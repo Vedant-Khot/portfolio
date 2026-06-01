@@ -536,129 +536,164 @@ function filterProjects(category) {
 
 // Project Case Database
 const projectCases = {
-  'devsync': {
-    title: 'DevSync: Vanilla JS Scrum Tracking Portal',
+  'streamtech': {
+    title: 'StreamTech: WebRTC Live Streaming Panel',
     category: 'Web Application',
-    tech: 'HTML5, CSS3 Grid, ES6 JS Core, LocalStorage',
-    scope: 'Designed to solve standard student team management challenges. We needed a collaborative, responsive task portal that would function entirely client-side without heavy database backends.',
-    architecture: 'Modular front-end built using raw JavaScript controllers and an observer state management core. UI components react instantly to model changes. Storing data cleanly in local browser segments.',
+    tech: 'Vanilla ES6 JS, Stream.io SDK, WebRTC, HTML5 Media Devices',
+    scope: 'Designed to solve live virtual classroom and multi-party seminar challenges. StreamTech establishes a non-blocking, sub-second latency streaming system directly inside standard browser viewports.',
+    architecture: 'Built purely with vanilla JS components triggering Stream Video APIs. Media streaming handles dynamic resolution adjustments according to bandwidth fluctuations, optimizing WebRTC channels.',
     keyPoints: [
-      'Interactive Canvas Board: Column grids featuring drag-and-drop tasks with smooth transition boundaries.',
-      'Active Velocity Visualizations: Custom vector charts rendering performance rates over time.',
-      'Payload Sync Framework: Dynamic REST client that pushes local records to simulated mock databases.',
-      'Modern Accessibility: Built with semantic structures to guarantee high keyboard navigation compatibility.'
+      'Interactive Peer Call Gateway: Handles camera and audio device constraints dynamically in standard layouts.',
+      'Active Stream Controller: Standardized JS functions generating secure user and room tokens from server endpoints.',
+      'Dynamic WebRTC Feeds: Coordinates multiple active video rendering cards under 150ms latency.',
+      'Responsive Participant Grid: Flexbox layout rearranging video grids dynamically based on active speakers.'
     ],
     asciiSchema: `
-+------------------------------------------+
-|            DevSync Controller            |
-+------------------------------------------+
-                    | (Triggers State)
-                    v
-+------------------------------------------+
-|          Observer Model Engine           |
-+------------------------------------------+
-      |                      |
-      v (Renders UI)         v (Saves Storage)
-+--------------+      +--------------------+
-|  HTML5 DOM   |      | Local Browser DB   |
-+--------------+      +--------------------+
+  +--------------+                    +--------------------+
+  | Faculty Cam  | --(WebRTC Stream)->| Stream.io CDN Edge |
+  +--------------+                    +--------------------+
+                                                |
+                                                v (Dynamic Bitrate)
+  +--------------+                    +--------------------+
+  | Student View | <--(Render Loop)---|  Stream Video SDK  |
+  +--------------+                    +--------------------+
     `
   },
-  'archpattern': {
-    title: 'ArchPattern: UML Pattern Simulator',
-    category: 'Software Engineering Modeling',
-    tech: 'Java Core, OOP, Vector UI, Design Patterns',
-    scope: 'An educational application mapping patterns to physical, observable events. Created to simplify the visualization of object coordination.',
-    architecture: 'Built using Java. Combines a core behavioral model with abstract strategy layers. Demonstrates modular OOP and runtime parameter swaps.',
+  'speaksense': {
+    title: 'SpeakSense: Speech Diagnostics Simulator',
+    category: 'UI/UX Interactive Design',
+    tech: 'Web Audio API, CSS Grid, HTML5 Canvas, Vector Graphics',
+    scope: 'An interactive layout developed to trace and visualize vocal frequencies. Designed as an academic prototype for speech therapy diagnostics.',
+    architecture: 'Client-side processing using the Web Audio API AnalyserNode. Gathers microphone feeds and plots real-time waveform scales onto a glowing HTML5 Canvas layout.',
     keyPoints: [
-      'Observer Grid Nodes: Circular canvas nodes reacting to dynamic subject broadcasts in real-time.',
-      'Strategy Pricing Sandbox: A testing widget simulating instant pricing changes based on selected logic.',
-      'Dynamic Factory Registry: Implemented custom object instantiation menus without hardcoded dependency links.',
-      'Diagnostic Console: Visual terminal reporting sequence maps, tracking runtime method calls.'
+      'Audio Analyser Matrix: Gathers raw microsecond frequencies to construct amplitude maps.',
+      'Dynamic Wave Canvas: A highly responsive canvas drawing clean soundwave patterns with zero lag.',
+      'Interactive Layout Grids: Minimalist glassmorphic layouts mapping vocal telemetry gauges.',
+      'Performance Optimizations: Uses requestAnimationFrame to throttle drawing cycles under 1.5ms.'
     ],
     asciiSchema: `
-  [Subject Node] --- (Notify Event) ---> [Observer A Node]
-        |
-        +-----------------------------> [Observer B Node]
-        
-  *Active Strategies:*
-  [Strategy A: Student 20% Off]  <--->  [Strategy B: Base Billing]
+  [Mic Input] ---> (AudioContext) ---> [AnalyserNode]
+                                             |
+                                             v (Frequency Array)
+  [HTML5 Canvas] <--(requestAnimationFrame)--[Vocal Wave Engine]
     `
   },
-  'aetheria': {
-    title: 'Aetheria Glassmorphism Component Library',
-    category: 'Frontend UI Design',
-    tech: 'CSS Custom Tokens, Backdrop Filter, Web Components',
-    scope: 'A premium experimental layout library engineered purely with vanilla CSS and responsive micro-interactions. Developed to prove that high-performance designs can be built without bulky styling engines.',
-    architecture: 'Standard CSS custom properties organizing HSL tokens. Features optimized blur overlays and keyframe configurations. Maintains layout speeds under 1.2ms.',
+  'saresapp': {
+    title: 'SaresApp: Mobile Utility Framework',
+    category: 'Mobile Application Development',
+    tech: 'Flutter, Dart Core, State Management, SQLite',
+    scope: 'Developed as a high-performance mobile utility dashboard. The application provides offline storage and smooth dynamic transitions.',
+    architecture: 'Built using Flutter/Dart with clean folder separations (models, views, controllers). Implements strict state management to coordinate real-time UI updates.',
     keyPoints: [
-      'Fluid Typography Matrices: Structured scale variables adapting font layouts relative to screen widths.',
+      'Dynamic Layout Slices: Standard Dart templates displaying real-time data logs in custom views.',
+      'Local Storage Pipeline: Coded clean SQLite adapters facilitating immediate offline data persistence.',
+      'Micro-Animations Engine: Built custom route transitions and reactive widgets that scale fluidly.',
+      'Universal Responsiveness: Scaled layout widgets to render identically on both Android and iOS.'
+    ],
+    asciiSchema: `
+  +------------------+                   +--------------------+
+  |   Flutter UI     | <--(Controller)-- |   Bloc State Pool  |
+  +------------------+                   +--------------------+
+                                                   |
+                                                   v (SQL Pipeline)
+  [ SQLite Database ] <============================+
+    `
+  },
+  'daa_project': {
+    title: 'DAA Visualizer: Sorting & Pathfinding Simulator',
+    category: 'Design & Analysis of Algorithms',
+    tech: 'HTML5, CSS3, Vanilla JS, Complexity Profiling',
+    scope: 'Created to simplify the visualization of complex algorithms. The simulator tracks, animates, and evaluates execution step counts and array swaps.',
+    architecture: 'Vanilla JS engine executing sort passes (QuickSort, MergeSort) asynchronously using delay loops. Generates step-by-step telemetry maps.',
+    keyPoints: [
+      'Asynchronous Sort Engine: Animates swaps using async/await delay loops to make operations visible.',
+      'Algorithmic Complexity Panel: Tracks array swaps and compare calls, plotting metrics dynamically.',
+      'Interactive Grid Pathfinders: Visualizes Dijkstra and A* pathfinding networks in grid cells.',
+      'Clean OOP Architecture: Modular class components separating algorithm models from drawing tasks.'
+    ],
+    asciiSchema: `
+  +------------------+                   +--------------------+
+  | Algorithm Module | --(Swap Event)--> | Array Visualizer   |
+  | (e.g. QuickSort) |                   | (Active DOM nodes) |
+  +------------------+                   +--------------------+
+                                                   | (Asynchronous Delay)
+                                                   v
+  [ Telemetry Console: Compare Count / Swap Count / Speed (ms) ]
+    `
+  },
+  'iskcon': {
+    title: 'ISKCON Kolhapur Community Portal',
+    category: 'Frontend Web Design',
+    tech: 'HTML5, Vanilla CSS3, Grid Layouts, Keyframes',
+    scope: 'Designed a highly responsive cultural and community portal for ISKCON Kolhapur. Focused on creating an elegant design system using vanilla web tools.',
+    architecture: 'Standard semantic HTML5 layout styled with high-fidelity HSL tokens and keyframe scroll animations. Retains layout speeds under 0.8ms.',
+    keyPoints: [
+      'Responsive Grid Matrices: Grid structures displaying schedules and events cleanly across all devices.',
       'Glassmorphic Layout Cards: Cards utilizing HSL borders, shadows, and backdrop filters.',
-      'High-Speed Keyframes: Optimized transitions designed to trigger GPU layer-compositing.',
-      'A11y Compliant Contrasts: Tailored HSL structures providing high contrast ratios on dark canvas gradients.'
+      'Interactive Scroll Keyframes: Smooth fade-ins and parallax transitions triggered as the user scrolls.',
+      'Optimized CSS Assets: Built purely with native CSS custom properties to ensure lightning-fast loads.'
     ],
     asciiSchema: `
    +------------------------------------+
-   |    Aetheria HSL Layout Tokens      |
+   |     ISKCON Kolhapur HSL Tokens     |
    +------------------------------------+
                      | (Applies Styles)
                      v
    +------------------------------------+
-   | Backdrop Filter Blur (12px - 20px) |
+   | Backdrop Filter Blur & Soft Glows  |
    +------------------------------------+
                      | (Optimized GPU Rendering)
                      v
-   [ 60 FPS Fluid Transitions & Dynamic Glows ]
+   [ 60 FPS Fluid Transitions & Dynamic Grid Alignments ]
     `
   },
-  'edudb': {
-    title: 'EduDB: Database Index Optimizer',
+  'rms': {
+    title: 'RMS Restaurant Portal',
     category: 'Database System Design',
-    tech: 'Python Core, PostgreSQL, SQL Profiling Tools',
-    scope: 'Developed to address optimization constraints in educational management databases. Designed to profile query bottlenecks and evaluate indexing strategies.',
-    architecture: 'PostgreSQL database managed by a Python API. Includes telemetry engines measuring query runtime variations, demonstrating sub-millisecond query returns.',
+    tech: 'CSS Grid, PostgreSQL, REST API Controllers, Mongoose',
+    scope: 'Developed to address optimization constraints in restaurant management. Handles reservations, table assignments, and daily inventory billing.',
+    architecture: 'PostgreSQL database managed by clean API controllers. Designed multi-table relational architectures to handle high-frequency concurrent operations.',
     keyPoints: [
-      'Relational Schema Blueprinting: Multi-table relational architecture mapping student performance arrays.',
-      'Automated Index Optimizers: Script routines that evaluate B-Tree structure setups, optimizing slow queries.',
-      'JSON Profiling Exports: Integrated telemetry exporting query benchmarks in formatted tables.',
-      'Transaction Concurrency: Custom locks simulating high-volume operations.'
+      'Multi-Table Relational Schema: Database tables mapping tables status, menu lists, and daily sales.',
+      'Dynamic Reservation Manager: API routes that allow real-time bookings and automated slot validation.',
+      'Interactive Dashboard: Responsive grid layouts displaying daily billing statistics and reservation metrics.',
+      'Secure Transaction Controls: Custom locks preventing double-booking of active tables.'
     ],
     asciiSchema: `
   +-------------+                 +----------------------+
-  | Python App  | --(Telemetry)-> |   SQL Query Profiler |
+  | API Server  | --(Telemetry)-> |   SQL Query Profiler |
   +-------------+                 +----------------------+
          |                                   |
          | (Executes Structured Queries)     | (Evaluates)
          v                                   v
   +-------------+                 +----------------------+
-  | Postgres DB | <-------------- |  B-Tree Index Tuning |
+  | Postgres DB | <-------------- | Relational Indexes   |
   +-------------+                 +----------------------+
     `
   },
-  'ppes': {
-    title: 'PPES: Personal Protective Equipment Safety Suite',
-    category: 'Web Application',
-    tech: 'Vanilla ES6+, WebSockets, HTML5 Canvas, SVG Diagnostics',
-    scope: 'Designed for industrial safety compliance, PPES acts as a real-time compliance monitor for high-hazard work zones. The suite ensures that personnel are equipped with mandatory safety gear (hard hats, safety harnesses, goggles) using smart sensor validation before entering hazardous environments.',
-    architecture: 'Built with a modular frontend controller that listens to real-time telemetry streams via a secure WebSocket gateway. A dynamic Canvas mapping engine visualizes safe and unsafe hazard zones, rendering real-time compliance updates and generating safety alert broadcasts.',
+  'ppes_school': {
+    title: 'PPES: Prarambha Path Evening School Portal',
+    category: 'Full-Stack Software Engineering',
+    tech: 'Next.js 14, Express.js, MongoDB Atlas, JWT, Razorpay, Stream API',
+    scope: 'A production-grade, multi-portal academic operations platform designed for students, faculty, and administrators of PPES evening school.',
+    architecture: 'Next.js App Router frontend communicating with an Express.js backend. Features a unique dual-access pattern: timetable actions connect directly to MongoDB via Next.js Server Actions, bypassing the Express API.',
     keyPoints: [
-      'WebSocket Telemetry Stream: Maintains a persistent, bi-directional socket pipeline streaming real-time sensor states from worker badges.',
-      'Interactive Safety Map: A HTML5 canvas layout mapping active zones, coloring workers green (compliant) or red (violation) in real-time.',
-      'Instant Warning Dispatch: Integrates a Web Audio and passive UI alert notification trigger immediately upon detecting equipment bypasses.',
-      'Audit Ledger Engine: Stored structured safety logs locally with search and filtering utilities, ready for daily compliance exports.'
+      'Role-Based Portal Access: Isolation of Student, Faculty, and Admin interfaces via secure JWT verification.',
+      'Secure Razorpay Checkouts: Order creation linked with server-side HMAC signature verification to protect transactions.',
+      'Stream Video Classrooms: Virtual classrooms utilizing Stream.io SDK to stream WebRTC sessions.',
+      'Direct-DB Timetable: Next.js Server Actions accessing MongoDB directly, optimizing timetable rendering under 12ms.'
     ],
     asciiSchema: `
-  +------------------+                   +--------------------+
-  | IoT Sensor Badges| --(WebSocket)-->  | PPES Secure Gateway|
-  +------------------+                   +--------------------+
-                                                   | (Telemetry payload)
-                                                   v
-  +------------------+                   +--------------------+
-  | HTML5 Canvas Map | <--(Render Loop)--| PPES Central State |
-  | (Compliance View)|                   +--------------------+
-  +------------------+                             |
-                                                   v (Triggers)
-                                         [ Web Audio / Alert Engine ]
+               +--------------------------------------+
+               |          Next.js Frontend            |
+               +--------------------------------------+
+                 /                                  \\
+    (Direct Connection)                        (REST API Calls)
+               /                                      \\
+              v                                        v
+      +---------------+                         +---------------+
+      | Shared Mongo  | <---(DB Operations)---- |  Express API  |
+      +---------------+                         +---------------+
     `
   }
 };
