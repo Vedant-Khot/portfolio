@@ -761,15 +761,61 @@ function initContactForm() {
     submitBtn.disabled = true;
     submitBtn.innerHTML = `Encrypting Payload <i class="fa-solid fa-circle-notch fa-spin"></i>`;
     
-    // Simulate API submission
-    setTimeout(() => {
-      showToast('Message encrypted and sent successfully!', 'success');
+    // Web3Forms API Configuration (100% Free & Fast background emails)
+    // 1. Enter your email on https://web3forms.com/ to receive a free Access Key instantly.
+    // 2. Paste your Access Key below.
+    // If left as "YOUR_ACCESS_KEY_HERE", it automatically falls back to mailto:vedantkhot112@gmail.com
+    const WEB3FORMS_ACCESS_KEY = "YOUR_ACCESS_KEY_HERE";
+    
+    if (WEB3FORMS_ACCESS_KEY && WEB3FORMS_ACCESS_KEY !== "YOUR_ACCESS_KEY_HERE") {
+      // Background API Dispatch
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: name,
+          email: email,
+          subject: "Portfolio Inquiry: " + subject,
+          message: message
+        })
+      })
+      .then(async (response) => {
+        const json = await response.json();
+        if (response.status === 200) {
+          showToast("Message sent successfully in the background!", "success");
+          form.reset();
+        } else {
+          showToast(json.message || "Failed to dispatch email.", "error");
+        }
+      })
+      .catch(() => {
+        showToast("Network pipeline failed. Triggering mailto fallback...", "error");
+        triggerMailtoFallback();
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `Send Message <i class="fa-solid fa-paper-plane"></i>`;
+      });
+    } else {
+      // Fallback redirection
+      setTimeout(() => {
+        triggerMailtoFallback();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `Send Message <i class="fa-solid fa-paper-plane"></i>`;
+      }, 1000);
+    }
+    
+    function triggerMailtoFallback() {
+      const emailBody = `Sender Name: ${name}\nSender Email: ${email}\n\nMessage Detail:\n${message}\n\n-----------------------------------------\nDispatch payload compiled via Academic Portfolio Contact Form.`;
+      const mailtoUrl = `mailto:vedantkhot112@gmail.com?subject=${encodeURIComponent("Portfolio Contact: " + subject)}&body=${encodeURIComponent(emailBody)}`;
+      window.location.href = mailtoUrl;
+      showToast('Opening default email client...', 'success');
       form.reset();
-      
-      // Restore Button state
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = `Send Message <i class="fa-solid fa-paper-plane"></i>`;
-    }, 1800);
+    }
   });
 }
 
