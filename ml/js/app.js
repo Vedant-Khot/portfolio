@@ -452,7 +452,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     // Only target elements that are present on the current page
     const revealElements = document.querySelectorAll(
-      '.chapter-card, .metric-box, .sdg-badge, .scorecard-item, .roadmap-node, .insight-card, .feature-card, .dataset-stat-card'
+      '.reveal, .metric-box, .sdg-badge, .scorecard-item, .roadmap-node, .insight-card, .feature-card, .dataset-stat-card'
     );
     
     if (revealElements.length > 0) {

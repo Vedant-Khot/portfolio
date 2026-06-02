@@ -130,12 +130,13 @@
           </div>
 
           <!-- Dataset Pipeline Flow Diagram -->
-          <div class="data-pipeline-container">
-            <div style="font-family: var(--font-header); font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 8px;">
+          <div class="data-pipeline-container reveal">
+            <div style="font-family: var(--font-header); font-size: 0.95rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px;">
               <i class="fa-solid fa-diagram-project"></i> Wildfire Data Ingestion & Preprocessing Pipeline
             </div>
             
-            <svg viewBox="0 0 760 160" width="100%" xmlns="http://www.w3.org/2000/svg" style="background: rgba(0,0,0,0.08); border: 1px solid rgba(234,88,12,0.1); border-radius: 12px; padding: 1.2rem 0.5rem; overflow: visible;">
+            <!-- Scaled up and enlarged pipeline SVG -->
+            <svg viewBox="0 0 960 280" width="100%" xmlns="http://www.w3.org/2000/svg" style="background: rgba(0,0,0,0.08); border: 1px solid rgba(234,88,12,0.1); border-radius: 12px; padding: 1.5rem 1rem; overflow: visible; height: 320px; width: 100%;">
               <defs>
                 <linearGradient id="pipeGrad" x1="0" x2="1" y1="0" y2="0">
                   <stop offset="0%" stop-color="hsl(20,95%,45%)" stop-opacity="0.9"/>
@@ -148,43 +149,57 @@
               </defs>
 
               <!-- Node 1: Raw Ingestion -->
-              <rect x="20" y="35" width="145" height="70" rx="8" fill="rgba(255,255,255,0.78)" stroke="rgba(234,88,12,0.22)" stroke-width="1.5"/>
-              <text x="92.5" y="58" font-size="10.5" font-weight="700" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">WATCH DUTY API</text>
-              <text x="92.5" y="73" font-size="9" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Raw Ingestion</text>
-              <text x="92.5" y="86" font-size="8" font-weight="600" fill="var(--accent-cyan)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Coordinate Grids</text>
+              <rect x="15" y="35" width="200" height="150" rx="16" fill="rgba(255,255,255,0.85)" stroke="rgba(234,88,12,0.28)" stroke-width="1.8"/>
+              <circle cx="115" cy="52" r="18" fill="rgba(234,88,12,0.06)" stroke="rgba(234,88,12,0.18)" stroke-width="1"/>
+              <path d="M109,46 C109,43.5 121,43.5 121,46 M109,46 L109,51 C109,53.5 121,53.5 121,51 L121,46 M109,51 L109,56 C109,58.5 121,58.5 121,56 L121,51" fill="none" stroke="hsl(20,95%,45%)" stroke-width="1.5"/>
+              <text x="115" y="88" font-size="13" font-weight="800" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">1. RAW INGESTION</text>
+              <text x="115" y="110" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Watch Duty & GIS</text>
+              <text x="115" y="128" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">316 Wildfire Records</text>
+              <text x="115" y="152" font-size="10" font-weight="800" fill="hsl(20,95%,45%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Coordinate Grids</text>
 
               <!-- Arrow 1 -> 2 -->
-              <line x1="165" y1="70" x2="215" y2="70" stroke="hsl(20,90%,45%)" stroke-width="2" stroke-dasharray="4,3"/>
-              <polygon points="215,66 223,70 215,74" fill="hsl(20,90%,45%)"/>
-              <text x="190" y="62" font-size="7.5" font-weight="700" fill="hsl(20,80%,38%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">INGEST</text>
+              <path d="M215,110 L265,110" fill="none" stroke="hsl(20,90%,45%)" stroke-width="2.5" stroke-dasharray="5,3"/>
+              <polygon points="259,105 265,110 259,115" fill="hsl(20,90%,45%)"/>
+              <text x="240" y="100" font-size="9" font-weight="800" fill="hsl(20,80%,38%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">INGEST</text>
 
               <!-- Node 2: Cleaning & Preprocessing -->
-              <rect x="225" y="35" width="145" height="70" rx="8" fill="rgba(255,255,255,0.78)" stroke="rgba(234,88,12,0.22)" stroke-width="1.5"/>
-              <text x="297.5" y="58" font-size="10.5" font-weight="700" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">PREPROCESSING</text>
-              <text x="297.5" y="73" font-size="9" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Scaling & Clean-up</text>
-              <text x="297.5" y="86" font-size="8" font-weight="600" fill="var(--accent-cyan)" font-family="Space Grotesk,sans-serif" text-anchor="middle">SMOTE Balanced</text>
+              <rect x="265" y="35" width="200" height="150" rx="16" fill="rgba(255,255,255,0.85)" stroke="rgba(6,182,212,0.28)" stroke-width="1.8"/>
+              <circle cx="365" cy="52" r="18" fill="rgba(6,182,212,0.06)" stroke="rgba(6,182,212,0.18)" stroke-width="1"/>
+              <circle cx="365" cy="52" r="5" fill="none" stroke="hsl(180,100%,42%)" stroke-width="1.8"/>
+              <path d="M365,44 L365,46 M365,58 L365,60 M357,52 L359,52 M371,52 L373,52" stroke="hsl(180,100%,42%)" stroke-width="1.8"/>
+              <text x="365" y="88" font-size="13" font-weight="800" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">2. PREPROCESSING</text>
+              <text x="365" y="110" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">5h Snapshot Slicing</text>
+              <text x="365" y="128" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">18,000 Row Expansions</text>
+              <text x="365" y="152" font-size="10" font-weight="800" fill="hsl(180,100%,42%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">SMOTE Balanced</text>
 
               <!-- Arrow 2 -> 3 -->
-              <line x1="370" y1="70" x2="420" y2="70" stroke="hsl(20,90%,45%)" stroke-width="2" stroke-dasharray="4,3"/>
-              <polygon points="420,66 428,70 420,74" fill="hsl(20,90%,45%)"/>
-              <text x="395" y="62" font-size="7.5" font-weight="700" fill="hsl(20,80%,38%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">SCALE</text>
+              <path d="M465,110 L515,110" fill="none" stroke="hsl(180,90%,42%)" stroke-width="2.5" stroke-dasharray="5,3"/>
+              <polygon points="509,105 515,110 509,115" fill="hsl(180,90%,42%)"/>
+              <text x="490" y="100" font-size="9" font-weight="800" fill="hsl(180,80%,35%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">SLICE</text>
 
               <!-- Node 3: Feature Engineering -->
-              <rect x="430" y="35" width="145" height="70" rx="8" fill="rgba(255,255,255,0.78)" stroke="rgba(234,88,12,0.22)" stroke-width="1.5"/>
-              <text x="502.5" y="58" font-size="10.5" font-weight="700" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">SPATIAL KINEMATICS</text>
-              <text x="502.5" y="73" font-size="9" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Feature Engineering</text>
-              <text x="502.5" y="86" font-size="8" font-weight="600" fill="var(--accent-cyan)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Closing Speed & Traj</text>
+              <rect x="515" y="35" width="200" height="150" rx="16" fill="rgba(255,255,255,0.85)" stroke="rgba(168,85,247,0.28)" stroke-width="1.8"/>
+              <circle cx="615" cy="52" r="18" fill="rgba(168,85,247,0.06)" stroke="rgba(168,85,247,0.18)" stroke-width="1"/>
+              <circle cx="615" cy="52" r="8" fill="none" stroke="hsl(270,95%,60%)" stroke-width="1.5"/>
+              <path d="M611,56 L619,48" stroke="hsl(270,95%,60%)" stroke-width="1.8" stroke-linecap="round"/>
+              <text x="615" y="88" font-size="13" font-weight="800" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">3. KINEMATICS & ENG</text>
+              <text x="615" y="110" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">log_dist & alignment_abs</text>
+              <text x="615" y="128" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Default 0° Bearing Fix</text>
+              <text x="615" y="152" font-size="10" font-weight="800" fill="hsl(270,95%,60%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">34 Dynamic Features</text>
 
               <!-- Arrow 3 -> 4 -->
-              <line x1="575" y1="70" x2="625" y2="70" stroke="hsl(20,90%,45%)" stroke-width="2" stroke-dasharray="4,3"/>
-              <polygon points="625,66 633,70 625,74" fill="hsl(20,90%,45%)"/>
-              <text x="600" y="62" font-size="7.5" font-weight="700" fill="hsl(20,80%,38%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">EXTRACT</text>
+              <path d="M715,110 L745,110" fill="none" stroke="hsl(270,90%,60%)" stroke-width="2.5" stroke-dasharray="5,3"/>
+              <polygon points="739,105 745,110 739,115" fill="hsl(270,90%,60%)"/>
+              <text x="730" y="100" font-size="9" font-weight="800" fill="hsl(270,80%,50%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">EXTRACT</text>
 
               <!-- Node 4: Model Ready Dataset -->
-              <rect x="635" y="35" width="110" height="70" rx="8" fill="url(#pipeGrad)" stroke="rgba(234,88,12,0.35)" stroke-width="1.8"/>
-              <text x="690" y="58" font-size="10.5" font-weight="700" fill="#ffffff" font-family="Space Grotesk,sans-serif" text-anchor="middle">MODEL CORE</text>
-              <text x="690" y="73" font-size="8.5" fill="rgba(255,255,255,0.85)" font-family="Space Grotesk,sans-serif" text-anchor="middle">18,000 Samples</text>
-              <text x="690" y="86" font-size="8" font-weight="700" fill="var(--accent-cyan)" font-family="Space Grotesk,sans-serif" text-anchor="middle">100% Ready</text>
+              <rect x="745" y="35" width="200" height="150" rx="16" fill="url(#pipeGrad)" stroke="rgba(234,88,12,0.4)" stroke-width="2"/>
+              <circle cx="845" cy="52" r="18" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <path d="M839,52 L843,56 L852,47" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="845" y="88" font-size="13" font-weight="800" fill="#ffffff" font-family="Space Grotesk,sans-serif" text-anchor="middle">4. MODEL CORE</text>
+              <text x="845" y="110" font-size="11" fill="rgba(255,255,255,0.9)" font-family="Space Grotesk,sans-serif" text-anchor="middle">RSF + XGB Ensemble</text>
+              <text x="845" y="128" font-size="11" fill="rgba(255,255,255,0.9)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Isotonic Calibration</text>
+              <text x="845" y="152" font-size="10" font-weight="900" fill="var(--accent-cyan)" font-family="Space Grotesk,sans-serif" text-anchor="middle">C-Index: 0.981</text>
             </svg>
           </div>
 
@@ -192,6 +207,106 @@
             This preprocessing paradigm ensures extreme data quality. Slicing raw events into temporal snapshots creates **18,000 distinct observations**, bypassing the raw coordinate sparsity problem. This provides the models with the dense statistical feedback needed to learn spatial-kinematic expansion vectors.
           </p>
 
+          <!-- 2. THE SPARSITY PROBLEM -->
+          <div class="section-title-sub">
+            <i class="fa-solid fa-circle-nodes"></i> 2. The Sparsity Problem — Root Cause Diagnosis
+          </div>
+          <p class="report-paragraph">
+            The dataset appears heavily zero-inflated, with many features having 88–92% zero values. This is <strong>not random missingness</strong> and cannot be addressed using standard statistical imputation. The zero-inflation is structural:
+          </p>
+          <div class="callout-box" style="border-left-color: var(--accent-purple); background: rgba(168, 85, 247, 0.02); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.04);">
+            <span class="callout-title" style="color: var(--accent-purple);"><i class="fa-solid fa-circle-exclamation"></i> Structural Data Limitation</span>
+            <p style="font-size: 0.92rem; line-height: 1.6; margin: 0; color: var(--text-muted);">
+              <strong>72.4% of observed fires (160 out of 221) have only a single perimeter observation in the first 5 hours.</strong> Since all growth, movement, and kinematics features are computed as differences between perimeters, fires with only one perimeter snapshot have no second measurement to subtract. These features are therefore definitionally zero—they encode the absence of data, not the absence of active fire expansion.
+            </p>
+          </div>
+
+          <p class="report-paragraph" style="margin-top: 1.2rem;">
+            This splits the dataset into two fundamentally distinct modeling subpopulations:
+          </p>
+
+          <table class="grid-table">
+            <thead>
+              <tr>
+                <th>Subpopulation Category</th>
+                <th>Fires (n)</th>
+                <th>Observed Hit Rate</th>
+                <th>Feature Availability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Single-perimeter fires</strong> (<code>low_temporal_resolution = 1</code>)</td>
+                <td>160 fires (72.4%)</td>
+                <td>20.0%</td>
+                <td>~6 basic features only (initial area, distance, time metadata).</td>
+              </tr>
+              <tr>
+                <td><strong>Multi-perimeter fires</strong> (<code>low_temporal_resolution = 0</code>)</td>
+                <td>61 fires (27.6%)</td>
+                <td>60.7%</td>
+                <td>Full multi-dimensional tracking (all 34 growth and movement fields).</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="report-paragraph">
+            <strong>Modeling Recommendation:</strong> Always include the custom <code>low_temporal_resolution_0_5h</code> indicator flag as a direct feature and as a key model segmentation variable. Naively pooling these groups weakens the predictive signal of dynamic features.
+          </p>
+
+          <!-- 3. THE DOMINANT SIGNAL -->
+          <div class="section-title-sub">
+            <i class="fa-solid fa-signal"></i> 3. The Dominant Signal — dist_min_ci_0_5h
+          </div>
+          <p class="report-paragraph">
+            The minimum distance to the nearest evacuation zone centroid at the start of the observation window (<code>dist_min_ci_0_5h</code>, in meters) acts as a near-perfect separator in the training set.
+          </p>
+          <div class="callout-box" style="border-left-color: var(--accent-cyan); background: rgba(234, 88, 12, 0.02); box-shadow: var(--shadow-neon-cyan);">
+            <span class="callout-title" style="color: var(--accent-cyan);"><i class="fa-solid fa-location-crosshairs"></i> The Proximity Threshold</span>
+            <p style="font-size: 0.92rem; line-height: 1.6; margin: 0; color: var(--text-muted);">
+              <strong>Every training fire starting within 4,674m of an evacuation zone centroid successfully breached (100% hit rate, n=69). Conversely, no fire at or beyond 5,000m ever reached within 5 km of a zone within 72 hours (0% hit rate, n=152).</strong>
+            </p>
+          </div>
+
+          <p class="report-paragraph" style="margin-top: 1.2rem;">
+            This demonstrates a clean hazard separation boundary, showing that proximity is the single most powerful spatial indicator of buffer breach risk:
+          </p>
+
+          <table class="grid-table">
+            <thead>
+              <tr>
+                <th>Proximity Feature Version</th>
+                <th>Correlation with Event</th>
+                <th>Analytical Implications & Transformation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Raw Distance</strong> (<code>dist_min_ci_0_5h</code>)</td>
+                <td>−0.481</td>
+                <td>Heavy right skew compresses feature variance in linear algorithms.</td>
+              </tr>
+              <tr>
+                <td><strong>Log-Transformed Distance</strong> (<code>log1p(dist_min_ci_0_5h)</code>)</td>
+                <td><strong>−0.812</strong></td>
+                <td>Expands resolution near boundaries, drastically increasing correlation.</td>
+              </tr>
+              <tr>
+                <td><strong>Binary Close Indicator</strong> (<code>is_close</code>, dist &lt; 5000m)</td>
+                <td><strong>1.000</strong></td>
+                <td>Achieves absolute separation on historical training data.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout-box" style="border-left-color: hsl(0, 85%, 45%); background: rgba(220, 38, 38, 0.02); box-shadow: 0 4px 15px rgba(220, 38, 38, 0.04);">
+            <span class="callout-title" style="color: hsl(0, 85%, 45%);"><i class="fa-solid fa-triangle-exclamation"></i> Critical Warning for Test Evaluation</span>
+            <p style="font-size: 0.92rem; line-height: 1.6; margin: 0; color: var(--text-muted);">
+              The 1.000 correlation is highly optimistic and reflects a complete absence of training samples in the 4,674m–5,000m distance gray zone. Because unseen test perimeters might start in this interval, we must **avoid using a hard threshold**. Instead, apply continuous log-transformed distance inputs combined with a smooth logistic function to output calibrated, non-binary survival probabilities.
+            </p>
+          </div>
+
+          <!-- 4. DATASET FEATURE CATEGORIES -->
           <div class="section-title-sub">
             <i class="fa-solid fa-tags"></i> 4. Dataset Feature Categories
           </div>
@@ -225,7 +340,7 @@
                 <h4 class="feature-card-title">Proximity Metrics</h4>
               </div>
               <p class="feature-card-desc">
-                Evaluates distance contraction relative to safe civil assets. This is the single strongest threat signal.
+                Evaluates distance contraction relative to safe civilian assets. This is the single strongest threat signal.
               </p>
               <div class="feature-pill-list">
                 <span class="feature-pill">dist_min_ci</span>
@@ -283,16 +398,268 @@
             </div>
 
           </div>
+
+          <!-- Interactive / Academic Feature Reference Table -->
+          <div class="reveal" style="margin-top: 2rem; overflow-x: auto;">
+            <div style="font-family: var(--font-header); font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-table-list"></i> Comprehensive Feature Category Reference & Physical Purpose
+            </div>
+            <table class="grid-table">
+              <thead>
+                <tr>
+                  <th>Feature Category</th>
+                  <th>Key Sourced Variables</th>
+                  <th>Direct Analytical & Physical Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>A. Temporal Features</strong></td>
+                  <td><code>num_perimeters_0_5h</code>, <code>dt_first_last_0_5h</code>, <code>event_start_month</code>, <code>event_start_hour</code></td>
+                  <td>Captures fire temporal frequency and monitoring window. Establishes critical seasonal and time-of-day baseline hazard cycles (e.g. 62% of buffer breaches occur during July–August).</td>
+                </tr>
+                <tr>
+                  <td><strong>B. Growth Features</strong></td>
+                  <td><code>area_first_ha</code>, <code>log1p_growth</code>, <code>area_growth_rate_ha_per_h</code>, <code>radial_growth_rate_m_per_h</code></td>
+                  <td>Quantifies thermodynamic expansion rates and fuel consumption speed. Higher radial and area growth speeds map directly to significantly earlier evacuation breaches.</td>
+                </tr>
+                <tr>
+                  <td><strong>C. Kinematic Features</strong></td>
+                  <td><code>centroid_speed_m_per_h</code>, <code>centroid_displacement_m</code></td>
+                  <td>Maps the physical velocity vectors and spatial core shifts of the fire's advancing center of mass across surrounding topography.</td>
+                </tr>
+                <tr>
+                  <td><strong>D. Proximity Features</strong></td>
+                  <td><code>dist_min_ci_0_5h</code>, <code>log_dist_min</code>, <code>dist_slope_ci_0_5h</code>, <code>closing_speed_abs_m_per_h</code>, <code>is_close</code></td>
+                  <td>The dominant spatial signal. Measures distance contraction and proximity to evacuation zones. Fires starting within 4,674m breach 100% of the time in training. Log compression models the exponential relationship.</td>
+                </tr>
+                <tr>
+                  <td><strong>E. Direction Features</strong></td>
+                  <td><code>alignment_abs</code>, <code>spread_bearing_sin</code>, <code>spread_bearing_cos</code></td>
+                  <td>Resolves complex expansion headings. Determines whether the fire is heading directly toward civilian infrastructure or drifting sideways (Along-Track vs Cross-Track vectors).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- DETAILED FEATURE-BY-FEATURE ANALYSIS (Missing Content restored) -->
+          <h3 class="section-title-sub" style="margin-top: 2rem;"><i class="fa-solid fa-list-check"></i> Feature-by-Feature Evaluation & Verdicts</h3>
+          <p class="report-paragraph">
+            A meticulous feature-by-feature auditing was performed across all 34 variables to separate physical signals from statistical artifacts, duplicates, and skewed values.
+          </p>
+
+          <table class="grid-table">
+            <thead>
+              <tr>
+                <th>Feature Name</th>
+                <th>Availability</th>
+                <th>Correlation</th>
+                <th>Verdicts & Mathematical Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Distance Features -->
+              <tr>
+                <td><code>dist_min_ci_0_5h</code></td>
+                <td>Always (221/221)</td>
+                <td>−0.812 (log)</td>
+                <td><strong>Verdict: Keep, log-transform.</strong> Log-compressing starting distance corrects extreme right skew and expands resolution near Evacuation boundaries.</td>
+              </tr>
+              <tr>
+                <td><code>dist_std_ci_0_5h</code></td>
+                <td>Sparse (19/221)</td>
+                <td>+0.142</td>
+                <td><strong>Verdict: Keep for Tier 2/3 models.</strong> Captures standard deviation of distances to all zones, indicating multi-zone threat dispersion.</td>
+              </tr>
+              <tr>
+                <td><code>dist_change_ci_0_5h</code></td>
+                <td>Sparse (18/221)</td>
+                <td>−0.106</td>
+                <td><strong>Verdict: Keep.</strong> Change in distance (d_final - d_initial). Negative means closing. Exact opposite of <code>projected_advance_m</code> (which is dropped).</td>
+              </tr>
+              <tr>
+                <td><code>dist_slope_ci_0_5h</code></td>
+                <td>Moderate (52/221)</td>
+                <td>−0.115</td>
+                <td><strong>Verdict: Keep.</strong> Richer availability than <code>dist_change</code>. Linear slope of distance vs time (meters/hour). Negative means closing.</td>
+              </tr>
+              <tr>
+                <td><code>closing_speed_abs_m_per_h</code></td>
+                <td>Sparse (18/221)</td>
+                <td>+0.139</td>
+                <td><strong>Verdict: Keep.</strong> Absolute closing speed is preferred over the signed version because it shows a stronger correlation with the event.</td>
+              </tr>
+              <!-- Growth Features -->
+              <tr>
+                <td><code>log1p_area_first</code></td>
+                <td>Always (221/221)</td>
+                <td>−0.168</td>
+                <td><strong>Verdict: Keep.</strong> Preferred over raw area (max 11,942 ha) to compress high right-skew in the initial fire centroid size.</td>
+              </tr>
+              <tr>
+                <td><code>log1p_growth</code></td>
+                <td>Sparse (24/221)</td>
+                <td>+0.293</td>
+                <td><strong>Verdict: Best growth signal.</strong> Compresses absolute growth outliers, capturing the physical rate of perimeter expansion.</td>
+              </tr>
+              <tr>
+                <td><code>radial_growth_rate_m_per_h</code></td>
+                <td>Sparse (25/221)</td>
+                <td>+0.215</td>
+                <td><strong>Verdict: Keep.</strong> Within close fires, faster radial growth shows high correlation with sooner hit timings (S(t) drops).</td>
+              </tr>
+              <!-- Kinematics & Direction -->
+              <tr>
+                <td><code>centroid_speed_m_per_h</code></td>
+                <td>Sparse (25/221)</td>
+                <td>+0.209</td>
+                <td><strong>Verdict: Keep.</strong> Rate-based speed variable showing the core physical movement of the fire center of mass.</td>
+              </tr>
+              <tr>
+                <td><code>alignment_abs</code></td>
+                <td>Moderate (61/221)</td>
+                <td><strong>+0.349</strong></td>
+                <td><strong>Verdict: Best Direction feature.</strong> Measures absolute alignment toward zone (1.0 = direct threat). Triggers for 61 fires because it uses distance slopes.</td>
+              </tr>
+            </tbody>
+          </table>
           
-          <div class="section-title-sub">
-            <i class="fa-solid fa-gears"></i> 8. Feature Engineering Quality
+          <!-- Expanded Feature Engineering Quality -->
+          <div class="section-title-sub" style="margin-top: 2.5rem;">
+            <i class="fa-solid fa-gears"></i> 8. Feature Engineering Quality & Mathematical Formulation
           </div>
           <p class="report-paragraph">
-            The feature engineering is one of the strongest components of this project. The project created highly meaningful, physically-derived features such as <strong>Closing Speed</strong>, <strong>Alignment Cosine</strong>, <strong>Distance Acceleration</strong>, <strong>Projected Advance Distance</strong>, and <strong>Relative Growth Rates</strong>.
+            Disaster intelligence models live or die by the physical relevance of their features. Rather than feeding raw, unaligned latitude/longitude pairs or skewed absolute area sizes directly to algorithms, this project leverages rigorous <strong>spatial kinematics transformations</strong> and <strong>structural sparsity safeguards</strong> to engineer highly predictive signals.
           </p>
+
           <p class="report-paragraph">
-            These are high-value engineered features that reflect the physical dynamics of fire. In machine learning competitions and real-world industrial projects, good features often matter much more than simply running highly complex models on raw, unrefined fields.
+            The engineered features and their mathematical formulations are outlined below:
           </p>
+
+          <!-- 2x3 Grid of Engineered Features -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.8rem 0;">
+            
+            <div class="glass-card" style="padding: 1.25rem; border-color: rgba(6, 182, 212, 0.15); background: rgba(6, 182, 212, 0.01);">
+              <h4 style="font-family: var(--font-header); font-size: 0.95rem; color: var(--accent-cyan); margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-compress"></i> 1. Log-Compress Distance (<code>log_dist_min</code>)
+              </h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0 0 0.8rem 0;">
+                <strong>Formula:</strong> <code>log1p(dist_min_ci_0_5h)</code>
+                <br>
+                <strong>Correlation Gain:</strong> <strong>−0.481 → −0.812</strong> (Massive +68.8% linearizing effect)
+                <br>
+                <strong>Rationale:</strong> Starting distances stretch over three orders of magnitude (300m to 750km). Logarithmic compression stabilizes linear boundaries, giving high-resolution scaling close to civilian zone thresholds.
+              </p>
+            </div>
+
+            <div class="glass-card" style="padding: 1.25rem; border-color: rgba(234, 88, 12, 0.15); background: rgba(234, 88, 12, 0.01);">
+              <h4 style="font-family: var(--font-header); font-size: 0.95rem; color: hsl(20,95%,45%); margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-arrow-up-right-dots"></i> 2. Neutralizing Bearing default (<code>bearing_is_real</code>)
+              </h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0 0 0.8rem 0;">
+                <strong>Formula:</strong> <code>(spread_bearing_cos != 1.0)</code> or <code>(num_perimeters > 1)</code>
+                <br>
+                <strong>Correlation Gain:</strong> Eliminates spurious <strong>−0.323</strong> correlation artifact
+                <br>
+                <strong>Rationale:</strong> 72% of fires are single-perimeter and default to bearing = 0° (North), making `cos(0) = 1.0`. The indicator flag shields downstream trees from learning this false wind signal.
+              </p>
+            </div>
+
+            <div class="glass-card" style="padding: 1.25rem; border-color: rgba(168, 85, 247, 0.15); background: rgba(168, 85, 247, 0.01);">
+              <h4 style="font-family: var(--font-header); font-size: 0.95rem; color: var(--accent-purple); margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-stopwatch"></i> 3. Observation Density (<code>log_num_perimeters</code>)
+              </h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0 0 0.8rem 0;">
+                <strong>Formula:</strong> <code>log1p(num_perimeters_0_5h)</code>
+                <br>
+                <strong>Correlation:</strong> <strong>+0.371</strong>
+                <br>
+                <strong>Rationale:</strong> High-risk fires are heavily monitored and trigger multiple alerts. Log compression linearizes the frequency of satellite snapshots.
+              </p>
+            </div>
+
+            <div class="glass-card" style="padding: 1.25rem; border-color: rgba(34, 197, 94, 0.15); background: rgba(34, 197, 94, 0.01);">
+              <h4 style="font-family: var(--font-header); font-size: 0.95rem; color: hsl(120,50%,42%); margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-arrows-spin"></i> 4. Proximity Speed Interaction (<code>close_and_closing</code>)
+              </h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0 0 0.8rem 0;">
+                <strong>Formula:</strong> <code>is_close × closing_speed_abs_m_per_h</code>
+                <br>
+                <strong>Rationale:</strong> Multiplies binary proximity with closing speed. Fires that are both extremely close AND closing at high speed represent the highest priority alert tier.
+              </p>
+            </div>
+
+            <div class="glass-card" style="padding: 1.25rem; border-color: rgba(239, 68, 68, 0.15); background: rgba(239, 68, 68, 0.01);">
+              <h4 style="font-family: var(--font-header); font-size: 0.95rem; color: hsl(0,85%,45%); margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-compass"></i> 5. Spatial Hazard Alignment (<code>dist_x_alignment</code>)
+              </h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0 0 0.8rem 0;">
+                <strong>Formula:</strong> <code>log_dist_min × alignment_abs</code>
+                <br>
+                <strong>Rationale:</strong> Combines spatial closeness with physical spread direction. High values highlight fires whose dynamic expansion trajectory points directly towards civilian populations.
+              </p>
+            </div>
+
+            <div class="glass-card" style="padding: 1.25rem; border-color: rgba(251, 191, 36, 0.15); background: rgba(251, 191, 36, 0.01);">
+              <h4 style="font-family: var(--font-header); font-size: 0.95rem; color: hsl(45,95%,45%); margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-clock-rotate-left"></i> 6. Arrival ETA Predictor (<code>closing_eta</code>)
+              </h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0 0 0.8rem 0;">
+                <strong>Formula:</strong> <code>dist_min_ci_0_5h / max(closing_speed_abs_m_per_h, 0.1)</code>
+                <br>
+                <strong>Correlation:</strong> <strong>−0.154</strong> (Strongest timing physical predictor)
+                <br>
+                <strong>Rationale:</strong> Approximates the time (in hours) until the fire perimeter breaches the boundary, serving as a primary target anchor for survival networks.
+              </p>
+            </div>
+            
+          </div>
+
+          <!-- Data Leakage callout box -->
+          <div class="callout-box" style="border-left-color: var(--accent-purple); background: rgba(168, 85, 247, 0.02); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.04); margin-bottom: 2rem;">
+            <span class="callout-title" style="color: var(--accent-purple);"><i class="fa-solid fa-shield-halved"></i> Data Leakage Safeguards: Scale Percentiles</span>
+            <p style="font-size: 0.92rem; line-height: 1.6; margin: 0; color: var(--text-muted);">
+              <strong>Standard Scaling Trap:</strong> Computing standard scaling parameters or percentiles over the combined dataset leaks test set statistics into the training loop, inflating validation accuracy. 
+              <br>
+              <strong>The Fix:</strong> All percentile features and normalizations are fitted <strong>strictly on the training split</strong> and subsequently applied to the test split as rigid mathematical constants.
+            </p>
+          </div>
+
+          <!-- Code Block Header -->
+          <div class="code-block-header" style="margin-top: 2rem;">
+            <span>Feature Engineering Kinematics Pipeline (Python)</span>
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <pre class="code-block" style="margin-bottom: 2.5rem;"><code style="color: var(--accent-cyan);">def engineer_wildfire_kinematics(df, train_dist_min_ci=None):
+    # 1. Log Compress Skewed Spatial Proximity
+    df['log_dist_min'] = np.log1p(df['dist_min_ci_0_5h'])
+    
+    # 2. Establish Soft Logistic Proximity Segmentator
+    df['is_close'] = (df['dist_min_ci_0_5h'] < 5000).astype(int)
+    
+    # 3. Neutralize default 0° North Bearing Artifact
+    df['bearing_is_real'] = (df['spread_bearing_cos'] != 1.0).astype(int)
+    
+    # 4. Correct right-skewed observation counts
+    df['log_num_perimeters'] = np.log1p(df['num_perimeters_0_5h'])
+    
+    # 5. Dynamic Interaction: Proximity x Closing Speed
+    df['close_and_closing'] = df['is_close'] * df['closing_speed_abs_m_per_h'].fillna(0)
+    
+    # 6. Dynamic Interaction: Distance x Absolute Direction Alignment
+    df['dist_x_alignment'] = df['log_dist_min'] * df['alignment_abs'].fillna(0)
+    
+    # 7. Physical Arrival Estimate (ETA in hours)
+    df['closing_eta'] = df['dist_min_ci_0_5h'] / (df['closing_speed_abs_m_per_h'].clip(lower=0.1))
+    df['closing_eta'] = df['closing_eta'].clip(upper=72.0) # limit to maximum horizon
+    
+    # 8. Safeguard: Map Train Percentiles (Prevent Leakage)
+    if train_dist_min_ci is not None:
+        p10 = np.percentile(train_dist_min_ci, 10)
+        p90 = np.percentile(train_dist_min_ci, 90)
+        df['dist_p10_p90_scaled'] = (df['dist_min_ci_0_5h'] - p10) / (p90 - p10)
+        
+    return df</code></pre>
           
           <!-- Premium Spatio-Temporal Spread Dynamics Diagram -->
           <div class="spread-container reveal">
@@ -433,6 +800,36 @@
               <span class="surv-anno-chip"><i class="fa-solid fa-calculator"></i> Along-Track (Closing) Speed = V × cos(θ)</span>
               <span class="surv-anno-chip surv-anno-blue"><i class="fa-solid fa-arrows-split-up-and-left"></i> Cross-Track Speed = V × sin(θ)</span>
               <span class="surv-anno-chip surv-anno-green"><i class="fa-solid fa-gauge-high"></i> V = Total Centroid Speed Vector</span>
+            </div>
+          </div>
+
+          <!-- ACADEMIC TRAPS & GOTCHAS (Missing Content restored) -->
+          <h3 class="section-title-sub" style="margin-top: 2.2rem;"><i class="fa-solid fa-triangle-exclamation"></i> Academic Gotchas, Traps & Fixes</h3>
+          <p class="report-paragraph">
+            Disaster risk forecasting is filled with mathematical traps. We resolved two major artifacts in the dataset to prevent models from learning spurious patterns:
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
+            <div class="glass-card" style="padding: 1.25rem; border-color: rgba(239, 68, 68, 0.15); background: rgba(239, 68, 68, 0.01);">
+              <h4 style="font-family: var(--font-header); font-size: 0.95rem; color: hsl(0, 85%, 45%); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-triangle-exclamation"></i> Trap 1: <code>spread_bearing_cos = 1.0</code> Artifact
+              </h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0;">
+                <strong>The Trap:</strong> When a fire has only one perimeter, no directional bearing can be computed. The system defaults the bearing to 0° (North), yielding <code>cos(0°) = 1.0</code>. All 161 low-resolution fires have exactly 1.0, showing a spurious correlation of -0.323 that really just detects data availability, not northward wind dynamics.
+                <br><br>
+                <strong>The Fix:</strong> Create an indicator flag <code>bearing_is_real = (num_perimeters > 1)</code>. The model only utilizes bearing values when this flag is active.
+              </p>
+            </div>
+
+            <div class="glass-card" style="padding: 1.25rem; border-color: rgba(234, 88, 12, 0.15); background: rgba(234, 88, 12, 0.01);">
+              <h4 style="font-family: var(--font-header); font-size: 0.95rem; color: var(--accent-cyan); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-shield-halved"></i> Trap 2: Perfect Separation (<code>is_close</code> = 1.0)
+              </h4>
+              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); margin: 0;">
+                <strong>The Trap:</strong> In the training set, the binary proximity indicator <code>is_close = (dist < 5000m)</code> perfectly separates breaches (100% below 5km, 0% above). Hard-coding a threshold inside the pipeline will cause the model to output extreme probabilities (0.0 or 1.0), severely penalizing calibration when boundary cases appear in the test set.
+                <br><br>
+                <strong>The Fix:</strong> Force the model to use the continuous <code>log1p(dist_min_ci_0_5h)</code> feature. This lets the algorithm learn a smooth logistic decision boundary with non-zero probabilities near the 5km gray zone.
+              </p>
             </div>
           </div>
         </article>

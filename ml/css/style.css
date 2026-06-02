@@ -410,6 +410,14 @@ html, body {
 }
 
 @media (max-width: 1200px) {
+  .back-btn {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+  .report-body {
+    padding-top: 5rem;
+  }
   .metric-grid {
     grid-template-columns: repeat(3, 1fr);
   }
