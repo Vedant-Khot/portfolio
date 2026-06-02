@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3: Survival Analysis & Censoring — Wildfire Evacuation Threat Prediction</title>
+  <meta name="description" content="In-depth academic case study on predicting wildfire buffer breaches using advanced Survival Analysis, Ensemble Learning, and Spatial Kinematics under Prof. Sneha Varur.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inherited Main Stylesheet -->
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- Custom Light-Fiery Theme Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Cyber Grid Canvas -->
+  <canvas id="cyber-canvas"></canvas>
+
+  <!-- Back to Portfolio Floating Button -->
+  <a href="../index.html#projects" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i> Back to Portfolio
+  </a>
+
+  <!-- Report Layout Wrapper -->
+  <main class="container report-body">
+
+    <!-- Key Performance Metrics Grid -->
+    <div class="metric-grid">
+      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
+        <div class="metric-value gradient-text">0.981</div>
+        <div class="metric-label">Ensemble C-Index</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">72h</div>
+        <div class="metric-label">Horizon</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">5 km</div>
+        <div class="metric-label">Zone Radius</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">221</div>
+        <div class="metric-label">Events</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">37</div>
+        <div class="metric-label">Features</div>
+      </div>
+    </div>
+
+    <!-- MAIN DOCK LAYOUT -->
+    <div class="report-layout">
+      
+      <!-- Sticky Sidebar Menu -->
+      <nav class="report-sidebar">
+        <div class="sidebar-title">Report Chapters</div>
+        
+        <a href="index.html" class="sidebar-link">
+          <i class="fa-solid fa-compass-drafting"></i> 1. Core Foundations
+        </a>
+        <a href="chapter2.html" class="sidebar-link">
+          <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
+        </a>
+        <a href="chapter3.html" class="sidebar-link active">
+          <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
+        </a>
+        <a href="chapter4.html" class="sidebar-link">
+          <i class="fa-solid fa-sliders"></i> 4. Preprocessing & EDA
+        </a>
+        <a href="chapter5.html" class="sidebar-link">
+          <i class="fa-solid fa-network-wired"></i> 5. ML Architecture
+        </a>
+        <a href="chapter6.html" class="sidebar-link">
+          <i class="fa-solid fa-leaf"></i> 6. SDG & Assessment
+        </a>
+      </nav>
+      
+      <!-- Scrollable Content Area -->
+      <section class="report-content">
+        
+        <!-- CHAPTER 3 -->
+        <article id="chapter3" class="chapter-card glass-card">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-hourglass-half"></i> Chapter 3: Survival Analysis & Censoring Mechanics
+          </h2>
+          
+          <div class="section-title-sub">
+            <i class="fa-solid fa-heart-pulse"></i> 6. Survival Analysis — Advanced Concept
+          </div>
+          <p class="report-paragraph">
+            The project uses <strong>Survival Analysis</strong>, a highly advanced mathematical framework usually reserved for healthcare (clinical trials), reliability engineering (mechanical failures), and risk modeling. In this project, it is adapted for wildfire prediction.
+          </p>
+          <p class="report-paragraph">
+            Instead of predicting simple binary outcomes like "Fire / No Fire," the survival model answers a much more useful question: <strong>“How long until the wildfire becomes dangerous and breaches the 5 km boundary?”</strong> This allows emergency planners to understand the hazard's progression over time, making the system far more realistic for real-world decision-making.
+          </p>
+
+          <div class="section-title-sub">
+            <i class="fa-solid fa-filter"></i> 7. Censoring Handling
+          </div>
+          <p class="report-paragraph">
+            A highly advanced concept included in the project is the proper mathematical handling of <strong>Censoring</strong>.
+          </p>
+          <p class="report-paragraph">
+            In risk forecasting, some wildfires never reach the evacuation zone within the 72-hour observation window. Standard classification models might treat these as simple "zeros" (failures). However, survival analysis correctly identifies them as <strong>“censored observations”</strong>—meaning the event of interest did not occur during the observation period, but could occur later.
+          </p>
+          <p class="report-paragraph">
+            This prevents the model from treating safe, long-duration fires as simple negative cases, ensuring unbiased risk estimations. Integrating censoring mechanics demonstrates excellent technical and mathematical maturity.
+          </p>
+          
+          <div class="callout-box" style="border-left-color: var(--accent-purple); background: rgba(168, 85, 247, 0.01);">
+            <span class="callout-title" style="color: var(--accent-purple);"><i class="fa-solid fa-clock"></i> Survival vs Classification Comparison</span>
+            <ul class="report-list">
+              <li><strong>Binary Classification:</strong> Outputs a flat probability. Misses *when* the breach occurs. Treats a fire breaching at 2 hours the same as one breaching at 70 hours.</li>
+              <li><strong>Survival Analysis:</strong> Generates a full continuous risk curve over the entire 72-hour window. Captures both the risk likelihood and the speed of threat progression.</li>
+            </ul>
+          </div>
+
+          <!-- ================================================================
+               SURVIVAL ANALYSIS EDUCATIONAL INFOGRAPHIC
+               ================================================================ -->
+          <div class="surv-infographic reveal">
+
+            <div class="surv-header">
+              <span class="surv-header-badge"><i class="fa-solid fa-chart-line"></i> Interactive Survival Analysis Explainer</span>
+              <p class="surv-header-sub">How survival analysis models wildfire breach risk over time</p>
+            </div>
+
+            <!-- ── ROW 1: Timeline of wildfire progression ── -->
+            <div class="surv-section-label">
+              <i class="fa-solid fa-fire" style="color:var(--accent-cyan);"></i> Stage 1 — Wildfire Timeline Progression
+            </div>
+            <div class="surv-card">
+              <p class="surv-card-desc">A wildfire observation window spans <strong>72 hours</strong>. During this time the fire advances toward the evacuation zone. The survival model tracks the continuously shrinking distance.</p>
+              <div class="surv-timeline-wrap">
+                <svg class="surv-timeline-svg" viewBox="0 0 720 130" xmlns="http://www.w3.org/2000/svg">
+
+                  <!-- Time axis -->
+                  <line x1="40" y1="80" x2="680" y2="80" stroke="rgba(234,88,12,0.35)" stroke-width="2"/>
+                  <!-- Arrow head -->
+                  <polygon points="680,75 692,80 680,85" fill="rgba(234,88,12,0.55)"/>
+                  <text x="696" y="84" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif">t (hours)</text>
+
+                  <!-- Hour ticks -->
+                  <g fill="hsl(20,12%,55%)" font-size="9.5" font-family="Space Grotesk,sans-serif" text-anchor="middle">
+                    <text x="40"  y="96">0h</text>
+                    <text x="180" y="96">18h</text>
+                    <text x="320" y="96">36h</text>
+                    <text x="460" y="96">54h</text>
+                    <text x="620" y="96">72h</text>
+                  </g>
+                  <g stroke="rgba(234,88,12,0.2)" stroke-width="1">
+                    <line x1="40"  y1="75" x2="40"  y2="85"/>
+                    <line x1="180" y1="75" x2="180" y2="85"/>
+                    <line x1="320" y1="75" x2="320" y2="85"/>
+                    <line x1="460" y1="75" x2="460" y2="85"/>
+                    <line x1="620" y1="75" x2="620" y2="85"/>
+                  </g>
+
+                  <!-- Fire origin icon -->
+                  <text x="34" y="58" font-size="20" text-anchor="middle" class="surv-fire-icon">🔥</text>
+                  <text x="34" y="72" font-size="8" fill="hsl(20,80%,42%)" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600">Start</text>
+
+                  <!-- Closing distance arrow -->
+                  <defs>
+                    <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                      <path d="M0,0 L6,3 L0,6 Z" fill="hsl(20,90%,45%)"/>
+                    </marker>
+                  </defs>
+                  <line x1="60" y1="55" x2="380" y2="55" stroke="hsl(20,90%,45%)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+                  <text x="220" y="47" font-size="10" fill="hsl(20,90%,42%)" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600">Fire advancing → closing distance</text>
+
+                  <!-- Event: breach marker -->
+                  <line x1="400" y1="60" x2="400" y2="88" stroke="hsl(20,90%,42%)" stroke-width="1.8" stroke-dasharray="3,2"/>
+                  <circle cx="400" cy="80" r="6" fill="hsl(20,90%,45%)" class="surv-pulse-dot"/>
+                  <text x="400" y="56" font-size="10" fill="hsl(20,90%,42%)" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700">⚡ BREACH</text>
+                  <text x="400" y="108" font-size="9.5" fill="hsl(20,12%,45%)" text-anchor="middle" font-family="Space Grotesk,sans-serif">t = 42h</text>
+
+                  <!-- Safe fire (no breach) -->
+                  <line x1="620" y1="60" x2="620" y2="88" stroke="hsl(120,35%,50%)" stroke-width="1.8" stroke-dasharray="3,2"/>
+                  <circle cx="620" cy="80" r="6" fill="hsl(120,38%,50%)"/>
+                  <text x="620" y="56" font-size="10" fill="hsl(120,35%,35%)" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700">✓ SAFE</text>
+                  <text x="620" y="108" font-size="9.5" fill="hsl(20,12%,45%)" text-anchor="middle" font-family="Space Grotesk,sans-serif">t = 72h (censored)</text>
+
+                  <!-- 5km zone label -->
+                  <rect x="370" y="15" width="62" height="18" rx="9" fill="rgba(234,88,12,0.10)" stroke="rgba(234,88,12,0.28)" stroke-width="1"/>
+                  <text x="401" y="27.5" font-size="9" fill="hsl(20,80%,38%)" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700">5 km Zone</text>
+
+                </svg>
+              </div>
+            </div>
+
+            <!-- ── ROW 2: Time-to-Event concept + Censoring (side by side) ── -->
+            <div class="surv-two-col">
+
+              <!-- Time-to-event -->
+              <div class="surv-card">
+                <div class="surv-card-title"><i class="fa-solid fa-stopwatch" style="color:var(--accent-cyan);"></i> Time-to-Event (T)</div>
+                <p class="surv-card-desc">The <em>event</em> is the wildfire crossing within 5 km of the evacuation zone. <strong>T</strong> is the number of hours from observation start until the breach occurs.</p>
+
+                <svg class="surv-tte-svg" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="tteFill" x1="0" x2="1" y1="0" y2="0">
+                      <stop offset="0%"   stop-color="hsl(20,95%,45%)" stop-opacity="0.18"/>
+                      <stop offset="100%" stop-color="hsl(20,95%,45%)" stop-opacity="0.05"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- axis -->
+                  <line x1="20" y1="68" x2="280" y2="68" stroke="rgba(234,88,12,0.3)" stroke-width="1.5"/>
+                  <text x="10"  y="72" font-size="9" fill="hsl(20,12%,50%)" font-family="Space Grotesk,sans-serif">0h</text>
+                  <text x="266" y="72" font-size="9" fill="hsl(20,12%,50%)" font-family="Space Grotesk,sans-serif">72h</text>
+
+                  <!-- Distance curve (fire closing in) -->
+                  <path d="M20,20 C80,22 130,40 175,62 L175,68 L20,68 Z" fill="url(#tteFill)" />
+                  <path d="M20,20 C80,22 130,40 175,62" stroke="hsl(20,90%,45%)" stroke-width="2" fill="none" stroke-linecap="round">
+                    <animate attributeName="stroke-dashoffset" from="300" to="0" dur="2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+                    <animate attributeName="stroke-dasharray" from="0,300" to="300,0" dur="2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+                  </path>
+
+                  <!-- T marker -->
+                  <line x1="175" y1="25" x2="175" y2="68" stroke="hsl(20,90%,45%)" stroke-width="1.5" stroke-dasharray="4,2"/>
+                  <circle cx="175" cy="62" r="5" fill="hsl(20,90%,45%)">
+                    <animate attributeName="r" values="5;7;5" dur="2s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
+                  </circle>
+                  <text x="175" y="21" text-anchor="middle" font-size="9.5" font-weight="700" fill="hsl(20,80%,38%)" font-family="Space Grotesk,sans-serif">T = 42h</text>
+
+                  <!-- Labels -->
+                  <text x="75"  y="48" font-size="8.5" fill="hsl(20,12%,42%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">distance closing</text>
+                  <text x="75"  y="58" font-size="8.5" fill="hsl(20,12%,42%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">toward zone →</text>
+                </svg>
+              </div>
+
+              <!-- Censoring -->
+              <div class="surv-card">
+                <div class="surv-card-title"><i class="fa-solid fa-eye-slash" style="color:var(--accent-purple);"></i> Censoring Examples</div>
+                <p class="surv-card-desc">When a fire doesn't breach within 72h, we don't discard it — we label it <strong>censored</strong>. The event could still happen later.</p>
+
+                <svg class="surv-censor-svg" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+                  <!-- axis -->
+                  <line x1="20" y1="110" x2="280" y2="110" stroke="rgba(234,88,12,0.28)" stroke-width="1.5"/>
+                  <text x="10"  y="114" font-size="8.5" fill="hsl(20,12%,50%)" font-family="Space Grotesk,sans-serif">0h</text>
+                  <text x="265" y="114" font-size="8.5" fill="hsl(20,12%,50%)" font-family="Space Grotesk,sans-serif">72h</text>
+
+                  <!-- Fire A — breach at 30h -->
+                  <text x="8" y="35" font-size="8.5" fill="hsl(20,12%,42%)" font-family="Space Grotesk,sans-serif" font-weight="600">Fire A</text>
+                  <line x1="20" y1="32" x2="140" y2="32" stroke="hsl(20,90%,45%)" stroke-width="2.5" stroke-linecap="round"/>
+                  <circle cx="140" cy="32" r="5.5" fill="hsl(20,90%,45%)"/>
+                  <text x="148" y="36" font-size="8" fill="hsl(20,80%,38%)" font-family="Space Grotesk,sans-serif" font-weight="700">⚡ Breach (30h)</text>
+
+                  <!-- Fire B — censored at 60h (extinguished) -->
+                  <text x="8" y="62" font-size="8.5" fill="hsl(20,12%,42%)" font-family="Space Grotesk,sans-serif" font-weight="600">Fire B</text>
+                  <line x1="20" y1="59" x2="235" y2="59" stroke="hsl(120,38%,50%)" stroke-width="2.5" stroke-linecap="round"/>
+                  <line x1="229" y1="53" x2="241" y2="65" stroke="hsl(120,38%,50%)" stroke-width="2.5" stroke-linecap="round"/>
+                  <line x1="241" y1="53" x2="229" y2="65" stroke="hsl(120,38%,50%)" stroke-width="2.5" stroke-linecap="round"/>
+                  <text x="245" y="63" font-size="8" fill="hsl(120,35%,38%)" font-family="Space Grotesk,sans-serif" font-weight="600">✗ Censored (60h)</text>
+                  <text x="8"  y="73" font-size="7.5" fill="hsl(20,12%,55%)" font-family="Space Grotesk,sans-serif" font-style="italic">(extinguished early)</text>
+
+                  <!-- Fire C — censored at 72h (window end) -->
+                  <text x="8" y="92" font-size="8.5" fill="hsl(20,12%,42%)" font-family="Space Grotesk,sans-serif" font-weight="600">Fire C</text>
+                  <line x1="20" y1="89" x2="277" y2="89" stroke="hsl(200,60%,55%)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5,3"/>
+                  <line x1="271" y1="83" x2="283" y2="95" stroke="hsl(200,60%,55%)" stroke-width="2.5" stroke-linecap="round"/>
+                  <line x1="283" y1="83" x2="271" y2="95" stroke="hsl(200,60%,55%)" stroke-width="2.5" stroke-linecap="round"/>
+                  <text x="8"  y="103" font-size="7.5" fill="hsl(20,12%,55%)" font-family="Space Grotesk,sans-serif" font-style="italic">(window ended, still burning)</text>
+                </svg>
+
+                <div class="surv-legend-row">
+                  <span class="surv-legend-dot" style="background:hsl(20,90%,45%);"></span> Breach event
+                  <span class="surv-legend-dot" style="background:hsl(120,38%,50%);"></span> Censored
+                  <span class="surv-legend-dot" style="background:hsl(200,60%,55%);"></span> Window end
+                </div>
+              </div>
+            </div>
+
+            <!-- ── ROW 3: Animated Survival Probability Curve ── -->
+            <div class="surv-section-label">
+              <i class="fa-solid fa-wave-square" style="color:var(--accent-purple);"></i> Stage 4 — Kaplan-Meier Survival Probability Curve
+            </div>
+            <div class="surv-card surv-card-wide">
+              <p class="surv-card-desc">S(t) = probability that the wildfire has <strong>NOT yet breached</strong> by time t. As hours pass, high-risk fires show rapidly declining survival probability.</p>
+
+              <div class="surv-km-wrap">
+                <svg id="surv-km-svg" class="surv-km-svg" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <!-- Clip path for animated reveal -->
+                    <clipPath id="kmClip">
+                      <rect x="0" y="0" width="0" height="280" id="kmClipRect">
+                        <animate attributeName="width" from="0" to="640" dur="2.6s" fill="freeze" begin="0.3s" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+                      </rect>
+                    </clipPath>
+                    <!-- Area fills -->
+                    <linearGradient id="kmGrad1" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%"   stop-color="hsl(20,90%,45%)" stop-opacity="0.22"/>
+                      <stop offset="100%" stop-color="hsl(20,90%,45%)" stop-opacity="0.01"/>
+                    </linearGradient>
+                    <linearGradient id="kmGrad2" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%"   stop-color="hsl(200,70%,50%)" stop-opacity="0.16"/>
+                      <stop offset="100%" stop-color="hsl(200,70%,50%)" stop-opacity="0.01"/>
+                    </linearGradient>
+                    <linearGradient id="kmGrad3" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%"   stop-color="hsl(120,50%,45%)" stop-opacity="0.14"/>
+                      <stop offset="100%" stop-color="hsl(120,50%,45%)" stop-opacity="0.01"/>
+                    </linearGradient>
+                  </defs>
+
+                  <!-- Grid lines -->
+                  <g stroke="rgba(234,88,12,0.08)" stroke-width="1">
+                    <line x1="60" y1="30"  x2="660" y2="30"/>
+                    <line x1="60" y1="72"  x2="660" y2="72"/>
+                    <line x1="60" y1="114" x2="660" y2="114"/>
+                    <line x1="60" y1="156" x2="660" y2="156"/>
+                    <line x1="60" y1="198" x2="660" y2="198"/>
+                  </g>
+
+                  <!-- Y axis -->
+                  <line x1="60" y1="20" x2="60" y2="215" stroke="rgba(234,88,12,0.3)" stroke-width="1.5"/>
+                  <!-- X axis -->
+                  <line x1="60" y1="215" x2="665" y2="215" stroke="rgba(234,88,12,0.3)" stroke-width="1.5"/>
+
+                  <!-- Y axis labels -->
+                  <g fill="hsl(20,12%,40%)" font-size="10" font-family="Space Grotesk,sans-serif" text-anchor="end">
+                    <text x="55" y="33">1.0</text>
+                    <text x="55" y="75">0.8</text>
+                    <text x="55" y="117">0.6</text>
+                    <text x="55" y="159">0.4</text>
+                    <text x="55" y="201">0.2</text>
+                  </g>
+                  <text x="-110" y="20" font-size="10" fill="hsl(20,80%,38%)" font-family="Space Grotesk,sans-serif" font-weight="600" transform="rotate(-90)" text-anchor="middle">S(t) — Survival Probability</text>
+
+                  <!-- X axis labels -->
+                  <g fill="hsl(20,12%,40%)" font-size="10" font-family="Space Grotesk,sans-serif" text-anchor="middle">
+                    <text x="60"  y="230">0h</text>
+                    <text x="180" y="230">12h</text>
+                    <text x="300" y="230">24h</text>
+                    <text x="420" y="230">36h</text>
+                    <text x="540" y="230">48h</text>
+                    <text x="660" y="230">60h+</text>
+                  </g>
+                  <text x="362" y="250" font-size="10.5" fill="hsl(20,80%,38%)" font-family="Space Grotesk,sans-serif" font-weight="600" text-anchor="middle">Time (hours from observation start)</text>
+
+                  <!-- ── HIGH-RISK fires (steep drop) ── -->
+                  <!-- Area fill -->
+                  <path d="M60,30 L60,30 L120,30 L120,58 L200,58 L200,90 L260,90 L260,128 L320,128 L320,168 L380,168 L380,200 L660,200 L660,215 L60,215 Z"
+                        fill="url(#kmGrad1)" clip-path="url(#kmClip)"/>
+                  <!-- Step curve -->
+                  <path d="M60,30 L120,30 L120,58 L200,58 L200,90 L260,90 L260,128 L320,128 L320,168 L380,168 L380,200 L660,200"
+                        stroke="hsl(20,90%,42%)" stroke-width="2.5" fill="none" stroke-linecap="round" clip-path="url(#kmClip)"/>
+                  <!-- Tick markers -->
+                  <g clip-path="url(#kmClip)">
+                    <line x1="120" y1="53"  x2="120" y2="63"  stroke="hsl(20,90%,42%)" stroke-width="1.5"/>
+                    <line x1="200" y1="85"  x2="200" y2="95"  stroke="hsl(20,90%,42%)" stroke-width="1.5"/>
+                    <line x1="260" y1="123" x2="260" y2="133" stroke="hsl(20,90%,42%)" stroke-width="1.5"/>
+                    <line x1="320" y1="163" x2="320" y2="173" stroke="hsl(20,90%,42%)" stroke-width="1.5"/>
+                    <line x1="380" y1="195" x2="380" y2="205" stroke="hsl(20,90%,42%)" stroke-width="1.5"/>
+                  </g>
+
+                  <!-- ── MID-RISK fires (moderate drop) ── -->
+                  <path d="M60,30 L60,30 L160,30 L160,45 L280,45 L280,72 L380,72 L380,100 L480,100 L480,130 L600,130 L600,155 L660,155 L660,215 L60,215 Z"
+                        fill="url(#kmGrad2)" clip-path="url(#kmClip)"/>
+                  <path d="M60,30 L160,30 L160,45 L280,45 L280,72 L380,72 L380,100 L480,100 L480,130 L600,130 L600,155 L660,155"
+                        stroke="hsl(200,70%,48%)" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="7,3" clip-path="url(#kmClip)"/>
+
+                  <!-- ── LOW-RISK fires (slow drop) ── -->
+                  <path d="M60,30 L200,30 L200,36 L360,36 L360,50 L480,50 L480,65 L600,65 L600,80 L660,80 L660,215 L60,215 Z"
+                        fill="url(#kmGrad3)" clip-path="url(#kmClip)"/>
+                  <path d="M60,30 L200,30 L200,36 L360,36 L360,50 L480,50 L480,65 L600,65 L600,80 L660,80"
+                        stroke="hsl(120,50%,42%)" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="4,4" clip-path="url(#kmClip)"/>
+
+                  <!-- Censoring tick marks (vertical ticks on curves) -->
+                  <g clip-path="url(#kmClip)">
+                    <!-- Censored on high-risk -->
+                    <line x1="350" y1="154" x2="350" y2="142" stroke="hsl(20,90%,42%)" stroke-width="2"/>
+                    <line x1="450" y1="184" x2="450" y2="172" stroke="hsl(20,90%,42%)" stroke-width="2"/>
+                    <!-- Censored on mid -->
+                    <line x1="530" y1="128" x2="530" y2="116" stroke="hsl(200,70%,48%)" stroke-width="2"/>
+                    <!-- Censored on low -->
+                    <line x1="640" y1="80"  x2="640" y2="68"  stroke="hsl(120,50%,42%)" stroke-width="2"/>
+                  </g>
+
+                  <!-- Annotation: breach zone -->
+                  <rect x="61" y="185" width="300" height="29" rx="4" fill="rgba(234,88,12,0.05)" stroke="rgba(234,88,12,0.15)" stroke-width="1" clip-path="url(#kmClip)"/>
+                  <text x="210" y="197" font-size="8.5" fill="hsl(20,80%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle" clip-path="url(#kmClip)">⚠ High-risk zone — S(t) &lt; 0.2</text>
+                  <text x="210" y="209" font-size="8" fill="hsl(20,12%,52%)" font-family="Space Grotesk,sans-serif" text-anchor="middle" clip-path="url(#kmClip)">Emergency evacuation trigger threshold</text>
+
+                  <!-- Legend -->
+                  <g font-size="9.5" font-family="Space Grotesk,sans-serif" font-weight="600">
+                    <rect x="420" y="22" width="238" height="70" rx="8" fill="rgba(255,255,255,0.65)" stroke="rgba(234,88,12,0.12)" stroke-width="1"/>
+                    <line x1="432" y1="38" x2="464" y2="38" stroke="hsl(20,90%,42%)"   stroke-width="2.5"/>
+                    <text x="470" y="42" fill="hsl(20,80%,35%)">High-Risk Fires</text>
+                    <line x1="432" y1="55" x2="464" y2="55" stroke="hsl(200,70%,48%)" stroke-width="2" stroke-dasharray="7,3"/>
+                    <text x="470" y="59" fill="hsl(200,50%,38%)">Mid-Risk Fires</text>
+                    <line x1="432" y1="72" x2="464" y2="72" stroke="hsl(120,50%,42%)" stroke-width="2" stroke-dasharray="4,4"/>
+                    <text x="470" y="76" fill="hsl(120,35%,35%)">Low-Risk Fires</text>
+                    <text x="432" y="87" fill="hsl(20,12%,50%)" font-weight="400" font-size="8.5">| = censored observation</text>
+                  </g>
+
+                </svg>
+              </div>
+              <div class="surv-km-annotation">
+                <div class="surv-anno-chip"><i class="fa-solid fa-triangle-exclamation"></i> High-risk fires lose 80% survival probability within 38h</div>
+                <div class="surv-anno-chip surv-anno-blue"><i class="fa-solid fa-circle-check"></i> Low-risk fires maintain S(t) &gt; 0.7 throughout the 72h window</div>
+                <div class="surv-anno-chip surv-anno-green"><i class="fa-solid fa-eye-slash"></i> Tick marks on curves indicate censored fire observations</div>
+              </div>
+            </div>
+
+          </div>
+          <!-- END SURVIVAL ANALYSIS INFOGRAPHIC -->
+
+        </article>
+      </section>
+      
+    </div>
+
+  </main>
+
+  <!-- Interactive Particles & Chart.js Loader Script -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>

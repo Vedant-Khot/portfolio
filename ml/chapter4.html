@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4: Preprocessing & EDA — Wildfire Evacuation Threat Prediction</title>
+  <meta name="description" content="In-depth academic case study on predicting wildfire buffer breaches using advanced Survival Analysis, Ensemble Learning, and Spatial Kinematics under Prof. Sneha Varur.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inherited Main Stylesheet -->
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- Custom Light-Fiery Theme Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Chart.js for EDA Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Cyber Grid Canvas -->
+  <canvas id="cyber-canvas"></canvas>
+
+  <!-- Back to Portfolio Floating Button -->
+  <a href="../index.html#projects" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i> Back to Portfolio
+  </a>
+
+  <!-- Report Layout Wrapper -->
+  <main class="container report-body">
+
+    <!-- Key Performance Metrics Grid -->
+    <div class="metric-grid">
+      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
+        <div class="metric-value gradient-text">0.981</div>
+        <div class="metric-label">Ensemble C-Index</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">72h</div>
+        <div class="metric-label">Horizon</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">5 km</div>
+        <div class="metric-label">Zone Radius</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">221</div>
+        <div class="metric-label">Events</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">37</div>
+        <div class="metric-label">Features</div>
+      </div>
+    </div>
+
+    <!-- MAIN DOCK LAYOUT -->
+    <div class="report-layout">
+      
+      <!-- Sticky Sidebar Menu -->
+      <nav class="report-sidebar">
+        <div class="sidebar-title">Report Chapters</div>
+        
+        <a href="index.html" class="sidebar-link">
+          <i class="fa-solid fa-compass-drafting"></i> 1. Core Foundations
+        </a>
+        <a href="chapter2.html" class="sidebar-link">
+          <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
+        </a>
+        <a href="chapter3.html" class="sidebar-link">
+          <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
+        </a>
+        <a href="chapter4.html" class="sidebar-link active">
+          <i class="fa-solid fa-sliders"></i> 4. Preprocessing & EDA
+        </a>
+        <a href="chapter5.html" class="sidebar-link">
+          <i class="fa-solid fa-network-wired"></i> 5. ML Architecture
+        </a>
+        <a href="chapter6.html" class="sidebar-link">
+          <i class="fa-solid fa-leaf"></i> 6. SDG & Assessment
+        </a>
+      </nav>
+      
+      <!-- Scrollable Content Area -->
+      <section class="report-content">
+        
+        <!-- CHAPTER 4 -->
+        <article id="chapter4" class="chapter-card glass-card">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-sliders"></i> Chapter 4: Preprocessing, EDA & Feature Selection
+          </h2>
+          
+          <div class="section-title-sub">
+            <i class="fa-solid fa-calculator"></i> 9. Data Preprocessing Analysis
+          </div>
+          <p class="report-paragraph">
+            The preprocessing pipeline is properly structured to address data quality and volume challenges:
+          </p>
+          <p class="report-paragraph">
+            <strong>A. Data Generation / Expansion:</strong> Because the dataset had only 220 distinct records, temporal expansion was used. Generating multiple temporal slices from the same event reduces overfitting, increases training diversity, and improves the model's ability to generalize to new, unseen fire patterns.
+          </p>
+          <p class="report-paragraph">
+            <strong>B. Data Cleaning:</strong> Standard but essential data cleaning steps were performed, including handling missing values, duplicate removal, error correction, and consistency checking to ensure data integrity.
+          </p>
+          <p class="report-paragraph">
+            <strong>C. Feature Scaling:</strong> Robust feature scaling was applied. This ensures numerical stability, faster model convergence, and balanced contributions from distance metrics, growth metrics, and speed-based variables.
+          </p>
+
+          <div class="section-title-sub">
+            <i class="fa-solid fa-chart-pie"></i> 10. Exploratory Data Analysis (EDA)
+          </div>
+          <p class="report-paragraph">
+            The EDA section provides critical insights into the structure and patterns within the data:
+          </p>
+          <p class="report-paragraph">
+            <strong>A. Class Imbalance:</strong> The dataset exhibits moderate imbalance (68.8% Event=0, 31.2% Event=1). SMOTE oversampling and class weighting inside survival loss functions ensure balanced model performance.
+          </p>
+          <p class="report-paragraph">
+            <strong>B. Seasonal Trend Analysis:</strong> <strong>62% of all observed wildfire breaches occur during the July–August window</strong>. This temporal seasonality is crucial for disaster forecasting and anticipating seasonal resource demands.
+          </p>
+          <p class="report-paragraph">
+            <strong>C. Correlation Analysis:</strong> Top predictors include Time-to-hit, Distance to infrastructure, Closing speed, and Growth rate — validating the project's physical domain assumptions.
+          </p>
+
+          <!-- ================================================================
+               INTERACTIVE EDA VISUALIZATION DASHBOARD
+               ================================================================ -->
+          <div style="margin: 2.5rem 0;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:1.8rem;">
+              <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+              <h3 style="font-family:var(--font-header); font-size:1.3rem; color:var(--text-white); margin:0;">
+                Interactive EDA Dashboard
+              </h3>
+              <span style="font-size:0.75rem; color:var(--text-muted); background:rgba(234,88,12,0.08); border:1px solid rgba(234,88,12,0.15); padding:0.2rem 0.7rem; border-radius:12px; font-family:var(--font-header);">
+                Powered by Chart.js
+              </span>
+            </div>
+
+            <!-- Row 1: Monthly Activity + Class Imbalance -->
+            <div style="display:grid; grid-template-columns:1.6fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+
+              <!-- Monthly Wildfire Activity Bar Chart -->
+              <div class="viz-card">
+                <div class="viz-card-header">
+                  <i class="fa-solid fa-chart-column" style="color:var(--accent-cyan);"></i>
+                  Wildfire Breach Activity by Month
+                </div>
+                <div class="viz-card-body">
+                  <canvas id="chart-monthly" height="220"></canvas>
+                </div>
+                <p class="viz-caption">July–August accounts for 62% of all 72h buffer breaches — confirming strong seasonal fire risk patterns.</p>
+              </div>
+
+              <!-- Class Imbalance Doughnut -->
+              <div class="viz-card">
+                <div class="viz-card-header">
+                  <i class="fa-solid fa-chart-pie" style="color:var(--accent-purple);"></i>
+                  Dataset Class Distribution
+                </div>
+                <div class="viz-card-body" style="display:flex; align-items:center; justify-content:center;">
+                  <canvas id="chart-class" height="200" style="max-width:240px;"></canvas>
+                </div>
+                <p class="viz-caption">31.2% positive breach events vs 68.8% non-breach — moderate imbalance addressed with SMOTE.</p>
+              </div>
+            </div>
+
+            <!-- Row 2: Feature Importance Horizontal Bar -->
+            <div style="margin-bottom:1.5rem;">
+              <div class="viz-card">
+                <div class="viz-card-header">
+                  <i class="fa-solid fa-ranking-star" style="color:var(--accent-cyan);"></i>
+                  Top Feature Importance Scores (Tree-Based)
+                </div>
+                <div class="viz-card-body">
+                  <canvas id="chart-features" height="260"></canvas>
+                </div>
+                <p class="viz-caption">Distance-based and kinematic features dominate. Closing speed and alignment cosines are the strongest predictors of breach events.</p>
+              </div>
+            </div>
+
+            <!-- Row 3: Correlation Heatmap -->
+            <div style="margin-bottom:1.5rem;">
+              <div class="viz-card">
+                <div class="viz-card-header">
+                  <i class="fa-solid fa-table-cells" style="color:var(--accent-purple);"></i>
+                  Feature Correlation Heatmap
+                </div>
+                <div class="viz-card-body" style="overflow-x:auto;">
+                  <canvas id="chart-heatmap" height="320"></canvas>
+                </div>
+                <p class="viz-caption">High positive correlations (orange) between distance-based features confirm multicollinearity. Temporal features show moderate independent relationships.</p>
+              </div>
+            </div>
+
+            <!-- Row 4: Box Plot - Distance Comparison -->
+            <div>
+              <div class="viz-card">
+                <div class="viz-card-header">
+                  <i class="fa-solid fa-box-open" style="color:var(--accent-cyan);"></i>
+                  Distance to Evacuation Zone: Event=0 vs Event=1
+                </div>
+                <div class="viz-card-body">
+                  <canvas id="chart-boxplot" height="240"></canvas>
+                </div>
+                <p class="viz-caption">Fires breaching the 5 km zone start 54× closer to infrastructure (median 2.4 km) compared to non-breach fires (median 131 km) — the single most powerful discriminating feature.</p>
+              </div>
+            </div>
+
+          </div>
+          <!-- END VISUALIZATION DASHBOARD -->
+
+          <div class="section-title-sub" style="color: var(--accent-cyan);">
+            <i class="fa-solid fa-lightbulb"></i> 11. Key Insights & Spatio-Temporal Discoveries
+          </div>
+          <p class="report-paragraph">
+            The dataset reveals critical spatio-temporal dynamics that directly translate into operational emergency rules.
+          </p>
+
+          <!-- 3-Card Interactive Insights Dashboard -->
+          <div class="insights-grid reveal">
+            
+            <!-- Card 1: 54x Closer -->
+            <div class="insight-card">
+              <div class="insight-tag">Proximity Threat</div>
+              <div class="insight-big-value">54<span class="small-unit">×</span></div>
+              <h4 class="insight-title">Closer to Infrastructure</h4>
+              <p class="insight-desc">
+                Breach fires start at a median of **2.4 km** from evacuation zones, compared to a massive **131 km** median for safe, non-breaching fires. Proximity is the single greatest hazard factor.
+              </p>
+            </div>
+
+            <!-- Card 2: 62% Jul-Aug -->
+            <div class="insight-card">
+              <div class="insight-tag">Seasonal Trend</div>
+              <div class="insight-big-value">62<span class="small-unit">%</span></div>
+              <h4 class="insight-title">July–August Peaks</h4>
+              <p class="insight-desc">
+                Nearly **two-thirds of all buffer breaches occur in July and August**. Emergency agencies can optimize fleet, tankers, and personnel deployment around this seasonal spike.
+              </p>
+            </div>
+
+            <!-- Card 3: Distance Dominance -->
+            <div class="insight-card">
+              <div class="insight-tag">ML Feature Priority</div>
+              <div class="insight-big-value">-0.81<span class="small-unit">r</span></div>
+              <h4 class="insight-title">Log-Distance Correlation</h4>
+              <p class="insight-desc">
+                Log-compressing starting distance (`log_dist_min`) expands feature variance, boosting correlation to **-0.81** and establishing a highly accurate hazard separation boundary.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="section-title-sub">
+            <i class="fa-solid fa-filter"></i> 12. Feature Selection Strategy
+          </div>
+          <p class="report-paragraph">
+            The project uses a hybrid feature selection strategy, combining quantitative correlation analysis and tree-based importance metrics with deep domain expertise. This professional approach ensures the model focuses on physically meaningful features rather than relying purely on statistical noise.
+          </p>
+        </article>
+      </section>
+      
+    </div>
+
+  </main>
+
+  <!-- Interactive Particles & Chart.js Loader Script -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>
