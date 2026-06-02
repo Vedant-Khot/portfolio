@@ -695,6 +695,46 @@ const projectCases = {
       | Shared Mongo  | <---(DB Operations)---- |  Express API  |
       +---------------+                         +---------------+
     `
+  },
+  'wids_wildfire': {
+    title: 'WiDS Datathon 2026: Wildfire Predictive Risk System',
+    category: 'Machine Learning / Survival Analysis',
+    tech: 'Python, XGBoost Survival, Random Survival Forest, Weibull AFT, GNNs, Spatial Kinematics',
+    scope: 'An advanced predictive disaster risk platform built to forecast if an active wildfire will breach a 5 km infrastructure boundary within 72 hours under Prof. Sneha Varur.',
+    architecture: 'An Ensemble Survival Framework combining tree-based Cox hazards, non-linear survival forests, Accelerated Failure Time (AFT) curves, and parametric Weibull models to estimate time-to-event curves.',
+    keyPoints: [
+      'Survival Time-to-Event Modeling: Adapts clinical and reliability engineering risk paradigms to disaster intelligence and warning thresholds.',
+      'Advanced Feature Engineering: Derives spatial alignment cosines, along-track closing speeds, growth accelerations, and projected advance scopes.',
+      'Spatio-Temporal GNNs: Models spatial heat maps by constructing k-NN graphs between grid coordinates to track thermal transfer.',
+      '0.981 Concordance Index: Reached highly reliable risk ranking results through rank-based blending and confidence weight optimizations.'
+    ],
+    detailedReportUrl: './ml/index.html',
+    asciiSchema: `
+         +-----------------------------------------------------+
+         | 37 Features (Temporal, Growth, Kinematics, Distance)|
+         +-----------------------------------------------------+
+                                    │
+                                    v
+                 +--------------------------------------+
+                 |     Data Preprocessing Pipeline      |
+                 |     (SMOTE + Robust Scaling)         |
+                 +--------------------------------------+
+                                    │
+                 ┌──────────────────┼──────────────────┐
+                 v                  v                  v
+         [ XGBoost Cox ]     [ Survival Forest ] [ Weibull AFT ]
+                 │                  │                  │
+                 └──────────────────┼──────────────────┘
+                                    v
+                 +--------------------------------------+
+                 |     Rank-Based Blending Ensemble     |
+                 +--------------------------------------+
+                                    │
+                                    v
+                 +--------------------------------------+
+                 |   72h Survival Curve (C-Index 0.981) |
+                 +--------------------------------------+
+    `
   }
 };
 
@@ -733,6 +773,14 @@ function openProjectCase(caseId) {
           ${data.keyPoints.map(point => `<li>${point}</li>`).join('')}
         </ul>
       </div>
+      
+      ${data.detailedReportUrl ? `
+      <div style="margin-top: 2rem; text-align: center;">
+        <a href="${data.detailedReportUrl}" class="cta-button" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+          <i class="fa-solid fa-file-invoice"></i> Open Detailed Analysis Report
+        </a>
+      </div>
+      ` : ''}
     </div>
   `;
   
