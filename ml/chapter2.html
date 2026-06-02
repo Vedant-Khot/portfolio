@@ -80,6 +80,9 @@
         <a href="chapter6.html" class="sidebar-link">
           <i class="fa-solid fa-leaf"></i> 6. SDG & Assessment
         </a>
+        <a href="team.html" class="sidebar-link">
+          <i class="fa-solid fa-users"></i> Research Team
+        </a>
       </nav>
       
       <!-- Scrollable Content Area -->
@@ -135,10 +138,10 @@
               <i class="fa-solid fa-diagram-project"></i> Wildfire Data Ingestion & Preprocessing Pipeline
             </div>
             
-            <!-- Scaled up and enlarged pipeline SVG -->
-            <svg viewBox="0 0 960 280" width="100%" xmlns="http://www.w3.org/2000/svg" style="background: rgba(0,0,0,0.08); border: 1px solid rgba(234,88,12,0.1); border-radius: 12px; padding: 1.5rem 1rem; overflow: visible; height: 320px; width: 100%;">
+            <!-- Scaled up and vertical pipeline SVG -->
+            <svg viewBox="0 0 500 730" width="100%" xmlns="http://www.w3.org/2000/svg" style="background: rgba(0,0,0,0.08); border: 1px solid rgba(234,88,12,0.1); border-radius: 12px; padding: 1.5rem 1rem; overflow: visible; height: 730px; max-width: 520px; margin: 0 auto; display: block;">
               <defs>
-                <linearGradient id="pipeGrad" x1="0" x2="1" y1="0" y2="0">
+                <linearGradient id="pipeGrad" x1="0" x2="0" y1="0" y2="1">
                   <stop offset="0%" stop-color="hsl(20,95%,45%)" stop-opacity="0.9"/>
                   <stop offset="100%" stop-color="hsl(0,85%,45%)" stop-opacity="0.9"/>
                 </linearGradient>
@@ -146,60 +149,62 @@
                   <stop offset="0%" stop-color="hsl(180,100%,50%)" stop-opacity="0.25"/>
                   <stop offset="100%" stop-color="hsl(270,95%,60%)" stop-opacity="0.05"/>
                 </linearGradient>
+                <marker id="orangeArrV" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="hsl(20,95%,45%)"/>
+                </marker>
+                <marker id="cyanArrV" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="hsl(180,100%,42%)"/>
+                </marker>
+                <marker id="purpleArrV" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="hsl(270,95%,60%)"/>
+                </marker>
               </defs>
 
               <!-- Node 1: Raw Ingestion -->
-              <rect x="15" y="35" width="200" height="150" rx="16" fill="rgba(255,255,255,0.85)" stroke="rgba(234,88,12,0.28)" stroke-width="1.8"/>
-              <circle cx="115" cy="52" r="18" fill="rgba(234,88,12,0.06)" stroke="rgba(234,88,12,0.18)" stroke-width="1"/>
-              <path d="M109,46 C109,43.5 121,43.5 121,46 M109,46 L109,51 C109,53.5 121,53.5 121,51 L121,46 M109,51 L109,56 C109,58.5 121,58.5 121,56 L121,51" fill="none" stroke="hsl(20,95%,45%)" stroke-width="1.5"/>
-              <text x="115" y="88" font-size="13" font-weight="800" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">1. RAW INGESTION</text>
-              <text x="115" y="110" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Watch Duty & GIS</text>
-              <text x="115" y="128" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">316 Wildfire Records</text>
-              <text x="115" y="152" font-size="10" font-weight="800" fill="hsl(20,95%,45%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Coordinate Grids</text>
+              <rect x="70" y="20" width="360" height="130" rx="20" fill="rgba(255,255,255,0.85)" stroke="rgba(234,88,12,0.28)" stroke-width="1.8"/>
+              <circle cx="250" cy="45" r="18" fill="rgba(234,88,12,0.06)" stroke="rgba(234,88,12,0.18)" stroke-width="1"/>
+              <path d="M244,41 C244,38.5 256,38.5 256,41 M244,41 L244,45 C244,47.5 256,47.5 256,45 L256,41 M244,45 L244,49 C244,51.5 256,51.5 256,49 L256,45" fill="none" stroke="hsl(20,95%,45%)" stroke-width="1.5"/>
+              <text x="250" y="78" font-size="14.5" font-weight="800" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">1. RAW INGESTION</text>
+              <text x="250" y="98" font-size="12" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Watch Duty APIs & GIS Shapefiles</text>
+              <text x="250" y="116" font-size="11.5" font-weight="800" fill="hsl(20,95%,45%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">316 Labeled Wildfire Records</text>
 
               <!-- Arrow 1 -> 2 -->
-              <path d="M215,110 L265,110" fill="none" stroke="hsl(20,90%,45%)" stroke-width="2.5" stroke-dasharray="5,3"/>
-              <polygon points="259,105 265,110 259,115" fill="hsl(20,90%,45%)"/>
-              <text x="240" y="100" font-size="9" font-weight="800" fill="hsl(20,80%,38%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">INGEST</text>
+              <path d="M250,150 L250,200" fill="none" stroke="hsl(20,90%,45%)" stroke-width="2.2" stroke-dasharray="4,2" marker-end="url(#orangeArrV)"/>
+              <text x="265" y="179" font-size="10" font-weight="800" fill="hsl(20,80%,38%)" font-family="Space Grotesk,sans-serif" text-anchor="start">INGEST</text>
 
               <!-- Node 2: Cleaning & Preprocessing -->
-              <rect x="265" y="35" width="200" height="150" rx="16" fill="rgba(255,255,255,0.85)" stroke="rgba(6,182,212,0.28)" stroke-width="1.8"/>
-              <circle cx="365" cy="52" r="18" fill="rgba(6,182,212,0.06)" stroke="rgba(6,182,212,0.18)" stroke-width="1"/>
-              <circle cx="365" cy="52" r="5" fill="none" stroke="hsl(180,100%,42%)" stroke-width="1.8"/>
-              <path d="M365,44 L365,46 M365,58 L365,60 M357,52 L359,52 M371,52 L373,52" stroke="hsl(180,100%,42%)" stroke-width="1.8"/>
-              <text x="365" y="88" font-size="13" font-weight="800" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">2. PREPROCESSING</text>
-              <text x="365" y="110" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">5h Snapshot Slicing</text>
-              <text x="365" y="128" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">18,000 Row Expansions</text>
-              <text x="365" y="152" font-size="10" font-weight="800" fill="hsl(180,100%,42%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">SMOTE Balanced</text>
+              <rect x="70" y="200" width="360" height="130" rx="20" fill="rgba(255,255,255,0.85)" stroke="rgba(6,182,212,0.28)" stroke-width="1.8"/>
+              <circle cx="250" cy="225" r="18" fill="rgba(6,182,212,0.06)" stroke="rgba(6,182,212,0.18)" stroke-width="1"/>
+              <circle cx="250" cy="225" r="5" fill="none" stroke="hsl(180,100%,42%)" stroke-width="1.8"/>
+              <path d="M250,217 L250,219 M250,231 L250,233 M242,225 L244,225 M256,225 L258,225" stroke="hsl(180,100%,42%)" stroke-width="1.8"/>
+              <text x="250" y="258" font-size="14.5" font-weight="800" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">2. PREPROCESSING</text>
+              <text x="250" y="278" font-size="12" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">5h Snapshot Slicing & Scaling</text>
+              <text x="250" y="296" font-size="11.5" font-weight="800" fill="hsl(180,100%,42%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">18,000 Observation Rows</text>
 
               <!-- Arrow 2 -> 3 -->
-              <path d="M465,110 L515,110" fill="none" stroke="hsl(180,90%,42%)" stroke-width="2.5" stroke-dasharray="5,3"/>
-              <polygon points="509,105 515,110 509,115" fill="hsl(180,90%,42%)"/>
-              <text x="490" y="100" font-size="9" font-weight="800" fill="hsl(180,80%,35%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">SLICE</text>
+              <path d="M250,330 L250,380" fill="none" stroke="hsl(180,90%,42%)" stroke-width="2.2" stroke-dasharray="4,2" marker-end="url(#cyanArrV)"/>
+              <text x="265" y="359" font-size="10" font-weight="800" fill="hsl(180,80%,35%)" font-family="Space Grotesk,sans-serif" text-anchor="start">SLICE</text>
 
               <!-- Node 3: Feature Engineering -->
-              <rect x="515" y="35" width="200" height="150" rx="16" fill="rgba(255,255,255,0.85)" stroke="rgba(168,85,247,0.28)" stroke-width="1.8"/>
-              <circle cx="615" cy="52" r="18" fill="rgba(168,85,247,0.06)" stroke="rgba(168,85,247,0.18)" stroke-width="1"/>
-              <circle cx="615" cy="52" r="8" fill="none" stroke="hsl(270,95%,60%)" stroke-width="1.5"/>
-              <path d="M611,56 L619,48" stroke="hsl(270,95%,60%)" stroke-width="1.8" stroke-linecap="round"/>
-              <text x="615" y="88" font-size="13" font-weight="800" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">3. KINEMATICS & ENG</text>
-              <text x="615" y="110" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">log_dist & alignment_abs</text>
-              <text x="615" y="128" font-size="11" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Default 0° Bearing Fix</text>
-              <text x="615" y="152" font-size="10" font-weight="800" fill="hsl(270,95%,60%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">34 Dynamic Features</text>
+              <rect x="70" y="380" width="360" height="130" rx="20" fill="rgba(255,255,255,0.85)" stroke="rgba(168,85,247,0.28)" stroke-width="1.8"/>
+              <circle cx="250" cy="405" r="18" fill="rgba(168,85,247,0.06)" stroke="rgba(168,85,247,0.18)" stroke-width="1"/>
+              <circle cx="250" cy="405" r="7" fill="none" stroke="hsl(270,95%,60%)" stroke-width="1.2"/>
+              <path d="M246,409 L254,401" stroke="hsl(270,95%,60%)" stroke-width="1.5"/>
+              <text x="250" y="438" font-size="14.5" font-weight="800" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">3. KINEMATICS & ENG</text>
+              <text x="250" y="458" font-size="12" fill="hsl(20,12%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">log_dist, is_close & alignment</text>
+              <text x="250" y="476" font-size="11.5" font-weight="800" fill="hsl(270,95%,60%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">34 Dynamic Physics Features</text>
 
               <!-- Arrow 3 -> 4 -->
-              <path d="M715,110 L745,110" fill="none" stroke="hsl(270,90%,60%)" stroke-width="2.5" stroke-dasharray="5,3"/>
-              <polygon points="739,105 745,110 739,115" fill="hsl(270,90%,60%)"/>
-              <text x="730" y="100" font-size="9" font-weight="800" fill="hsl(270,80%,50%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">EXTRACT</text>
+              <path d="M250,510 L250,560" fill="none" stroke="hsl(270,90%,60%)" stroke-width="2.2" stroke-dasharray="4,2" marker-end="url(#purpleArrV)"/>
+              <text x="265" y="539" font-size="10" font-weight="800" fill="hsl(270,80%,50%)" font-family="Space Grotesk,sans-serif" text-anchor="start">BUILD</text>
 
               <!-- Node 4: Model Ready Dataset -->
-              <rect x="745" y="35" width="200" height="150" rx="16" fill="url(#pipeGrad)" stroke="rgba(234,88,12,0.4)" stroke-width="2"/>
-              <circle cx="845" cy="52" r="18" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <path d="M839,52 L843,56 L852,47" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="845" y="88" font-size="13" font-weight="800" fill="#ffffff" font-family="Space Grotesk,sans-serif" text-anchor="middle">4. MODEL CORE</text>
-              <text x="845" y="110" font-size="11" fill="rgba(255,255,255,0.9)" font-family="Space Grotesk,sans-serif" text-anchor="middle">RSF + XGB Ensemble</text>
-              <text x="845" y="128" font-size="11" fill="rgba(255,255,255,0.9)" font-family="Space Grotesk,sans-serif" text-anchor="middle">Isotonic Calibration</text>
-              <text x="845" y="152" font-size="10" font-weight="900" fill="var(--accent-cyan)" font-family="Space Grotesk,sans-serif" text-anchor="middle">C-Index: 0.981</text>
+              <rect x="70" y="560" width="360" height="130" rx="20" fill="url(#pipeGrad)" stroke="rgba(234,88,12,0.4)" stroke-width="2"/>
+              <circle cx="250" cy="585" r="18" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <path d="M244,585 L248,589 L256,580" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+              <text x="250" y="618" font-size="14.5" font-weight="800" fill="#ffffff" font-family="Space Grotesk,sans-serif" text-anchor="middle">4. MODEL CORE</text>
+              <text x="250" y="638" font-size="12" fill="rgba(255,255,255,0.9)" font-family="Space Grotesk,sans-serif" text-anchor="middle">RSF + XGBoost Survival Ensembles</text>
+              <text x="250" y="656" font-size="11.5" font-weight="900" fill="var(--accent-cyan)" font-family="Space Grotesk,sans-serif" text-anchor="middle">C-Index: 0.981 | Calibrated</text>
             </svg>
           </div>
 
