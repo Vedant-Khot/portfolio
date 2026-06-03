@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: Complete Approach History — Wildfire Evacuation Threat Prediction</title>
+  <meta name="description" content="A comprehensive approach history documenting the progression from baseline statistical models to physics-informed architectures and empirical calibration expert systems.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inherited Main Stylesheet -->
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- Custom Light-Fiery Theme Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Cyber Grid Canvas -->
+  <canvas id="cyber-canvas"></canvas>
+
+  <!-- Report Layout Wrapper -->
+  <main class="container report-body">
+
+    <!-- Key Performance Metrics Grid -->
+    <div class="metric-grid">
+      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
+        <div class="metric-value gradient-text">0.981</div>
+        <div class="metric-label">Ensemble C-Index</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">72h</div>
+        <div class="metric-label">Horizon</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">5 km</div>
+        <div class="metric-label">Zone Radius</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">221</div>
+        <div class="metric-label">Events</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">37</div>
+        <div class="metric-label">Features</div>
+      </div>
+    </div>
+
+    <!-- MAIN DOCK LAYOUT -->
+    <div class="report-layout">
+      
+      <!-- Sticky Sidebar Menu -->
+      <nav class="report-sidebar">
+        <div class="sidebar-title">Report Chapters</div>
+        
+        <a href="index.html" class="sidebar-link">
+          <i class="fa-solid fa-compass-drafting"></i> 1. Core Foundations
+        </a>
+        <a href="chapter2.html" class="sidebar-link">
+          <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
+        </a>
+        <a href="chapter3.html" class="sidebar-link">
+          <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
+        </a>
+        <a href="chapter4.html" class="sidebar-link">
+          <i class="fa-solid fa-sliders"></i> 4. Preprocessing & EDA
+        </a>
+        <a href="chapter5.html" class="sidebar-link">
+          <i class="fa-solid fa-network-wired"></i> 5. ML Architecture
+        </a>
+        <a href="chapter6.html" class="sidebar-link">
+          <i class="fa-solid fa-leaf"></i> 6. SDG & Assessment
+        </a>
+        <a href="history.html" class="sidebar-link active">
+          <i class="fa-solid fa-clock-rotate-left"></i> 7. Approach History
+        </a>
+        <a href="team.html" class="sidebar-link">
+          <i class="fa-solid fa-users"></i> Research Team
+        </a>
+      </nav>
+      
+      <!-- Scrollable Content Area -->
+      <section class="report-content">
+        
+        <!-- CHAPTER 7: HISTORY -->
+        <article id="history" class="chapter-card glass-card">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-clock-rotate-left"></i> Chapter 7: Complete Modeling Approach History
+          </h2>
+          
+          <p class="report-paragraph">
+            This modeling chronicle logs the entire research evolution of the **WiDS Datathon 2026** wildfire risk forecasting system. The timeline captures the progression from classical baseline statistical models to physics-informed feature spaces, multi-brain architectures, synthetic digital twins, and ultimately empirical calibration expert systems.
+          </p>
+
+          <div class="section-title-sub">
+            <i class="fa-solid fa-timeline"></i> Modeling Evolution Roadmap
+          </div>
+
+          <!-- Chronological Roadmap Timeline -->
+          <div class="roadmap-timeline">
+            <div class="roadmap-track"></div>
+
+            <!-- Phase 1 -->
+            <div class="roadmap-node">
+              <div class="roadmap-bullet"><i class="fa-solid fa-calculator"></i></div>
+              <div class="roadmap-content-card">
+                <div class="roadmap-node-header">
+                  <h4 class="roadmap-node-title">Phase 1: Baseline Statistical Models</h4>
+                  <span class="roadmap-node-tag">ai_model_v3 ➔ v8</span>
+                </div>
+                <p class="report-paragraph" style="font-size: 0.85rem; margin-bottom: 0.8rem; text-align: left;">
+                  Initial modeling steps focused on setting up traditional survival analysis frameworks using imputed dataset runs.
+                </p>
+                <div style="overflow-x:auto;">
+                  <table class="grid-table" style="margin: 0.5rem 0; font-size: 0.78rem;">
+                    <thead>
+                      <tr>
+                        <th>Model</th>
+                        <th>Strategy</th>
+                        <th>Key Library</th>
+                        <th>Submission File</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>ai_model_v3.py</code></td>
+                        <td>RSF + CoxPH ensemble with imputed data</td>
+                        <td>sksurv</td>
+                        <td><code>submission_v3_imputed_data.csv</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>ai_model_v4.py</code></td>
+                        <td>GBSA + RSF blend, Platt Scaling calibration</td>
+                        <td>sksurv</td>
+                        <td><code>submission_v4.csv</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>ai_model_v5.py</code></td>
+                        <td>Claude V1 — full pipeline with Optuna tuning</td>
+                        <td>sksurv + optuna</td>
+                        <td><code>submission_claude_v1.csv</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>ai_model_v6.py</code></td>
+                        <td>Simplified GBSA</td>
+                        <td>sksurv</td>
+                        <td><code>submission_v6.csv</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>ai_model_v7.py</code></td>
+                        <td>Isotonic calibration added</td>
+                        <td>sksurv</td>
+                        <td><code>submission_v7.csv</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>ai_model_v8.py</code></td>
+                        <td>Weighted ensemble (GBSA/RSF)</td>
+                        <td>sksurv</td>
+                        <td><code>submission_v8.csv</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="callout-box" style="border-left-color: var(--accent-purple); background: rgba(168, 85, 247, 0.02); margin-top: 0.8rem; padding: 0.8rem 1rem;">
+                  <span class="callout-title" style="color: var(--accent-purple); font-size: 0.85rem; margin-bottom: 0.2rem;"><i class="fa-solid fa-lightbulb"></i> Key Lesson Learned</span>
+                  <p style="font-size: 0.8rem; margin: 0; color: var(--text-muted);">
+                    Pure statistical models plateaued around **0.955–0.960 C-Index** without incorporating custom spatial-kinematic or physics features.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="roadmap-node">
+              <div class="roadmap-bullet"><i class="fa-solid fa-fire"></i></div>
+              <div class="roadmap-content-card">
+                <div class="roadmap-node-header">
+                  <h4 class="roadmap-node-title">Phase 2: Physics-Informed Machine Learning</h4>
+                  <span class="roadmap-node-tag">ai_model_v9 ➔ v10i</span>
+                </div>
+                <p class="report-paragraph" style="font-size: 0.85rem; margin-bottom: 0.8rem; text-align: left;">
+                  Discovered the 4.8 km "Oracle" boundary from spatial EDA, integrating direct physical proximity constraints.
+                </p>
+                <div style="overflow-x:auto;">
+                  <table class="grid-table" style="margin: 0.5rem 0; font-size: 0.78rem;">
+                    <thead>
+                      <tr>
+                        <th>Model</th>
+                        <th>Strategy</th>
+                        <th>Innovation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>ai_model_v9.py</code></td>
+                        <td>Physics features (dist_sigmoid, TTI) added</td>
+                        <td>First use of <code>dist_sigmoid</code> boundary</td>
+                      </tr>
+                      <tr>
+                        <td><code>ai_model_v9b.py</code></td>
+                        <td>Soft Expert version with calibration</td>
+                        <td>Isotonic post-calibration</td>
+                      </tr>
+                      <tr>
+                        <td><code>ai_model_v10.py</code> to <code>v10i.py</code></td>
+                        <td>Iterative tuning of blend weights + KM correction</td>
+                        <td>9 variants exploring weight space</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="callout-box" style="border-left-color: var(--accent-cyan); background: rgba(234, 88, 12, 0.02); margin-top: 0.8rem; padding: 0.8rem 1rem;">
+                  <span class="callout-title" style="color: var(--accent-cyan); font-size: 0.85rem; margin-bottom: 0.2rem;"><i class="fa-solid fa-circle-exclamation"></i> Key Lesson Learned</span>
+                  <p style="font-size: 0.8rem; margin: 0; color: var(--text-muted);">
+                    <code>dist_sigmoid</code> (representing the 4.8 km spatial threat threshold) emerged as the single most powerful feature in the entire project.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="roadmap-node">
+              <div class="roadmap-bullet"><i class="fa-solid fa-brain"></i></div>
+              <div class="roadmap-content-card">
+                <div class="roadmap-node-header">
+                  <h4 class="roadmap-node-title">Phase 3: The "Soft Expert" Two-Brain Architecture</h4>
+                  <span class="roadmap-node-tag">final_soft_16_04 ➔ 17_04</span>
+                </div>
+                <p class="report-paragraph" style="font-size: 0.85rem; margin-bottom: 0.8rem; text-align: left;">
+                  Introduced specialization in modeling based on the fire observation types, splitting inputs into static and dynamic sub-cohorts.
+                </p>
+                <div style="overflow-x:auto;">
+                  <table class="grid-table" style="margin: 0.5rem 0; font-size: 0.78rem;">
+                    <thead>
+                      <tr>
+                        <th>Model</th>
+                        <th>Strategy</th>
+                        <th>Key Innovation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>final_soft_16_04.py</code></td>
+                        <td>Split into Static Brain (1-perimeter) + Dynamic Brain (multi-perimeter)</td>
+                        <td>Two-Brain architecture</td>
+                      </tr>
+                      <tr>
+                        <td><code>final_soft_16_04_fixed.py</code></td>
+                        <td>Bug-fixed script</td>
+                        <td>Fixed indentation/structural errors</td>
+                      </tr>
+                      <tr>
+                        <td><code>final_soft_17_04.py</code></td>
+                        <td>Added seasonal weighting</td>
+                        <td>Extended Two-Brain with time features</td>
+                      </tr>
+                      <tr>
+                        <td><code>FIXED_RANK_BLENDED_16_04.py</code></td>
+                        <td>Fixed ranking with blended output</td>
+                        <td>Rank-blended submission</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="callout-box" style="border-left-color: var(--accent-purple); background: rgba(168, 85, 247, 0.02); margin-top: 0.8rem; padding: 0.8rem 1rem;">
+                  <span class="callout-title" style="color: var(--accent-purple); font-size: 0.85rem; margin-bottom: 0.2rem;"><i class="fa-solid fa-lightbulb"></i> Key Lesson Learned</span>
+                  <p style="font-size: 0.8rem; margin: 0; color: var(--text-muted);">
+                    Separating static fires (relying on initial distance parameters) from dynamic fires (tracking spatial kinematics) dramatically improved C-index scores.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 4 -->
+            <div class="roadmap-node">
+              <div class="roadmap-bullet"><i class="fa-solid fa-clone"></i></div>
+              <div class="roadmap-content-card">
+                <div class="roadmap-node-header">
+                  <h4 class="roadmap-node-title">Phase 4: Physics Ensemble with Digital Twins</h4>
+                  <span class="roadmap-node-tag">V11 Physics Ensemble</span>
+                </div>
+                <p class="report-paragraph" style="font-size: 0.85rem; margin-bottom: 0.8rem; text-align: left;">
+                  The first pipeline iteration combining all domain physics discoveries into a single rigorous cross-validated framework.
+                </p>
+                <div style="overflow-x:auto;">
+                  <table class="grid-table" style="margin: 0.5rem 0; font-size: 0.78rem;">
+                    <thead>
+                      <tr>
+                        <th>Model</th>
+                        <th>Strategy</th>
+                        <th>Score (Out-of-Fold)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>v11_physics_ensemble.py</code></td>
+                        <td>5-fold CatBoost Two-Brain + 15x Digital Twins + Isotonic Calibration + TTI Gate</td>
+                        <td><strong>0.9695 OOF Hybrid</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <h5 style="font-family: var(--font-header); font-size: 0.82rem; color: var(--text-white); margin: 0.8rem 0 0.3rem;">Core Pipeline Innovations:</h5>
+                <ul class="report-list" style="margin-bottom: 0; font-size: 0.8rem;">
+                  <li style="margin-bottom: 0.3rem;"><strong>Independent-Jitter Digital Twins:</strong> Generated 1,200 synthetic fires by adding randomized noise to historical coordinate vectors, stabilizing validation.</li>
+                  <li style="margin-bottom: 0.3rem;"><strong>TTI Physics Gate:</strong> Hard-coded constraint filter silencing threats that are physically incapable of reaching the zone within 72h based on maximum spread speed.</li>
+                  <li style="margin-bottom: 0.3rem;"><strong>Per-Horizon Isotonic Calibration:</strong> Aligning raw model output probability ranks back to actual observed spatial breach frequencies.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Phase 5 -->
+            <div class="roadmap-node">
+              <div class="roadmap-bullet"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div class="roadmap-content-card">
+                <div class="roadmap-node-header">
+                  <h4 class="roadmap-node-title">Phase 5: Stability & Diversity Ensemble</h4>
+                  <span class="roadmap-node-tag">V12 ➔ V15</span>
+                </div>
+                <p class="report-paragraph" style="font-size: 0.85rem; margin-bottom: 0.8rem; text-align: left;">
+                  Tested structural modeling alterations to expand validation diversity and combat sample overfitting.
+                </p>
+                <div style="overflow-x:auto;">
+                  <table class="grid-table" style="margin: 0.5rem 0; font-size: 0.78rem;">
+                    <thead>
+                      <tr>
+                        <th>Model</th>
+                        <th>Strategy</th>
+                        <th>OOF Hybrid Score</th>
+                        <th>File Reference</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>v12_seed_blender.py</code></td>
+                        <td>10-seed average of V11 pipeline</td>
+                        <td><strong>0.9719</strong> 🏆</td>
+                        <td><code>submission_v12_seed_blender.csv</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>v13_pseudo_labeling.py</code></td>
+                        <td>High-confidence test fires appended to training</td>
+                        <td>0.9669</td>
+                        <td><code>submission_v13_pseudo.csv</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>v14_meta_stacker.py</code></td>
+                        <td>CatBoost + GBSA + RSF blended via Ridge meta-learner</td>
+                        <td>0.9706</td>
+                        <td><code>submission_v14_stacking.csv</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>v15_master_blend.py</code></td>
+                        <td>60% V12 + 40% V14 weighted average</td>
+                        <td>~0.9713</td>
+                        <td><code>submission_v15_master_blend.csv</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 6 -->
+            <div class="roadmap-node">
+              <div class="roadmap-bullet"><i class="fa-solid fa-sliders"></i></div>
+              <div class="roadmap-content-card">
+                <div class="roadmap-node-header">
+                  <h4 class="roadmap-node-title">Phase 6: Physics-Calibration Expert System</h4>
+                  <span class="roadmap-node-tag">widsv37 ➔ final2</span>
+                </div>
+                <p class="report-paragraph" style="font-size: 0.85rem; margin-bottom: 0.8rem; text-align: left;">
+                  Moved away from pure machine learning to design empirical calibration pipelines and mathematical momentum solvers.
+                </p>
+                <div style="overflow-x:auto;">
+                  <table class="grid-table" style="margin: 0.5rem 0; font-size: 0.78rem;">
+                    <thead>
+                      <tr>
+                        <th>Model</th>
+                        <th>Strategy</th>
+                        <th>Key Innovation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>widsv37.py</code></td>
+                        <td>Pure calibration: Empirical targets + Additive Mean Snap</td>
+                        <td>Foundation empirical approach</td>
+                      </tr>
+                      <tr>
+                        <td><code>wids50.py</code></td>
+                        <td>Kinetic Momentum Ranking + Solar Window Factor + Lagrangian Solver</td>
+                        <td><strong>0.974+ private score</strong></td>
+                      </tr>
+                      <tr>
+                        <td><code>widsfinal.py</code></td>
+                        <td>Loads V31 prediction, applies rank-preserving scale + "Squeeze"</td>
+                        <td>Best post-calibration corrector</td>
+                      </tr>
+                      <tr>
+                        <td><code>final1.py</code> (V58)</td>
+                        <td>Wids50 + Seasonal Hazard multiplier + dynamic horizon spread</td>
+                        <td>0.974+ model</td>
+                      </tr>
+                      <tr>
+                        <td><code>final2.py</code> (V75)</td>
+                        <td>5-fold WeibullAFT + CoxPH ranking + Power-1.5 polarization</td>
+                        <td>Private LB Shield</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Section: Approach Taxonomy Grid -->
+          <div class="section-title-sub" style="margin-top: 3rem;">
+            <i class="fa-solid fa-grip-lines"></i> Modeling Approach Taxonomy
+          </div>
+          <p class="report-paragraph">
+            The project's architectural attempts can be categorized into 10 distinct modeling approaches, spanning statistical baselines, hybrid physics modeling, digital twin augmentation, and empirical Lagrangian solvers.
+          </p>
+
+          <div class="taxonomy-grid reveal">
+            
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">01</div>
+              <h4 class="taxonomy-title">Pure Survival Statistics</h4>
+              <p class="taxonomy-desc">Baseline RSF, GBSA, and CoxPH models built using standard survival analysis libraries.</p>
+              <span class="taxonomy-models">ai_model_v3 to v8</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">02</div>
+              <h4 class="taxonomy-title">Physics-Feature ML</h4>
+              <p class="taxonomy-desc">Introduction of spatial proximity markers, time-to-event gates, and momentum vectors.</p>
+              <span class="taxonomy-models">ai_model_v9 to v10i</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">03</div>
+              <h4 class="taxonomy-title">Specialised Two-Brain</h4>
+              <p class="taxonomy-desc">Separate specialized training structures for static (1-obs) and dynamic (multi-obs) fires.</p>
+              <span class="taxonomy-models">final_soft_16_04</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">04</div>
+              <h4 class="taxonomy-title">Digital Twin Augmentation</h4>
+              <p class="taxonomy-desc">Generating synthetic coordinate jitter fires to combat small sample sizes and stabilize CV.</p>
+              <span class="taxonomy-models">v11 pipeline</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">05</div>
+              <h4 class="taxonomy-title">Seed Stability Blending</h4>
+              <p class="taxonomy-desc">Multi-seed average predictions of high-performing model frameworks to reduce outlier variance.</p>
+              <span class="taxonomy-models">v12 blender</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">06</div>
+              <h4 class="taxonomy-title">Pseudo-Labeling</h4>
+              <p class="taxonomy-desc">Incorporating high-confidence test set predictions back into the training dataset splits.</p>
+              <span class="taxonomy-models">v13 pipeline</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">07</div>
+              <h4 class="taxonomy-title">Multi-Model Meta-Stacking</h4>
+              <p class="taxonomy-desc">Blending predictions from CatBoost, GBSA, and RSF models using a Ridge meta-regressor.</p>
+              <span class="taxonomy-models">v14 meta-stacker</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">08</div>
+              <h4 class="taxonomy-title">Pure Calibration Expert</h4>
+              <p class="taxonomy-desc">Empirical Kaplan-Meier baseline matching combined with additive solvers and rank shifts.</p>
+              <span class="taxonomy-models">widsv37, wids50</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">09</div>
+              <h4 class="taxonomy-title">Kinetic Momentum Expert</h4>
+              <p class="taxonomy-desc">Physical threat scoring modeled as: Area × Speed / sqrt(Distance) × Solar Window Factor.</p>
+              <span class="taxonomy-models">wids50, final1</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">10</div>
+              <h4 class="taxonomy-title">Cross-Validated Ranking</h4>
+              <p class="taxonomy-desc">5-fold parametric Weibull Accelerated Failure Time blended with non-parametric CoxPH rankings.</p>
+              <span class="taxonomy-models">final2 (v75)</span>
+            </div>
+
+          </div>
+
+          <!-- Section: Best Submissions -->
+          <div class="section-title-sub" style="margin-top: 3rem;">
+            <i class="fa-solid fa-trophy"></i> Best Submissions by Approach
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="grid-table reveal">
+              <thead>
+                <tr>
+                  <th>Approach Category</th>
+                  <th>Best Performing File Reference</th>
+                  <th>Known Concordance Index Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Pure Calibration & Kinetic Momentum Solver</strong></td>
+                  <td><code>submission_momentum_oracle.csv</code></td>
+                  <td><strong>0.974+</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Kinetic Momentum + Seasonal Multiplier</strong></td>
+                  <td><code>submission_v52.csv</code> (final1 output)</td>
+                  <td><strong>0.974+</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Seed Blender Ensemble</strong></td>
+                  <td><code>submission_v12_seed_blender.csv</code></td>
+                  <td>0.9719 OOF</td>
+                </tr>
+                <tr>
+                  <td><strong>Meta-Stacking Classifier Blend</strong></td>
+                  <td><code>submission_v14_stacking.csv</code></td>
+                  <td>0.9706 OOF</td>
+                </tr>
+                <tr>
+                  <td><strong>Physics-Informed Two-Brain Ensemble</strong></td>
+                  <td><code>submission_v11_physics_ensemble.csv</code></td>
+                  <td>0.9695 OOF</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </article>
+      </section>
+      
+    </div>
+
+  </main>
+
+  <!-- Interactive Particles Loader Script -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>
