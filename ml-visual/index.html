@@ -31,6 +31,15 @@
   <!-- Report Layout Wrapper -->
   <main class="container report-body">
 
+    <!-- Main Report Header -->
+    <header class="report-header">
+      <div class="report-header-badge">
+        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+      </div>
+      <h1 class="gradient-text">wids datathon challenge 2026</h1>
+      <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
+    </header>
+
     <!-- Key Performance Metrics Grid -->
     <div class="metric-grid">
       <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
@@ -65,6 +74,11 @@
         <a href="index.html" class="sidebar-link active">
           <i class="fa-solid fa-compass-drafting"></i> 1. Core Foundations
         </a>
+        <div class="sidebar-sub-nav">
+          <a href="#chapter1" class="sub-link"><i class="fa-solid fa-house"></i> Overview</a>
+          <a href="#sim-proximity" class="sub-link"><i class="fa-solid fa-play"></i> Threat Simulator</a>
+          <a href="#methodology-details" class="sub-link"><i class="fa-solid fa-book"></i> Methodology</a>
+        </div>
         <a href="chapter2.html" class="sidebar-link">
           <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
         </a>
@@ -296,7 +310,7 @@
           </div>
 
           <!-- Collapsible Methodology Expander -->
-          <details class="methodology-card">
+          <details class="methodology-card" id="methodology-details">
             <summary>
               <span><i class="fa-solid fa-graduation-cap"></i> View Detailed Project Overview & Core Foundations</span>
             </summary>

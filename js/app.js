@@ -697,10 +697,10 @@ const projectCases = {
     `
   },
   'wids_wildfire': {
-    title: 'WiDS Datathon 2026: Wildfire Predictive Risk System',
-    category: 'Machine Learning / Survival Analysis',
+    title: 'wids datathon challenge 2026',
+    category: 'Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis',
     tech: 'Python, XGBoost Survival, Random Survival Forest, Weibull AFT, GNNs, Spatial Kinematics',
-    scope: 'An advanced predictive disaster risk platform built to forecast if an active wildfire will breach a 5 km infrastructure boundary within 72 hours under Prof. Sneha Varur.',
+    scope: 'An advanced predictive disaster risk platform built to forecast if an active wildfire will breach a 5 km infrastructure boundary within 72 hours under Prof. Sneha Varur using survival analysis models.',
     architecture: 'An Ensemble Survival Framework combining tree-based Cox hazards, non-linear survival forests, Accelerated Failure Time (AFT) curves, and parametric Weibull models to estimate time-to-event curves.',
     keyPoints: [
       'Survival Time-to-Event Modeling: Adapts clinical and reliability engineering risk paradigms to disaster intelligence and warning thresholds.',

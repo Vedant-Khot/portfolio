@@ -31,6 +31,15 @@
   <!-- Report Layout Wrapper -->
   <main class="container report-body">
 
+    <!-- Main Report Header -->
+    <header class="report-header">
+      <div class="report-header-badge">
+        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+      </div>
+      <h1 class="gradient-text">wids datathon challenge 2026</h1>
+      <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
+    </header>
+
     <!-- Key Performance Metrics Grid -->
     <div class="metric-grid">
       <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
@@ -71,6 +80,11 @@
         <a href="chapter3.html" class="sidebar-link active">
           <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
         </a>
+        <div class="sidebar-sub-nav">
+          <a href="#chapter3" class="sub-link"><i class="fa-solid fa-hourglass"></i> Censoring Mechanics</a>
+          <a href="#censor-wizard" class="sub-link"><i class="fa-solid fa-wand-magic-sparkles"></i> Censoring Wizard</a>
+          <a href="#km-interactive" class="sub-link"><i class="fa-solid fa-chart-line"></i> Kaplan-Meier Curve</a>
+        </div>
         <a href="chapter4.html" class="sidebar-link">
           <i class="fa-solid fa-sliders"></i> 4. Preprocessing & EDA
         </a>
@@ -100,7 +114,7 @@
             <i class="fa-solid fa-hourglass-half"></i> Chapter 3: Survival Analysis & Censoring Mechanics
           </h2>
           
-          <details class="methodology-card">
+          <details class="methodology-card" id="survival-details">
             <summary>
               <span><i class="fa-solid fa-graduation-cap"></i> View Methodology: Survival Analysis & Censoring Mechanics</span>
             </summary>
@@ -142,7 +156,7 @@
           <!-- ================================================================
                INTERACTIVE CENSORING CONCEPT WIZARD
                ================================================================ -->
-          <div class="censor-wizard">
+          <div class="censor-wizard" id="censor-wizard">
             <div class="censor-wizard-header">
               <span class="censor-wizard-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Step-Through</span>
               <h3 class="censor-wizard-title">What is Censoring? — Click-Through Visual Guide</h3>
@@ -457,7 +471,7 @@
             <div class="surv-section-label">
               <i class="fa-solid fa-wave-square" style="color:var(--accent-purple);"></i> Stage 4 — Kaplan-Meier Survival Probability Curve
             </div>
-            <div class="surv-card surv-card-wide">
+            <div class="surv-card surv-card-wide" id="km-interactive">
               <p class="surv-card-desc">S(t) = probability that the wildfire has <strong>NOT yet breached</strong> by time t. As hours pass, high-risk fires show rapidly declining survival probability.</p>
 
               <!-- Kaplan-Meier Interactive Filter Toolbar -->

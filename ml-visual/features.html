@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feature Engineering — Wildfire Evacuation Threat Prediction</title>
+  <meta name="description" content="Complete feature engineering breakdown for WiDS 2026 wildfire prediction: 37 spatial-kinematic features, engineered interactions, formulas, and academic traps.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Inherited Main Stylesheet -->
+  <link rel="stylesheet" href="../css/main.css">
+
+  <!-- Custom Wildfire Theme Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* =============================================
+       FEATURE EXPLORER — Category Tab System
+       ============================================= */
+    .feat-tab-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.8rem;
+    }
+    .feat-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-header);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.5rem 1.1rem;
+      border-radius: 12px;
+      border: 1.5px solid rgba(234,88,12,0.15);
+      background: rgba(255,255,255,0.65);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .feat-tab:hover {
+      border-color: rgba(234,88,12,0.3);
+      color: var(--accent-cyan);
+      background: rgba(255,255,255,0.9);
+    }
+    .feat-tab.active {
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 6px 20px rgba(234,88,12,0.18);
+    }
+    .feat-tab[data-cat="all"].active   { background: linear-gradient(135deg,hsl(20,90%,45%),hsl(0,85%,45%)); }
+    .feat-tab[data-cat="dist"].active  { background: linear-gradient(135deg,hsl(180,100%,38%),hsl(200,80%,45%)); }
+    .feat-tab[data-cat="growth"].active{ background: linear-gradient(135deg,hsl(20,90%,45%),hsl(36,100%,48%)); }
+    .feat-tab[data-cat="kin"].active   { background: linear-gradient(135deg,hsl(270,90%,55%),hsl(290,80%,50%)); }
+    .feat-tab[data-cat="dir"].active   { background: linear-gradient(135deg,hsl(0,85%,42%),hsl(20,90%,48%)); }
+    .feat-tab[data-cat="time"].active  { background: linear-gradient(135deg,hsl(120,50%,38%),hsl(160,60%,40%)); }
+    .feat-tab[data-cat="eng"].active   { background: linear-gradient(135deg,hsl(45,95%,40%),hsl(36,100%,48%)); }
+
+    /* =============================================
+       FEATURE CARDS GRID
+       ============================================= */
+    .feat-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.1rem;
+    }
+    .feat-card {
+      background: rgba(255,255,255,0.8);
+      border: 1.5px solid var(--feat-border, rgba(234,88,12,0.12));
+      border-radius: 14px;
+      padding: 1.1rem 1.2rem;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .feat-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--feat-accent, var(--accent-cyan));
+      border-radius: 2px 0 0 2px;
+    }
+    .feat-card:hover {
+      box-shadow: 0 10px 30px var(--feat-glow, rgba(234,88,12,0.08));
+      border-color: var(--feat-accent, var(--accent-cyan));
+      transform: translateY(-3px);
+    }
+    .feat-card.hidden { display: none; }
+    .feat-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .feat-name {
+      font-family: 'Space Mono', monospace, var(--font-header);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-white);
+      word-break: break-all;
+    }
+    .feat-badge {
+      font-family: var(--font-header);
+      font-size: 0.58rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      background: var(--feat-bg, rgba(234,88,12,0.07));
+      color: var(--feat-accent, hsl(20,85%,40%));
+      border: 1px solid var(--feat-border, rgba(234,88,12,0.18));
+    }
+    .feat-avail {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-header);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .feat-avail-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+    .feat-avail-dot.always { background: hsl(120,50%,42%); }
+    .feat-avail-dot.moderate { background: hsl(36,100%,48%); }
+    .feat-avail-dot.sparse { background: hsl(0,80%,50%); }
+    .feat-corr {
+      font-family: var(--font-header);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--feat-accent, var(--accent-cyan));
+      margin-bottom: 0.5rem;
+    }
+    .feat-verdict {
+      font-size: 0.8rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+    .feat-verdict strong { color: var(--text-white); }
+
+    /* =============================================
+       FORMULA CARDS — Engineered Features
+       ============================================= */
+    .formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+    .formula-card {
+      background: rgba(255,255,255,0.78);
+      border: 1.5px solid var(--fc-border, rgba(234,88,12,0.12));
+      border-radius: 16px;
+      padding: 1.3rem 1.4rem;
+      transition: all 0.3s;
+    }
+    .formula-card:hover {
+      border-color: var(--fc-accent, var(--accent-cyan));
+      box-shadow: 0 10px 30px var(--fc-glow, rgba(234,88,12,0.08));
+      transform: translateY(-3px);
+    }
+    .formula-card-num {
+      font-family: var(--font-header);
+      font-size: 0.62rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fc-accent, var(--accent-cyan));
+      margin-bottom: 0.4rem;
+    }
+    .formula-card-title {
+      font-family: var(--font-header);
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text-white);
+      margin: 0 0 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .formula-code-pill {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: var(--fc-bg, rgba(234,88,12,0.07));
+      color: var(--fc-accent, hsl(20,85%,40%));
+      border: 1px solid var(--fc-border, rgba(234,88,12,0.15));
+      border-radius: 8px;
+      padding: 0.3rem 0.8rem;
+      display: inline-block;
+      margin-bottom: 0.8rem;
+    }
+    .formula-gain {
+      font-family: var(--font-header);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--fc-accent, var(--accent-cyan));
+      margin-bottom: 0.5rem;
+    }
+    .formula-rationale {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+    .formula-rationale strong { color: var(--text-white); }
+
+    /* =============================================
+       TRAPS CARDS
+       ============================================= */
+    .trap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.4rem;
+      margin: 1.5rem 0;
+    }
+    .trap-card {
+      background: rgba(255,255,255,0.75);
+      border: 1.5px solid var(--trap-border, rgba(220,38,38,0.15));
+      border-radius: 16px;
+      padding: 1.4rem;
+      position: relative;
+    }
+    .trap-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--trap-accent, hsl(0,80%,45%));
+      border-radius: 2px 2px 0 0;
+    }
+    .trap-label {
+      font-family: var(--font-header);
+      font-size: 0.62rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--trap-accent, hsl(0,80%,45%));
+      margin-bottom: 0.5rem;
+    }
+    .trap-title {
+      font-family: var(--font-header);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-white);
+      margin: 0 0 0.7rem;
+    }
+    .trap-body {
+      font-size: 0.83rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+    .trap-body strong { color: var(--text-white); }
+    .trap-fix {
+      margin-top: 0.9rem;
+      padding: 0.7rem 0.9rem;
+      background: rgba(34,197,94,0.06);
+      border-left: 3px solid hsl(120,50%,42%);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.8rem;
+      color: hsl(120,45%,30%);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* =============================================
+       CORRELATION BAR VISUAL
+       ============================================= */
+    .corr-visual {
+      margin: 1.8rem 0;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(234,88,12,0.12);
+      border-radius: 16px;
+      padding: 1.4rem 1.6rem;
+    }
+    .corr-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+    }
+    .corr-row:last-child { margin-bottom: 0; }
+    .corr-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-white);
+      min-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    @media (max-width: 600px) { .corr-name { min-width: 110px; font-size: 0.65rem; } }
+    .corr-bar-wrap {
+      flex: 1;
+      height: 10px;
+      background: rgba(234,88,12,0.08);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .corr-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .corr-val {
+      font-family: var(--font-header);
+      font-size: 0.78rem;
+      font-weight: 700;
+      min-width: 48px;
+      text-align: right;
+    }
+
+    /* =============================================
+       SPARSITY OVERVIEW
+       ============================================= */
+    .sparse-ring-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+      justify-content: center;
+    }
+    .sparse-ring-item {
+      text-align: center;
+      width: 120px;
+    }
+    .sparse-ring-svg { overflow: visible; }
+    .sparse-ring-label {
+      font-family: var(--font-header);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+    .sparse-ring-val {
+      font-family: var(--font-header);
+      font-size: 0.85rem;
+      font-weight: 900;
+      color: var(--text-white);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cyber Grid Canvas -->
+  <canvas id="cyber-canvas"></canvas>
+
+  <!-- Report Layout Wrapper -->
+  <main class="container report-body">
+
+    <!-- Main Report Header -->
+    <header class="report-header">
+      <div class="report-header-badge">
+        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+      </div>
+      <h1 class="gradient-text">wids datathon challenge 2026</h1>
+      <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
+    </header>
+
+    <!-- Key Performance Metrics Grid -->
+    <div class="metric-grid">
+      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
+        <div class="metric-value gradient-text">37</div>
+        <div class="metric-label">Total Features</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">6</div>
+        <div class="metric-label">Engineered</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">−0.81</div>
+        <div class="metric-label">Best Correlation</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">100%</div>
+        <div class="metric-label">Separation (is_close)</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">5 km</div>
+        <div class="metric-label">Threshold</div>
+      </div>
+    </div>
+
+    <!-- MAIN DOCK LAYOUT -->
+    <div class="report-layout">
+
+      <!-- Sticky Sidebar Menu -->
+      <nav class="report-sidebar">
+        <div class="sidebar-title">Report Chapters</div>
+
+        <a href="index.html" class="sidebar-link">
+          <i class="fa-solid fa-compass-drafting"></i> 1. Core Foundations
+        </a>
+        <a href="chapter2.html" class="sidebar-link">
+          <i class="fa-solid fa-chart-bar"></i> 2. Dataset &amp; Kinematics
+        </a>
+        <a href="chapter3.html" class="sidebar-link">
+          <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
+        </a>
+        <a href="chapter4.html" class="sidebar-link">
+          <i class="fa-solid fa-sliders"></i> 4. Preprocessing &amp; EDA
+        </a>
+        <a href="chapter5.html" class="sidebar-link">
+          <i class="fa-solid fa-network-wired"></i> 5. ML Architecture
+        </a>
+        <a href="chapter6.html" class="sidebar-link">
+          <i class="fa-solid fa-leaf"></i> 6. SDG &amp; Assessment
+        </a>
+        <a href="history.html" class="sidebar-link">
+          <i class="fa-solid fa-clock-rotate-left"></i> 7. Approach History
+        </a>
+        <a href="learnings.html" class="sidebar-link">
+          <i class="fa-solid fa-lightbulb"></i> Key Learnings
+        </a>
+        <a href="features.html" class="sidebar-link active">
+          <i class="fa-solid fa-gears"></i> Feature Engineering
+        </a>
+        <div class="sidebar-sub-nav">
+          <a href="#features-sparsity" class="sub-link"><i class="fa-solid fa-chart-pie"></i> Data Sparsity</a>
+          <a href="#features-explorer" class="sub-link"><i class="fa-solid fa-magnifying-glass-chart"></i> Feature Explorer</a>
+          <a href="#features-formulas" class="sub-link"><i class="fa-solid fa-calculator"></i> Physics Formulas</a>
+          <a href="#features-traps" class="sub-link"><i class="fa-solid fa-triangle-exclamation"></i> Academic Gotchas</a>
+        </div>
+        <a href="team.html" class="sidebar-link">
+          <i class="fa-solid fa-users"></i> Research Team
+        </a>
+      </nav>
+
+      <!-- Scrollable Content Area -->
+      <section class="report-content">
+
+        <!-- FEATURE ENGINEERING PAGE -->
+        <article id="features" class="chapter-card glass-card">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-gears"></i> Feature Engineering — Spatial Kinematics &amp; Physics Transformations
+          </h2>
+
+          <!-- INTRO -->
+          <p class="report-paragraph">
+            Disaster intelligence models live or die by the physical relevance of their features. Rather than feeding raw latitude/longitude pairs or skewed absolute area values directly to algorithms, this project applies rigorous <strong>spatial kinematics transformations</strong>, <strong>log compressions</strong>, and <strong>interaction terms</strong> — engineering 6 powerful derived features on top of the 31 sourced variables.
+          </p>
+          <div class="callout-box" style="margin-bottom: 2rem;">
+            <span class="callout-title"><i class="fa-solid fa-quote-left"></i> Domain Principle</span>
+            <p style="font-size:0.9rem; margin:0; line-height:1.6; color:var(--text-muted);">
+              In ML competitions and real-world disaster systems, <strong>good features often matter more than complex models.</strong>  
+              A well-engineered distance metric can outperform a deep neural network on raw coordinates.
+            </p>
+          </div>
+
+          <!-- ============================================
+               SECTION 1: FEATURE OVERVIEW & AVAILABILITY
+               ============================================ -->
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:1.5rem;" id="features-sparsity">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
+              Section 1 — Dataset Availability &amp; Data Sparsity
+            </h3>
+          </div>
+
+          <p class="report-paragraph">
+            A critical challenge: <strong>72.4% of fires (160/221) have only a single perimeter snapshot</strong> in the first 5 hours. Because growth, movement, and kinematic features are computed as differences between perimeters, single-snapshot fires have definitionally zero values — encoding absence of data, not absence of fire expansion.
+          </p>
+
+          <!-- Sparsity Ring Visuals -->
+          <div class="sparse-ring-grid">
+
+            <div class="sparse-ring-item">
+              <svg class="sparse-ring-svg" viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(234,88,12,0.1)" stroke-width="8"/>
+                <circle cx="40" cy="40" r="30" fill="none" stroke="hsl(120,50%,42%)" stroke-width="8"
+                  stroke-dasharray="188.4 188.4"
+                  stroke-dashoffset="0"
+                  stroke-linecap="round"
+                  transform="rotate(-90 40 40)"/>
+                <text x="40" y="38" font-size="11" font-weight="900" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">221</text>
+                <text x="40" y="50" font-size="7.5" fill="hsl(20,12%,45%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">total</text>
+              </svg>
+              <div class="sparse-ring-val">221</div>
+              <div class="sparse-ring-label">Total Events</div>
+            </div>
+
+            <div class="sparse-ring-item">
+              <svg class="sparse-ring-svg" viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(234,88,12,0.1)" stroke-width="8"/>
+                <circle cx="40" cy="40" r="30" fill="none" stroke="hsl(0,80%,48%)" stroke-width="8"
+                  stroke-dasharray="136.6 188.4"
+                  stroke-dashoffset="0"
+                  stroke-linecap="round"
+                  transform="rotate(-90 40 40)"/>
+                <text x="40" y="38" font-size="11" font-weight="900" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">160</text>
+                <text x="40" y="50" font-size="7.5" fill="hsl(20,12%,45%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">72.4%</text>
+              </svg>
+              <div class="sparse-ring-val">160</div>
+              <div class="sparse-ring-label">Single Perimeter (Low Resolution)</div>
+            </div>
+
+            <div class="sparse-ring-item">
+              <svg class="sparse-ring-svg" viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(234,88,12,0.1)" stroke-width="8"/>
+                <circle cx="40" cy="40" r="30" fill="none" stroke="hsl(200,70%,48%)" stroke-width="8"
+                  stroke-dasharray="51.8 188.4"
+                  stroke-dashoffset="0"
+                  stroke-linecap="round"
+                  transform="rotate(-90 40 40)"/>
+                <text x="40" y="38" font-size="11" font-weight="900" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">61</text>
+                <text x="40" y="50" font-size="7.5" fill="hsl(20,12%,45%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">27.6%</text>
+              </svg>
+              <div class="sparse-ring-val">61</div>
+              <div class="sparse-ring-label">Multi-Perimeter (Full Data)</div>
+            </div>
+
+            <div class="sparse-ring-item">
+              <svg class="sparse-ring-svg" viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(234,88,12,0.1)" stroke-width="8"/>
+                <circle cx="40" cy="40" r="30" fill="none" stroke="hsl(20,90%,45%)" stroke-width="8"
+                  stroke-dasharray="58.9 188.4"
+                  stroke-dashoffset="0"
+                  stroke-linecap="round"
+                  transform="rotate(-90 40 40)"/>
+                <text x="40" y="38" font-size="11" font-weight="900" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">31.2</text>
+                <text x="40" y="50" font-size="7.5" fill="hsl(20,12%,45%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">%</text>
+              </svg>
+              <div class="sparse-ring-val">31.2%</div>
+              <div class="sparse-ring-label">Positive Breach Rate</div>
+            </div>
+
+            <div class="sparse-ring-item">
+              <svg class="sparse-ring-svg" viewBox="0 0 80 80" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(234,88,12,0.1)" stroke-width="8"/>
+                <circle cx="40" cy="40" r="30" fill="none" stroke="hsl(120,50%,42%)" stroke-width="8"
+                  stroke-dasharray="188.4 188.4"
+                  stroke-dashoffset="0"
+                  stroke-linecap="round"
+                  transform="rotate(-90 40 40)"/>
+                <text x="40" y="38" font-size="11" font-weight="900" fill="hsl(20,24%,12%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">100%</text>
+                <text x="40" y="50" font-size="7.5" fill="hsl(20,12%,45%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">breach</text>
+              </svg>
+              <div class="sparse-ring-val">100%</div>
+              <div class="sparse-ring-label">Breach rate if within 4,674m</div>
+            </div>
+
+          </div>
+
+          <table class="grid-table" style="margin-bottom:2rem;">
+            <thead>
+              <tr>
+                <th>Subpopulation</th>
+                <th>Fires (n)</th>
+                <th>Breach Rate</th>
+                <th>Feature Availability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Single-perimeter</strong> (<code>low_temporal_resolution = 1</code>)</td>
+                <td>160 (72.4%)</td>
+                <td>20.0%</td>
+                <td>~6 basic features only (area, distance, time metadata)</td>
+              </tr>
+              <tr>
+                <td><strong>Multi-perimeter</strong> (<code>low_temporal_resolution = 0</code>)</td>
+                <td>61 (27.6%)</td>
+                <td>60.7%</td>
+                <td>Full 34-feature kinematic tracking available</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- ============================================
+               SECTION 2: FEATURE EXPLORER WITH TABS
+               ============================================ -->
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:1.5rem;" id="features-explorer">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
+              Section 2 — Interactive Feature Explorer
+            </h3>
+          </div>
+          <p class="report-paragraph">Filter features by category to explore each variable's availability, correlation with the breach event, and domain verdict.</p>
+
+          <!-- Filter Tabs -->
+          <div class="feat-tab-bar" id="featTabBar">
+            <button class="feat-tab active" data-cat="all"><i class="fa-solid fa-layer-group"></i> All Features</button>
+            <button class="feat-tab" data-cat="dist"><i class="fa-solid fa-ruler-horizontal"></i> Proximity</button>
+            <button class="feat-tab" data-cat="growth"><i class="fa-solid fa-expand-arrows-alt"></i> Growth</button>
+            <button class="feat-tab" data-cat="kin"><i class="fa-solid fa-circle-dot"></i> Kinematics</button>
+            <button class="feat-tab" data-cat="dir"><i class="fa-solid fa-location-arrow"></i> Direction</button>
+            <button class="feat-tab" data-cat="time"><i class="fa-solid fa-stopwatch"></i> Temporal</button>
+            <button class="feat-tab" data-cat="eng"><i class="fa-solid fa-gears"></i> Engineered</button>
+          </div>
+
+          <!-- Feature Cards -->
+          <div class="feat-cards-grid" id="featGrid">
+
+            <!-- PROXIMITY FEATURES -->
+            <div class="feat-card" data-cat="dist"
+              style="--feat-accent: hsl(180,100%,38%); --feat-bg: rgba(6,182,212,0.06); --feat-border: rgba(6,182,212,0.18); --feat-glow: rgba(6,182,212,0.12);">
+              <div class="feat-card-top">
+                <div class="feat-name">dist_min_ci_0_5h</div>
+                <span class="feat-badge" style="--feat-accent:hsl(180,100%,38%); --feat-bg:rgba(6,182,212,0.06); --feat-border:rgba(6,182,212,0.2);">PROXIMITY</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot always"></div> Always (221/221)</div>
+              <div class="feat-corr">Correlation: −0.481 (raw) → −0.812 (log-transformed)</div>
+              <p class="feat-verdict"><strong>Verdict: Keep, log-transform.</strong> Minimum distance to nearest evacuation zone centroid. The single strongest predictor. Log1p compression corrects extreme right skew (300m–750km range) and expands resolution near the 5km boundary.</p>
+            </div>
+
+            <div class="feat-card" data-cat="dist"
+              style="--feat-accent: hsl(180,100%,38%); --feat-bg: rgba(6,182,212,0.06); --feat-border: rgba(6,182,212,0.18); --feat-glow: rgba(6,182,212,0.12);">
+              <div class="feat-card-top">
+                <div class="feat-name">dist_std_ci_0_5h</div>
+                <span class="feat-badge" style="--feat-accent:hsl(180,100%,38%); --feat-bg:rgba(6,182,212,0.06); --feat-border:rgba(6,182,212,0.2);">PROXIMITY</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (19/221)</div>
+              <div class="feat-corr">Correlation: +0.142</div>
+              <p class="feat-verdict"><strong>Verdict: Keep for Tier 2/3 models.</strong> Standard deviation of distances to all zones. Captures multi-zone threat dispersion — fires threatening multiple zones simultaneously signal broader hazard spread.</p>
+            </div>
+
+            <div class="feat-card" data-cat="dist"
+              style="--feat-accent: hsl(180,100%,38%); --feat-bg: rgba(6,182,212,0.06); --feat-border: rgba(6,182,212,0.18); --feat-glow: rgba(6,182,212,0.12);">
+              <div class="feat-card-top">
+                <div class="feat-name">dist_change_ci_0_5h</div>
+                <span class="feat-badge" style="--feat-accent:hsl(180,100%,38%); --feat-bg:rgba(6,182,212,0.06); --feat-border:rgba(6,182,212,0.2);">PROXIMITY</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (18/221)</div>
+              <div class="feat-corr">Correlation: −0.106</div>
+              <p class="feat-verdict"><strong>Verdict: Keep.</strong> Absolute change in distance (d_final − d_initial). Negative = closing. Exact inverse of projected_advance_m (dropped). Directly measures how much the fire closed the gap in the first 5 hours.</p>
+            </div>
+
+            <div class="feat-card" data-cat="dist"
+              style="--feat-accent: hsl(180,100%,38%); --feat-bg: rgba(6,182,212,0.06); --feat-border: rgba(6,182,212,0.18); --feat-glow: rgba(6,182,212,0.12);">
+              <div class="feat-card-top">
+                <div class="feat-name">dist_slope_ci_0_5h</div>
+                <span class="feat-badge" style="--feat-accent:hsl(180,100%,38%); --feat-bg:rgba(6,182,212,0.06); --feat-border:rgba(6,182,212,0.2);">PROXIMITY</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot moderate"></div> Moderate (52/221)</div>
+              <div class="feat-corr">Correlation: −0.115</div>
+              <p class="feat-verdict"><strong>Verdict: Keep.</strong> Linear slope of distance vs. time (meters/hour). Richer availability than dist_change. Negative = closing. Better temporal stability over the 5-hour window.</p>
+            </div>
+
+            <div class="feat-card" data-cat="dist"
+              style="--feat-accent: hsl(180,100%,38%); --feat-bg: rgba(6,182,212,0.06); --feat-border: rgba(6,182,212,0.18); --feat-glow: rgba(6,182,212,0.12);">
+              <div class="feat-card-top">
+                <div class="feat-name">closing_speed_abs_m_per_h</div>
+                <span class="feat-badge" style="--feat-accent:hsl(180,100%,38%); --feat-bg:rgba(6,182,212,0.06); --feat-border:rgba(6,182,212,0.2);">PROXIMITY</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (18/221)</div>
+              <div class="feat-corr">Correlation: +0.139</div>
+              <p class="feat-verdict"><strong>Verdict: Keep (absolute over signed).</strong> The absolute closing speed value shows a stronger positive correlation with the breach event than the signed version, as directionality (toward/away) is already encoded in the sign of dist_change.</p>
+            </div>
+
+            <!-- GROWTH FEATURES -->
+            <div class="feat-card" data-cat="growth"
+              style="--feat-accent: hsl(20,90%,45%); --feat-bg: rgba(234,88,12,0.06); --feat-border: rgba(234,88,12,0.18); --feat-glow: rgba(234,88,12,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">log1p_area_first</div>
+                <span class="feat-badge">GROWTH</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot always"></div> Always (221/221)</div>
+              <div class="feat-corr">Correlation: −0.168</div>
+              <p class="feat-verdict"><strong>Verdict: Keep (log over raw).</strong> Log1p of initial fire area in hectares. Raw area reaches 11,942 ha with extreme right skew. Log compression stabilizes the linear boundary for tree-based models and avoids outlier domination.</p>
+            </div>
+
+            <div class="feat-card" data-cat="growth"
+              style="--feat-accent: hsl(20,90%,45%); --feat-bg: rgba(234,88,12,0.06); --feat-border: rgba(234,88,12,0.18); --feat-glow: rgba(234,88,12,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">log1p_growth</div>
+                <span class="feat-badge">GROWTH</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (24/221)</div>
+              <div class="feat-corr">Correlation: +0.293 ⭐ Best growth signal</div>
+              <p class="feat-verdict"><strong>Verdict: Best growth feature.</strong> Log-compressed absolute area growth (ha) over the observation window. Compresses extreme outliers and captures the physical rate of perimeter expansion. Strong +0.293 correlation — faster-growing fires are much more likely to breach.</p>
+            </div>
+
+            <div class="feat-card" data-cat="growth"
+              style="--feat-accent: hsl(20,90%,45%); --feat-bg: rgba(234,88,12,0.06); --feat-border: rgba(234,88,12,0.18); --feat-glow: rgba(234,88,12,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">radial_growth_rate_m_per_h</div>
+                <span class="feat-badge">GROWTH</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (25/221)</div>
+              <div class="feat-corr">Correlation: +0.215</div>
+              <p class="feat-verdict"><strong>Verdict: Keep.</strong> Rate of radial perimeter expansion in meters/hour. Among close fires, faster radial growth shows high correlation with sooner breach timings — the Kaplan-Meier S(t) drops earlier for high-radial-growth cohorts.</p>
+            </div>
+
+            <div class="feat-card" data-cat="growth"
+              style="--feat-accent: hsl(20,90%,45%); --feat-bg: rgba(234,88,12,0.06); --feat-border: rgba(234,88,12,0.18); --feat-glow: rgba(234,88,12,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">area_growth_rate_ha_per_h</div>
+                <span class="feat-badge">GROWTH</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (25/221)</div>
+              <div class="feat-corr">Correlation: +0.187</div>
+              <p class="feat-verdict"><strong>Verdict: Keep alongside radial rate.</strong> Area expansion in hectares/hour. Complements radial growth by capturing volumetric fuel consumption intensity. Different burn geometries can have the same radial rate but different area rates (e.g., elliptical vs. circular fire spread).</p>
+            </div>
+
+            <!-- KINEMATIC FEATURES -->
+            <div class="feat-card" data-cat="kin"
+              style="--feat-accent: hsl(270,90%,55%); --feat-bg: rgba(168,85,247,0.06); --feat-border: rgba(168,85,247,0.18); --feat-glow: rgba(168,85,247,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">centroid_speed_m_per_h</div>
+                <span class="feat-badge" style="background:rgba(168,85,247,0.07); color:hsl(270,75%,42%); border-color:rgba(168,85,247,0.2);">KINEMATICS</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (25/221)</div>
+              <div class="feat-corr">Correlation: +0.209</div>
+              <p class="feat-verdict"><strong>Verdict: Keep.</strong> Physical velocity of the fire's center of mass (m/h). Captures the rate of spatial translation — the actual movement speed of the fire front across topography. Essential for computing closing speed components.</p>
+            </div>
+
+            <div class="feat-card" data-cat="kin"
+              style="--feat-accent: hsl(270,90%,55%); --feat-bg: rgba(168,85,247,0.06); --feat-border: rgba(168,85,247,0.18); --feat-glow: rgba(168,85,247,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">centroid_displacement_m</div>
+                <span class="feat-badge" style="background:rgba(168,85,247,0.07); color:hsl(270,75%,42%); border-color:rgba(168,85,247,0.2);">KINEMATICS</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (25/221)</div>
+              <div class="feat-corr">Correlation: +0.198</div>
+              <p class="feat-verdict"><strong>Verdict: Keep.</strong> Total spatial displacement of the centroid over the 5h window. Combined with bearing angle, gives the displacement vector. Fires whose centroids travel large distances are more likely to cross the 5km boundary.</p>
+            </div>
+
+            <!-- DIRECTION FEATURES -->
+            <div class="feat-card" data-cat="dir"
+              style="--feat-accent: hsl(0,85%,45%); --feat-bg: rgba(220,38,38,0.05); --feat-border: rgba(220,38,38,0.18); --feat-glow: rgba(220,38,38,0.08);">
+              <div class="feat-card-top">
+                <div class="feat-name">alignment_abs</div>
+                <span class="feat-badge" style="background:rgba(220,38,38,0.06); color:hsl(0,80%,40%); border-color:rgba(220,38,38,0.2);">DIRECTION ⭐</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot moderate"></div> Moderate (61/221)</div>
+              <div class="feat-corr">Correlation: +0.349 — Best direction feature</div>
+              <p class="feat-verdict"><strong>Verdict: Best direction feature.</strong> Absolute alignment of spread vector with the direction toward the evacuation zone. Value of 1.0 = fire heading directly at the zone. Value near 0 = fire spreading sideways. Uses distance slopes to compute, so it triggers for 61 multi-perimeter fires.</p>
+            </div>
+
+            <div class="feat-card" data-cat="dir"
+              style="--feat-accent: hsl(0,85%,45%); --feat-bg: rgba(220,38,38,0.05); --feat-border: rgba(220,38,38,0.18); --feat-glow: rgba(220,38,38,0.08);">
+              <div class="feat-card-top">
+                <div class="feat-name">spread_bearing_cos</div>
+                <span class="feat-badge" style="background:rgba(220,38,38,0.06); color:hsl(0,80%,40%); border-color:rgba(220,38,38,0.2);">DIRECTION ⚠️</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot always"></div> Always (221/221)</div>
+              <div class="feat-corr">Correlation: −0.323 (spurious artifact!)</div>
+              <p class="feat-verdict"><strong>Verdict: Use only with bearing_is_real flag.</strong> Cosine of the fire spread bearing. However, 72% of single-perimeter fires default to bearing = 0° (North), making cos(0°) = 1.0. This creates a spurious correlation — the model learns data availability, not actual northward wind. Guard with the <code>bearing_is_real</code> indicator.</p>
+            </div>
+
+            <div class="feat-card" data-cat="dir"
+              style="--feat-accent: hsl(0,85%,45%); --feat-bg: rgba(220,38,38,0.05); --feat-border: rgba(220,38,38,0.18); --feat-glow: rgba(220,38,38,0.08);">
+              <div class="feat-card-top">
+                <div class="feat-name">spread_bearing_sin</div>
+                <span class="feat-badge" style="background:rgba(220,38,38,0.06); color:hsl(0,80%,40%); border-color:rgba(220,38,38,0.2);">DIRECTION</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot always"></div> Always (221/221)</div>
+              <div class="feat-corr">Correlation: −0.048</div>
+              <p class="feat-verdict"><strong>Verdict: Keep as cross-track component.</strong> Sin of bearing = along the perpendicular axis. Together with bearing_cos, encodes the full directional decomposition. Low correlation by itself, but important in interaction terms.</p>
+            </div>
+
+            <!-- TEMPORAL FEATURES -->
+            <div class="feat-card" data-cat="time"
+              style="--feat-accent: hsl(120,50%,40%); --feat-bg: rgba(34,197,94,0.05); --feat-border: rgba(34,197,94,0.18); --feat-glow: rgba(34,197,94,0.08);">
+              <div class="feat-card-top">
+                <div class="feat-name">num_perimeters_0_5h</div>
+                <span class="feat-badge" style="background:rgba(34,197,94,0.06); color:hsl(120,45%,32%); border-color:rgba(34,197,94,0.2);">TEMPORAL</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot always"></div> Always (221/221)</div>
+              <div class="feat-corr">Correlation: +0.371</div>
+              <p class="feat-verdict"><strong>Verdict: Keep (log-compressed).</strong> Number of perimeter snapshots in the first 5h. High-risk fires are heavily monitored — more satellite alerts. This is also the key segmentation variable separating low-resolution from high-resolution fires. Log1p compresses the frequency distribution.</p>
+            </div>
+
+            <div class="feat-card" data-cat="time"
+              style="--feat-accent: hsl(120,50%,40%); --feat-bg: rgba(34,197,94,0.05); --feat-border: rgba(34,197,94,0.18); --feat-glow: rgba(34,197,94,0.08);">
+              <div class="feat-card-top">
+                <div class="feat-name">event_start_month</div>
+                <span class="feat-badge" style="background:rgba(34,197,94,0.06); color:hsl(120,45%,32%); border-color:rgba(34,197,94,0.2);">TEMPORAL</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot always"></div> Always (221/221)</div>
+              <div class="feat-corr">Correlation: +0.148</div>
+              <p class="feat-verdict"><strong>Verdict: Keep as cyclic encoding.</strong> Calendar month of fire start. Important because 62% of breaches occur in July–August. Encode as sin/cos pair (month_sin, month_cos) to preserve circular calendar continuity (December→January proximity).</p>
+            </div>
+
+            <div class="feat-card" data-cat="time"
+              style="--feat-accent: hsl(120,50%,40%); --feat-bg: rgba(34,197,94,0.05); --feat-border: rgba(34,197,94,0.18); --feat-glow: rgba(34,197,94,0.08);">
+              <div class="feat-card-top">
+                <div class="feat-name">dt_first_last_0_5h</div>
+                <span class="feat-badge" style="background:rgba(34,197,94,0.06); color:hsl(120,45%,32%); border-color:rgba(34,197,94,0.2);">TEMPORAL</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (61/221)</div>
+              <div class="feat-corr">Correlation: +0.162</div>
+              <p class="feat-verdict"><strong>Verdict: Keep.</strong> Duration (hours) between first and last perimeter snapshot. Longer observation windows indicate sustained, monitored fires. Combined with num_perimeters, encodes the observation density (perimeters per hour) — a proxy for monitoring intensity.</p>
+            </div>
+
+            <!-- ENGINEERED FEATURES -->
+            <div class="feat-card" data-cat="eng"
+              style="--feat-accent: hsl(45,90%,42%); --feat-bg: rgba(234,179,8,0.06); --feat-border: rgba(234,179,8,0.2); --feat-glow: rgba(234,179,8,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">log_dist_min</div>
+                <span class="feat-badge" style="background:rgba(234,179,8,0.07); color:hsl(45,85%,35%); border-color:rgba(234,179,8,0.25);">ENGINEERED ⭐</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot always"></div> Always (221/221)</div>
+              <div class="feat-corr">Correlation gain: −0.481 → −0.812 (+68.8%)</div>
+              <p class="feat-verdict"><strong>Formula: <code>log1p(dist_min_ci_0_5h)</code></strong><br>Corrects extreme right skew across 3 orders of magnitude. Expands resolution near the critical 5km boundary. Single biggest correlation improvement in the entire pipeline.</p>
+            </div>
+
+            <div class="feat-card" data-cat="eng"
+              style="--feat-accent: hsl(45,90%,42%); --feat-bg: rgba(234,179,8,0.06); --feat-border: rgba(234,179,8,0.2); --feat-glow: rgba(234,179,8,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">is_close</div>
+                <span class="feat-badge" style="background:rgba(234,179,8,0.07); color:hsl(45,85%,35%); border-color:rgba(234,179,8,0.25);">ENGINEERED</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot always"></div> Always (221/221)</div>
+              <div class="feat-corr">Training correlation: 1.000 (perfect — use carefully)</div>
+              <p class="feat-verdict"><strong>Formula: <code>(dist_min_ci_0_5h &lt; 5000).astype(int)</code></strong><br>Binary proximity flag. Every training fire below 4,674m breached 100%. Use as soft indicator only — not as a hard threshold — since there's no training data in the 4,674–5,000m gray zone.</p>
+            </div>
+
+            <div class="feat-card" data-cat="eng"
+              style="--feat-accent: hsl(45,90%,42%); --feat-bg: rgba(234,179,8,0.06); --feat-border: rgba(234,179,8,0.2); --feat-glow: rgba(234,179,8,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">bearing_is_real</div>
+                <span class="feat-badge" style="background:rgba(234,179,8,0.07); color:hsl(45,85%,35%); border-color:rgba(234,179,8,0.25);">ENGINEERED</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot always"></div> Always (221/221)</div>
+              <div class="feat-corr">Eliminates spurious −0.323 artifact</div>
+              <p class="feat-verdict"><strong>Formula: <code>(spread_bearing_cos != 1.0) or (num_perimeters &gt; 1)</code></strong><br>Indicator flag that shields the model from learning the false north-bearing artifact. When 0, bearing values are meaningless defaults and should be masked to 0 in downstream models.</p>
+            </div>
+
+            <div class="feat-card" data-cat="eng"
+              style="--feat-accent: hsl(45,90%,42%); --feat-bg: rgba(234,179,8,0.06); --feat-border: rgba(234,179,8,0.2); --feat-glow: rgba(234,179,8,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">close_and_closing</div>
+                <span class="feat-badge" style="background:rgba(234,179,8,0.07); color:hsl(45,85%,35%); border-color:rgba(234,179,8,0.25);">ENGINEERED</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (active when both available)</div>
+              <div class="feat-corr">Interaction term — amplifies co-occurring signals</div>
+              <p class="feat-verdict"><strong>Formula: <code>is_close × closing_speed_abs_m_per_h</code></strong><br>Multiplicative interaction. Fires that are both close AND closing fast are the highest priority tier. This term is zero for far fires and scales with urgency for near ones, naturally creating a tiered risk amplifier.</p>
+            </div>
+
+            <div class="feat-card" data-cat="eng"
+              style="--feat-accent: hsl(45,90%,42%); --feat-bg: rgba(234,179,8,0.06); --feat-border: rgba(234,179,8,0.2); --feat-glow: rgba(234,179,8,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">dist_x_alignment</div>
+                <span class="feat-badge" style="background:rgba(234,179,8,0.07); color:hsl(45,85%,35%); border-color:rgba(234,179,8,0.25);">ENGINEERED</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Active for multi-perimeter fires</div>
+              <div class="feat-corr">Combined spatial-directional threat index</div>
+              <p class="feat-verdict"><strong>Formula: <code>log_dist_min × alignment_abs</code></strong><br>Combines spatial closeness with fire heading. High values highlight fires whose trajectory points directly at civilian populations. A fire 3km away headed directly at the zone (alignment=1.0) is encoded very differently from a fire 3km away moving sideways.</p>
+            </div>
+
+            <div class="feat-card" data-cat="eng"
+              style="--feat-accent: hsl(45,90%,42%); --feat-bg: rgba(234,179,8,0.06); --feat-border: rgba(234,179,8,0.2); --feat-glow: rgba(234,179,8,0.1);">
+              <div class="feat-card-top">
+                <div class="feat-name">closing_eta</div>
+                <span class="feat-badge" style="background:rgba(234,179,8,0.07); color:hsl(45,85%,35%); border-color:rgba(234,179,8,0.25);">ENGINEERED ⭐</span>
+              </div>
+              <div class="feat-avail"><div class="feat-avail-dot sparse"></div> Sparse (when closing_speed available)</div>
+              <div class="feat-corr">Correlation: −0.154 — Strongest timing predictor</div>
+              <p class="feat-verdict"><strong>Formula: <code>dist_min / max(closing_speed_abs, 0.1)</code></strong><br>Physics-based ETA estimate in hours. Serves as the primary target anchor for survival networks — essentially what the model is trying to predict, now provided as an input feature for residual learning. Clipped at 72h max horizon.</p>
+            </div>
+
+          </div>
+
+          <!-- ============================================
+               SECTION 3: CORRELATION COMPARISON VISUAL
+               ============================================ -->
+          <div style="display:flex; align-items:center; gap:10px; margin-top:2.5rem; margin-bottom:1.2rem;">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
+              Section 3 — Correlation Ranking &amp; Signal Strength
+            </h3>
+          </div>
+
+          <div class="corr-visual">
+            <div style="font-family:var(--font-header); font-size:0.78rem; font-weight:700; color:var(--text-muted); margin-bottom:1rem; letter-spacing:0.06em; text-transform:uppercase;">Feature Correlation with Breach Event (absolute value)</div>
+
+            <!-- Top features by correlation -->
+            <div class="corr-row">
+              <div class="corr-name">log_dist_min</div>
+              <div class="corr-bar-wrap"><div class="corr-bar-fill" data-w="100" style="background:linear-gradient(90deg,hsl(180,100%,38%),hsl(200,80%,45%));"></div></div>
+              <div class="corr-val" style="color:hsl(180,100%,35%);">0.812</div>
+            </div>
+            <div class="corr-row">
+              <div class="corr-name">is_close</div>
+              <div class="corr-bar-wrap"><div class="corr-bar-fill" data-w="100" style="background:linear-gradient(90deg,hsl(180,100%,38%),hsl(200,80%,45%));"></div></div>
+              <div class="corr-val" style="color:hsl(180,100%,35%);">1.000 (training)</div>
+            </div>
+            <div class="corr-row">
+              <div class="corr-name">alignment_abs</div>
+              <div class="corr-bar-wrap"><div class="corr-bar-fill" data-w="43" style="background:linear-gradient(90deg,hsl(0,80%,42%),hsl(20,90%,45%));"></div></div>
+              <div class="corr-val" style="color:hsl(0,75%,40%);">0.349</div>
+            </div>
+            <div class="corr-row">
+              <div class="corr-name">num_perimeters_0_5h</div>
+              <div class="corr-bar-wrap"><div class="corr-bar-fill" data-w="46" style="background:linear-gradient(90deg,hsl(120,50%,40%),hsl(160,55%,42%));"></div></div>
+              <div class="corr-val" style="color:hsl(120,50%,35%);">0.371</div>
+            </div>
+            <div class="corr-row">
+              <div class="corr-name">log1p_growth</div>
+              <div class="corr-bar-wrap"><div class="corr-bar-fill" data-w="36" style="background:linear-gradient(90deg,hsl(20,90%,45%),hsl(36,100%,48%));"></div></div>
+              <div class="corr-val" style="color:hsl(20,80%,40%);">0.293</div>
+            </div>
+            <div class="corr-row">
+              <div class="corr-name">centroid_speed_m_per_h</div>
+              <div class="corr-bar-wrap"><div class="corr-bar-fill" data-w="26" style="background:linear-gradient(90deg,hsl(270,85%,50%),hsl(290,75%,50%));"></div></div>
+              <div class="corr-val" style="color:hsl(270,80%,45%);">0.209</div>
+            </div>
+            <div class="corr-row">
+              <div class="corr-name">radial_growth_rate_m_per_h</div>
+              <div class="corr-bar-wrap"><div class="corr-bar-fill" data-w="26" style="background:linear-gradient(90deg,hsl(20,90%,45%),hsl(36,100%,48%));"></div></div>
+              <div class="corr-val" style="color:hsl(20,80%,40%);">0.215</div>
+            </div>
+            <div class="corr-row">
+              <div class="corr-name">dist_min_ci_0_5h (raw)</div>
+              <div class="corr-bar-wrap"><div class="corr-bar-fill" data-w="59" style="background:linear-gradient(90deg,hsl(180,100%,38%),hsl(200,80%,45%));"></div></div>
+              <div class="corr-val" style="color:hsl(180,80%,38%);">0.481 (baseline)</div>
+            </div>
+          </div>
+
+          <!-- ============================================
+               SECTION 4: ENGINEERED FEATURE FORMULAS
+               ============================================ -->
+          <div style="display:flex; align-items:center; gap:10px; margin-top:2.5rem; margin-bottom:1.2rem;" id="features-formulas">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
+              Section 4 — Engineered Feature Formulas &amp; Physics
+            </h3>
+          </div>
+
+          <div class="formula-grid">
+
+            <div class="formula-card"
+              style="--fc-accent:hsl(180,100%,38%); --fc-bg:rgba(6,182,212,0.06); --fc-border:rgba(6,182,212,0.18); --fc-glow:rgba(6,182,212,0.1);">
+              <div class="formula-card-num">Engineered Feature 1</div>
+              <div class="formula-card-title"><i class="fa-solid fa-compress" style="color:hsl(180,100%,38%);"></i> Log-Compress Distance</div>
+              <div class="formula-code-pill" style="--fc-accent:hsl(180,100%,38%); --fc-bg:rgba(6,182,212,0.06); --fc-border:rgba(6,182,212,0.2);">log1p(dist_min_ci_0_5h)</div>
+              <div class="formula-gain">Correlation gain: −0.481 → −0.812 (+68.8%)</div>
+              <p class="formula-rationale">
+                Starting distances range from <strong>300m to 750km</strong> — three orders of magnitude. Raw distances cause linear algorithms to treat the 300–5,000m range as almost identical. Log compression <em>expands</em> this critical near-boundary region and <em>compresses</em> the far, safe region where all fires look the same.
+              </p>
+            </div>
+
+            <div class="formula-card"
+              style="--fc-accent:hsl(20,90%,45%); --fc-bg:rgba(234,88,12,0.06); --fc-border:rgba(234,88,12,0.18); --fc-glow:rgba(234,88,12,0.1);">
+              <div class="formula-card-num">Engineered Feature 2</div>
+              <div class="formula-card-title"><i class="fa-solid fa-arrow-up-right-dots" style="color:hsl(20,90%,45%);"></i> Bearing Validity Flag</div>
+              <div class="formula-code-pill">(spread_bearing_cos != 1.0).astype(int)</div>
+              <div class="formula-gain">Eliminates −0.323 spurious artifact</div>
+              <p class="formula-rationale">
+                <strong>72% of fires</strong> have only one perimeter snapshot. With no second measurement, the bearing defaults to 0° (North). This makes cos(0°) = 1.0 for all these fires — a completely fake signal. The model was learning <em>"did we observe the fire enough times?"</em> instead of <em>"is the fire heading north?"</em>
+              </p>
+            </div>
+
+            <div class="formula-card"
+              style="--fc-accent:hsl(270,90%,55%); --fc-bg:rgba(168,85,247,0.06); --fc-border:rgba(168,85,247,0.18); --fc-glow:rgba(168,85,247,0.1);">
+              <div class="formula-card-num">Engineered Feature 3</div>
+              <div class="formula-card-title"><i class="fa-solid fa-stopwatch" style="color:hsl(270,90%,55%);"></i> Observation Density</div>
+              <div class="formula-code-pill">log1p(num_perimeters_0_5h)</div>
+              <div class="formula-gain">Correlation: +0.371</div>
+              <p class="formula-rationale">
+                High-risk fires generate many satellite alerts. Log1p linearizes the count distribution (1, 2, 3… → 0.69, 1.10, 1.39…). This also serves as the key <strong>segmentation variable</strong> separating the two modeling subpopulations. More perimeters = more kinematic data available.
+              </p>
+            </div>
+
+            <div class="formula-card"
+              style="--fc-accent:hsl(120,50%,40%); --fc-bg:rgba(34,197,94,0.05); --fc-border:rgba(34,197,94,0.18); --fc-glow:rgba(34,197,94,0.08);">
+              <div class="formula-card-num">Engineered Feature 4</div>
+              <div class="formula-card-title"><i class="fa-solid fa-arrows-spin" style="color:hsl(120,50%,40%);"></i> Proximity × Speed</div>
+              <div class="formula-code-pill">is_close × closing_speed_abs_m_per_h</div>
+              <div class="formula-gain">Tier-1 alert amplifier</div>
+              <p class="formula-rationale">
+                <strong>Multiplicative interaction</strong> between spatial proximity and closing velocity. Fires far away give zero regardless of speed. Fires that are close AND fast get the highest values — naturally encoding the "imminent threat" tier. Replaces the need for a manual rule-based alert system.
+              </p>
+            </div>
+
+            <div class="formula-card"
+              style="--fc-accent:hsl(0,85%,42%); --fc-bg:rgba(220,38,38,0.05); --fc-border:rgba(220,38,38,0.18); --fc-glow:rgba(220,38,38,0.08);">
+              <div class="formula-card-num">Engineered Feature 5</div>
+              <div class="formula-card-title"><i class="fa-solid fa-compass" style="color:hsl(0,85%,42%);"></i> Spatial Hazard Alignment</div>
+              <div class="formula-code-pill">log_dist_min × alignment_abs</div>
+              <div class="formula-gain">Directional threat severity index</div>
+              <p class="formula-rationale">
+                Combines <em>how close</em> a fire is with <em>where it's heading</em>. A fire 3km away heading directly at the zone (alignment=1.0) is encoded as <code>log(3000)×1.0 = 8.0</code>. A fire 3km away heading sideways (alignment=0.1) is <code>8.0×0.1 = 0.8</code>. This encodes the joint threat level in a single, physically meaningful scalar.
+              </p>
+            </div>
+
+            <div class="formula-card"
+              style="--fc-accent:hsl(45,95%,42%); --fc-bg:rgba(234,179,8,0.06); --fc-border:rgba(234,179,8,0.2); --fc-glow:rgba(234,179,8,0.1);">
+              <div class="formula-card-num">Engineered Feature 6</div>
+              <div class="formula-card-title"><i class="fa-solid fa-clock-rotate-left" style="color:hsl(45,95%,42%);"></i> Physics ETA Estimate</div>
+              <div class="formula-code-pill">dist_min / max(closing_speed_abs, 0.1)</div>
+              <div class="formula-gain">Correlation: −0.154 — Strongest timing predictor</div>
+              <p class="formula-rationale">
+                Directly approximates the physical <strong>time-to-breach</strong> in hours, providing the survival model with its own target as an input feature for residual learning. Clipped at 72h (the maximum observation horizon). The <code>max(..., 0.1)</code> prevents division-by-zero for stationary fires.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- ============================================
+               SECTION 5: PYTHON CODE BLOCK
+               ============================================ -->
+          <div style="display:flex; align-items:center; gap:10px; margin-top:2.5rem; margin-bottom:1.2rem;">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
+              Section 5 — Complete Engineering Pipeline (Python)
+            </h3>
+          </div>
+
+          <div class="code-block-header">
+            <span>wildfire_kinematics.py — Feature Engineering Function</span>
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <pre class="code-block"><code style="color: var(--accent-cyan);">def engineer_wildfire_kinematics(df, train_dist_min_ci=None):
+    """
+    Wildfire evacuation threat feature engineering pipeline.
+    Applies spatial kinematics transformations to the raw WiDS dataset.
+
+    Args:
+        df: Input DataFrame with raw features
+        train_dist_min_ci: Training-set dist values for leakage-safe scaling
+
+    Returns:
+        df: DataFrame with engineered features appended
+    """
+    
+    # ── 1. Log Compress Skewed Spatial Proximity ──────────────────────
+    # Corrects 3-order-of-magnitude skew: −0.481 → −0.812 correlation
+    df['log_dist_min'] = np.log1p(df['dist_min_ci_0_5h'])
+    
+    # ── 2. Soft Proximity Threshold ───────────────────────────────────
+    # WARNING: Perfect training separation — do NOT use as hard threshold
+    df['is_close'] = (df['dist_min_ci_0_5h'] < 5000).astype(int)
+    
+    # ── 3. Neutralize Default 0° North Bearing Artifact ──────────────
+    # 72% of fires default to cos(0°)=1.0 — guard before using bearing
+    df['bearing_is_real'] = (
+        (df['spread_bearing_cos'] != 1.0) | 
+        (df['num_perimeters_0_5h'] > 1)
+    ).astype(int)
+    
+    # Apply guard: zero out bearing features for low-res fires
+    df['spread_bearing_cos_guarded'] = (
+        df['spread_bearing_cos'] * df['bearing_is_real']
+    )
+    df['spread_bearing_sin_guarded'] = (
+        df['spread_bearing_sin'] * df['bearing_is_real']
+    )
+    
+    # ── 4. Log-Compress Observation Count ────────────────────────────
+    # Linearizes satellite alert frequency; key segmentation feature
+    df['log_num_perimeters'] = np.log1p(df['num_perimeters_0_5h'])
+    
+    # ── 5. Proximity × Closing Speed Interaction ─────────────────────
+    # Amplifies Tier-1 imminent threats: close AND fast = highest risk
+    df['close_and_closing'] = (
+        df['is_close'] * df['closing_speed_abs_m_per_h'].fillna(0)
+    )
+    
+    # ── 6. Spatial-Directional Threat Index ──────────────────────────
+    # Combines "how close" with "which direction" in one scalar
+    df['dist_x_alignment'] = (
+        df['log_dist_min'] * df['alignment_abs'].fillna(0)
+    )
+    
+    # ── 7. Physics-Based ETA Estimate ────────────────────────────────
+    # Time (hours) until breach at current closing speed
+    # Clipped to 72h horizon; 0.1 guard prevents division-by-zero
+    closing_speed_safe = df['closing_speed_abs_m_per_h'].clip(lower=0.1)
+    df['closing_eta'] = (
+        df['dist_min_ci_0_5h'] / closing_speed_safe
+    ).clip(upper=72.0)
+    
+    # ── 8. Leakage-Safe Percentile Scaling ───────────────────────────
+    # Compute percentiles ONLY from training data, apply to test
+    if train_dist_min_ci is not None:
+        p10 = np.percentile(train_dist_min_ci, 10)
+        p90 = np.percentile(train_dist_min_ci, 90)
+        df['dist_p10_p90_scaled'] = (
+            (df['dist_min_ci_0_5h'] - p10) / (p90 - p10)
+        ).clip(0, 1)
+    
+    return df</code></pre>
+
+          <!-- ============================================
+               SECTION 6: ACADEMIC TRAPS
+               ============================================ -->
+          <div style="display:flex; align-items:center; gap:10px; margin-top:2.5rem; margin-bottom:1.2rem;" id="features-traps">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg,hsl(0,85%,45%),hsl(20,90%,45%)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
+              Section 6 — Academic Traps, Artifacts &amp; Fixes
+            </h3>
+          </div>
+          <p class="report-paragraph">Disaster risk forecasting is filled with mathematical traps. These two artifacts were identified and resolved to prevent the models from learning spurious or brittle patterns.</p>
+
+          <div class="trap-grid">
+
+            <div class="trap-card" style="--trap-accent:hsl(0,80%,45%); --trap-border:rgba(220,38,38,0.15);">
+              <div class="trap-label">Trap 1 — Directional Artifact</div>
+              <h4 class="trap-title"><i class="fa-solid fa-compass"></i> spread_bearing_cos Default = 1.0</h4>
+              <p class="trap-body">
+                <strong>The Trap:</strong> When a fire has only one perimeter snapshot, no bearing can be computed — so the system defaults the angle to 0° (North). This makes <code>cos(0°) = 1.0</code> for all 161 low-resolution fires, creating a false correlation of −0.323. The model was "learning" data availability, not actual wind dynamics.
+              </p>
+              <div class="trap-fix">
+                ✅ <strong>Fix Applied:</strong> Created <code>bearing_is_real = (num_perimeters &gt; 1)</code> flag. Bearing features are masked to 0 when this flag is inactive. The model only uses directional data when it's mathematically valid.
+              </div>
+            </div>
+
+            <div class="trap-card" style="--trap-accent:hsl(20,90%,45%); --trap-border:rgba(234,88,12,0.15);">
+              <div class="trap-label">Trap 2 — Perfect Separation Overfit</div>
+              <h4 class="trap-title"><i class="fa-solid fa-shield-halved"></i> is_close = 1.000 Training Correlation</h4>
+              <p class="trap-body">
+                <strong>The Trap:</strong> In training data, every fire within 4,674m breached (100%). Using this as a hard threshold produces extreme probabilities (0 or 1), severely damaging calibration when test fires appear in the 4,674–5,000m gray zone — a distance range that has zero training samples.
+              </p>
+              <div class="trap-fix">
+                ✅ <strong>Fix Applied:</strong> Force continuous <code>log1p(dist_min_ci_0_5h)</code> as the primary input. The model learns a smooth logistic boundary — outputting calibrated non-binary probabilities near the 5km threshold, not hard decisions.
+              </div>
+            </div>
+
+            <div class="trap-card" style="--trap-accent:hsl(200,70%,45%); --trap-border:rgba(59,130,246,0.15);">
+              <div class="trap-label">Trap 3 — Data Leakage</div>
+              <h4 class="trap-title"><i class="fa-solid fa-database"></i> Percentile Scaling Across Full Dataset</h4>
+              <p class="trap-body">
+                <strong>The Trap:</strong> Computing standard scaling or percentile normalization over the combined train+test dataset leaks test statistics into the training loop, inflating validation accuracy by up to 3–4 C-Index points. Many Kaggle models make this mistake.
+              </p>
+              <div class="trap-fix">
+                ✅ <strong>Fix Applied:</strong> All percentile features and Robust Scaler normalization parameters are fitted <strong>strictly on the training split</strong>, then applied to test as frozen mathematical constants — never refitted on test data.
+              </div>
+            </div>
+
+            <div class="trap-card" style="--trap-accent:hsl(270,85%,52%); --trap-border:rgba(168,85,247,0.15);">
+              <div class="trap-label">Trap 4 — Sparsity Pooling</div>
+              <h4 class="trap-title"><i class="fa-solid fa-layer-group"></i> Naively Pooling High/Low Resolution Fires</h4>
+              <p class="trap-body">
+                <strong>The Trap:</strong> Simply merging single-perimeter (72.4%) and multi-perimeter (27.6%) fires into one model pool dilutes the kinematic signal — the dynamic features are all zero for the majority class, making them appear uncorrelated with the event even though they're highly informative within the multi-perimeter subpopulation.
+              </p>
+              <div class="trap-fix">
+                ✅ <strong>Fix Applied:</strong> Always include <code>low_temporal_resolution_0_5h</code> indicator as both a direct feature and a model stratification variable. The 60.7% breach rate in multi-perimeter fires vs 20.0% in single-perimeter fires demands subpopulation-aware modeling.
+              </div>
+            </div>
+
+          </div>
+
+        </article>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Feature Tab Filter + Correlation Bar Animation Scripts -->
+  <script>
+    // ── Feature Tab Filtering ──────────────────────────────────────
+    const tabBar = document.getElementById('featTabBar');
+    const grid   = document.getElementById('featGrid');
+
+    tabBar.querySelectorAll('.feat-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBar.querySelectorAll('.feat-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const cat = btn.getAttribute('data-cat');
+        grid.querySelectorAll('.feat-card').forEach(card => {
+          if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // ── Correlation Bar Animation ─────────────────────────────────
+    const corrBars = document.querySelectorAll('.corr-bar-fill');
+    const corrObs  = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const w = entry.target.getAttribute('data-w') || '0';
+          setTimeout(() => { entry.target.style.width = w + '%'; }, 100);
+          corrObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    corrBars.forEach(b => corrObs.observe(b));
+  </script>
+
+  <!-- Main app.js (canvas background + scroll reveal) -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>

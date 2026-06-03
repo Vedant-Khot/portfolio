@@ -74,7 +74,7 @@ body {
 
 /* Common Layout Components */
 .container {
-  max-width: 1200px;
+  max-width: 99vw;
   margin: 0 auto;
   padding: 0 2rem;
   width: 100%;

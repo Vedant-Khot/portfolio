@@ -31,6 +31,15 @@
   <!-- Report Layout Wrapper -->
   <main class="container report-body">
 
+    <!-- Main Report Header -->
+    <header class="report-header">
+      <div class="report-header-badge">
+        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+      </div>
+      <h1 class="gradient-text">wids datathon challenge 2026</h1>
+      <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
+    </header>
+
     <!-- Key Performance Metrics Grid -->
     <div class="metric-grid">
       <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
@@ -68,6 +77,11 @@
         <a href="chapter2.html" class="sidebar-link active">
           <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
         </a>
+        <div class="sidebar-sub-nav">
+          <a href="#chapter2" class="sub-link"><i class="fa-solid fa-database"></i> Dataset Stats</a>
+          <a href="#pipeline-section" class="sub-link"><i class="fa-solid fa-diagram-project"></i> Ingestion Pipeline</a>
+          <a href="#kinematics-section" class="sub-link"><i class="fa-solid fa-arrows-spin"></i> Spatial Kinematics</a>
+        </div>
         <a href="chapter3.html" class="sidebar-link">
           <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
         </a>
@@ -139,7 +153,7 @@
           </div>
 
           <!-- Dataset Pipeline Flow Diagram -->
-          <div class="data-pipeline-container reveal">
+          <div class="data-pipeline-container reveal" id="pipeline-section">
             <div style="font-family: var(--font-header); font-size: 0.95rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px;">
               <i class="fa-solid fa-diagram-project"></i> Wildfire Data Ingestion & Preprocessing Pipeline
             </div>
@@ -673,7 +687,7 @@
     return df</code></pre>
           
           <!-- Premium Spatio-Temporal Spread Dynamics Diagram -->
-          <div class="spread-container reveal">
+          <div class="spread-container reveal" id="kinematics-section">
             <div style="font-family: var(--font-header); font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
               <i class="fa-solid fa-compass"></i> Wildfire Spatio-Temporal Spread Dynamics & Kinematics
             </div>

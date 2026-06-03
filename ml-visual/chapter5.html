@@ -31,6 +31,15 @@
   <!-- Report Layout Wrapper -->
   <main class="container report-body">
 
+    <!-- Main Report Header -->
+    <header class="report-header">
+      <div class="report-header-badge">
+        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+      </div>
+      <h1 class="gradient-text">wids datathon challenge 2026</h1>
+      <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
+    </header>
+
     <!-- Key Performance Metrics Grid -->
     <div class="metric-grid">
       <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
@@ -77,6 +86,11 @@
         <a href="chapter5.html" class="sidebar-link active">
           <i class="fa-solid fa-network-wired"></i> 5. ML Architecture
         </a>
+        <div class="sidebar-sub-nav">
+          <a href="#chapter5" class="sub-link"><i class="fa-solid fa-microchip"></i> Model Overview</a>
+          <a href="#model-flow-section" class="sub-link"><i class="fa-solid fa-diagram-project"></i> Model Flowchart</a>
+          <a href="#architecture-details" class="sub-link"><i class="fa-solid fa-book"></i> Methodology Details</a>
+        </div>
         <a href="chapter6.html" class="sidebar-link">
           <i class="fa-solid fa-leaf"></i> 6. SDG & Assessment
         </a>
@@ -100,7 +114,7 @@
             <i class="fa-solid fa-network-wired"></i> Chapter 5: Machine Learning Architecture & Performance
           </h2>
           
-          <details class="methodology-card" style="margin-bottom: 2rem;">
+          <details class="methodology-card" id="architecture-details" style="margin-bottom: 2rem;">
             <summary>
               <span><i class="fa-solid fa-graduation-cap"></i> View Methodology: Ensemble Survival Framework Overview</span>
             </summary>
@@ -122,7 +136,7 @@
               <span class="pipeline-badge"><i class="fa-solid fa-diagram-project"></i> End-to-End Survival Analysis Pipeline</span>
               
               <!-- Interactive Model Selector Tabs -->
-              <div class="model-tabs-container" style="margin-bottom: 0.5rem;">
+              <div class="model-tabs-container" id="model-flow-section" style="margin-bottom: 0.5rem;">
                 <button class="model-tab-btn active" data-model="all">
                   <i class="fa-solid fa-layer-group"></i> All Modules
                 </button>

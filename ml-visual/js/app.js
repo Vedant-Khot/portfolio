@@ -756,3 +756,111 @@
     });
   }
 })();
+
+// ============================================================
+// CENSORING WIZARD (chapter3.html) — global functions
+// ============================================================
+let censorStep = 0;
+const CENSOR_TOTAL = 3;
+
+function censorGoto(step) {
+  // Hide all panels
+  document.querySelectorAll('.censor-step-panel').forEach((p, i) => {
+    p.classList.toggle('active', i === step);
+  });
+  // Update dots
+  document.querySelectorAll('.censor-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === step);
+    d.classList.toggle('done', i < step);
+  });
+  // Update buttons
+  const prev = document.getElementById('censorPrev');
+  const next = document.getElementById('censorNext');
+  const counter = document.getElementById('censorCounter');
+  if (prev) prev.style.display = step === 0 ? 'none' : 'inline-flex';
+  if (next) {
+    if (step === CENSOR_TOTAL - 1) {
+      next.innerHTML = '<i class="fa-solid fa-check"></i> Got it!';
+      next.onclick = () => {
+        censorStep = 0;
+        censorGoto(0);
+      };
+    } else {
+      next.innerHTML = 'Next Step <i class="fa-solid fa-arrow-right"></i>';
+      next.onclick = () => censorNav(1);
+    }
+  }
+  if (counter) counter.textContent = `${step + 1} / ${CENSOR_TOTAL}`;
+  censorStep = step;
+}
+
+function censorNav(dir) {
+  const next = Math.max(0, Math.min(CENSOR_TOTAL - 1, censorStep + dir));
+  censorGoto(next);
+}
+
+// ============================================================
+// SCORE BAR ANIMATION (chapter6.html)
+// ============================================================
+(function() {
+  const scorecard = document.getElementById('scorecard');
+  if (!scorecard) return;
+
+  const fills = scorecard.querySelectorAll('.score-bar-fill');
+  if (!fills.length) return;
+
+  const animateBars = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        fills.forEach(fill => {
+          const target = fill.getAttribute('data-score') || '80';
+          // Small delay so CSS transition is visible
+          setTimeout(() => {
+            fill.style.width = target + '%';
+          }, 120);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  const obs = new IntersectionObserver(animateBars, { threshold: 0.3 });
+  obs.observe(scorecard);
+})();
+
+// ============================================================
+// IMPACT COUNTER ANIMATION (chapter6.html)
+// ============================================================
+(function() {
+  const counters = document.querySelectorAll('.impact-counter');
+  if (!counters.length) return;
+
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 1400;
+    const startTime = performance.now();
+
+    function update(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = current + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => obs.observe(c));
+})();

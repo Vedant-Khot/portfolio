@@ -26,6 +26,15 @@
   <!-- Report Layout Wrapper -->
   <main class="container report-body">
 
+    <!-- Main Report Header -->
+    <header class="report-header">
+      <div class="report-header-badge">
+        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+      </div>
+      <h1 class="gradient-text">wids datathon challenge 2026</h1>
+      <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
+    </header>
+
     <!-- Key Performance Metrics Grid -->
     <div class="metric-grid">
       <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
@@ -78,6 +87,12 @@
         <a href="history.html" class="sidebar-link active">
           <i class="fa-solid fa-clock-rotate-left"></i> 7. Approach History
         </a>
+        <div class="sidebar-sub-nav">
+          <a href="#history" class="sub-link"><i class="fa-solid fa-clock-rotate-left"></i> Research Chronicle</a>
+          <a href="#history-roadmap" class="sub-link"><i class="fa-solid fa-timeline"></i> Evolution Roadmap</a>
+          <a href="#history-taxonomy" class="sub-link"><i class="fa-solid fa-grip-lines"></i> Modeling Taxonomy</a>
+          <a href="#history-submissions" class="sub-link"><i class="fa-solid fa-trophy"></i> Best Submissions</a>
+        </div>
         <a href="learnings.html" class="sidebar-link">
           <i class="fa-solid fa-lightbulb"></i> Key Learnings
         </a>
@@ -106,7 +121,7 @@
             </div>
           </details>
 
-          <div class="section-title-sub">
+          <div class="section-title-sub" id="history-roadmap">
             <i class="fa-solid fa-timeline"></i> Modeling Evolution Roadmap
           </div>
 
@@ -431,7 +446,7 @@
           </div>
 
           <!-- Section: Approach Taxonomy Grid -->
-          <div class="section-title-sub" style="margin-top: 3rem;">
+          <div class="section-title-sub" id="history-taxonomy" style="margin-top: 3rem;">
             <i class="fa-solid fa-grip-lines"></i> Modeling Approach Taxonomy
           </div>
           <p class="report-paragraph">
@@ -513,7 +528,7 @@
           </div>
 
           <!-- Section: Best Submissions -->
-          <div class="section-title-sub" style="margin-top: 3rem;">
+          <div class="section-title-sub" id="history-submissions" style="margin-top: 3rem;">
             <i class="fa-solid fa-trophy"></i> Best Submissions by Approach
           </div>
           <div style="overflow-x:auto;">

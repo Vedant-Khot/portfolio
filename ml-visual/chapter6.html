@@ -31,6 +31,15 @@
   <!-- Report Layout Wrapper -->
   <main class="container report-body">
 
+    <!-- Main Report Header -->
+    <header class="report-header">
+      <div class="report-header-badge">
+        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+      </div>
+      <h1 class="gradient-text">wids datathon challenge 2026</h1>
+      <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
+    </header>
+
     <!-- Key Performance Metrics Grid -->
     <div class="metric-grid">
       <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
@@ -80,6 +89,11 @@
         <a href="chapter6.html" class="sidebar-link active">
           <i class="fa-solid fa-leaf"></i> 6. SDG & Assessment
         </a>
+        <div class="sidebar-sub-nav">
+          <a href="#chapter6" class="sub-link"><i class="fa-solid fa-leaf"></i> SDG Alignment</a>
+          <a href="#strengths-section" class="sub-link"><i class="fa-solid fa-circle-check"></i> Project Strengths</a>
+          <a href="#weaknesses-section" class="sub-link"><i class="fa-solid fa-circle-xmark"></i> Project Weaknesses</a>
+        </div>
         <a href="history.html" class="sidebar-link">
           <i class="fa-solid fa-clock-rotate-left"></i> 7. Approach History
         </a>
@@ -100,6 +114,45 @@
             <i class="fa-solid fa-leaf"></i> Chapter 6: Global Impact, Assessment & Expansion
           </h2>
           
+          <!-- ================================================================
+               REAL-WORLD IMPACT STATISTICS STRIP
+               ================================================================ -->
+          <div style="margin-bottom:2rem;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:1.2rem;">
+              <div style="width:4px; height:24px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+              <h3 style="font-family:var(--font-header); font-size:1rem; color:var(--text-white); margin:0;">
+                Real-World Impact Potential
+              </h3>
+            </div>
+            <div class="impact-strip">
+              <div class="impact-stat">
+                <div class="impact-stat-icon">🏘️</div>
+                <div class="impact-stat-value"><span class="impact-counter" data-target="54" data-suffix="×">54×</span></div>
+                <div class="impact-stat-label">Breach fires start 54× closer to zones</div>
+              </div>
+              <div class="impact-stat">
+                <div class="impact-stat-icon">⏱️</div>
+                <div class="impact-stat-value"><span class="impact-counter" data-target="72" data-suffix="h">72h</span></div>
+                <div class="impact-stat-label">Maximum early-warning horizon</div>
+              </div>
+              <div class="impact-stat">
+                <div class="impact-stat-icon">🎯</div>
+                <div class="impact-stat-value"><span class="impact-counter" data-target="98" data-suffix="%">98%</span></div>
+                <div class="impact-stat-label">Concordance accuracy (C-Index 0.981)</div>
+              </div>
+              <div class="impact-stat">
+                <div class="impact-stat-icon">🌡️</div>
+                <div class="impact-stat-value"><span class="impact-counter" data-target="62" data-suffix="%">62%</span></div>
+                <div class="impact-stat-label">Breaches occur in Jul–Aug window</div>
+              </div>
+              <div class="impact-stat">
+                <div class="impact-stat-icon">📊</div>
+                <div class="impact-stat-value"><span class="impact-counter" data-target="37" data-suffix="">37</span></div>
+                <div class="impact-stat-label">Engineered spatial-kinematic features</div>
+              </div>
+            </div>
+          </div>
+
           <div class="section-title-sub">
             <i class="fa-solid fa-globe"></i> 19. SDG Alignment Analysis
           </div>
@@ -157,7 +210,7 @@
             </div>
           </div>
 
-          <details class="methodology-card">
+          <details class="methodology-card" id="strengths-section">
             <summary>
               <span><i class="fa-solid fa-star"></i> View 20. Strengths of the Project</span>
             </summary>
@@ -174,7 +227,7 @@
             </div>
           </details>
 
-          <details class="methodology-card">
+          <details class="methodology-card" id="weaknesses-section">
             <summary>
               <span><i class="fa-solid fa-circle-xmark"></i> View 21. Weaknesses & Areas for Improvement</span>
             </summary>
@@ -264,26 +317,31 @@
           <div class="section-title-sub">
             <i class="fa-solid fa-graduation-cap"></i> 24. Academic Evaluation & Scorecard
           </div>
-          <div class="scorecard-grid">
+          <div class="scorecard-grid" id="scorecard">
             <div class="scorecard-item">
               <div class="score-value">9.0</div>
               <div class="score-label">Technical Depth</div>
+              <div class="score-bar-wrap"><div class="score-bar-fill" data-score="90"></div></div>
             </div>
             <div class="scorecard-item">
               <div class="score-value">8.5</div>
               <div class="score-label">Innovation</div>
+              <div class="score-bar-wrap"><div class="score-bar-fill" data-score="85"></div></div>
             </div>
             <div class="scorecard-item">
               <div class="score-value">10</div>
               <div class="score-label">Practical Relevance</div>
+              <div class="score-bar-wrap"><div class="score-bar-fill" data-score="100"></div></div>
             </div>
             <div class="scorecard-item">
               <div class="score-value">8.5</div>
               <div class="score-label">Presentation</div>
+              <div class="score-bar-wrap"><div class="score-bar-fill" data-score="85"></div></div>
             </div>
             <div class="scorecard-item">
               <div class="score-value">9.0</div>
               <div class="score-label">Research Depth</div>
+              <div class="score-bar-wrap"><div class="score-bar-fill" data-score="90"></div></div>
             </div>
           </div>
 

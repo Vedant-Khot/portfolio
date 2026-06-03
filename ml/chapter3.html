@@ -31,6 +31,15 @@
   <!-- Report Layout Wrapper -->
   <main class="container report-body">
 
+    <!-- Main Report Header -->
+    <header class="report-header">
+      <div class="report-header-badge">
+        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+      </div>
+      <h1 class="gradient-text">wids datathon challenge 2026</h1>
+      <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
+    </header>
+
     <!-- Key Performance Metrics Grid -->
     <div class="metric-grid">
       <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
@@ -71,6 +80,11 @@
         <a href="chapter3.html" class="sidebar-link active">
           <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
         </a>
+        <div class="sidebar-sub-nav">
+          <a href="#chapter3" class="sub-link"><i class="fa-solid fa-hourglass"></i> Censoring Mechanics</a>
+          <a href="#censoring-handling" class="sub-link"><i class="fa-solid fa-filter"></i> Censoring Handling</a>
+          <a href="#km-curve" class="sub-link"><i class="fa-solid fa-chart-line"></i> Kaplan-Meier Curve</a>
+        </div>
         <a href="chapter4.html" class="sidebar-link">
           <i class="fa-solid fa-sliders"></i> 4. Preprocessing & EDA
         </a>
@@ -110,7 +124,7 @@
             Instead of predicting simple binary outcomes like "Fire / No Fire," the survival model answers a much more useful question: <strong>“How long until the wildfire becomes dangerous and breaches the 5 km boundary?”</strong> This allows emergency planners to understand the hazard's progression over time, making the system far more realistic for real-world decision-making.
           </p>
 
-          <div class="section-title-sub">
+          <div class="section-title-sub" id="censoring-handling">
             <i class="fa-solid fa-filter"></i> 7. Censoring Handling
           </div>
           <p class="report-paragraph">
@@ -291,7 +305,7 @@
             <div class="surv-section-label">
               <i class="fa-solid fa-wave-square" style="color:var(--accent-purple);"></i> Stage 4 — Kaplan-Meier Survival Probability Curve
             </div>
-            <div class="surv-card surv-card-wide">
+            <div class="surv-card surv-card-wide" id="km-curve">
               <p class="surv-card-desc">S(t) = probability that the wildfire has <strong>NOT yet breached</strong> by time t. As hours pass, high-risk fires show rapidly declining survival probability.</p>
 
               <div class="surv-km-wrap">

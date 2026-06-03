@@ -26,6 +26,15 @@
   <!-- Report Layout Wrapper -->
   <main class="container report-body">
 
+    <!-- Main Report Header -->
+    <header class="report-header">
+      <div class="report-header-badge">
+        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+      </div>
+      <h1 class="gradient-text">wids datathon challenge 2026</h1>
+      <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
+    </header>
+
     <!-- Key Performance Metrics Grid -->
     <div class="metric-grid">
       <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
@@ -81,6 +90,12 @@
         <a href="learnings.html" class="sidebar-link active">
           <i class="fa-solid fa-lightbulb"></i> Key Learnings
         </a>
+        <div class="sidebar-sub-nav">
+          <a href="#learnings-survival" class="sub-link"><i class="fa-solid fa-hourglass-half"></i> Survival Mechanics</a>
+          <a href="#learnings-sparsity" class="sub-link"><i class="fa-solid fa-expand-arrows-alt"></i> Zero-Inflation</a>
+          <a href="#learnings-physics" class="sub-link"><i class="fa-solid fa-shield-halved"></i> Domain Physics</a>
+          <a href="#learnings-wind" class="sub-link"><i class="fa-solid fa-wind"></i> Bearing Trap</a>
+        </div>
         <a href="team.html" class="sidebar-link">
           <i class="fa-solid fa-users"></i> Research Team
         </a>
@@ -100,7 +115,7 @@
           </p>
 
           <!-- 1. Survival Analysis & Censoring -->
-          <details class="methodology-card">
+          <details class="methodology-card" id="learnings-survival">
             <summary>
               <span><i class="fa-solid fa-hourglass-half"></i> 1. Survival Analysis & Right-Censoring Mechanics</span>
             </summary>
@@ -118,7 +133,7 @@
           </details>
 
           <!-- 2. Zero-Inflation -->
-          <details class="methodology-card">
+          <details class="methodology-card" id="learnings-sparsity">
             <summary>
               <span><i class="fa-solid fa-circle-exclamation"></i> 2. Structural Zero-Inflation in Spatial Tracking</span>
             </summary>
@@ -136,7 +151,7 @@
           </details>
 
           <!-- 3. Domain Physics & The Oracle -->
-          <details class="methodology-card">
+          <details class="methodology-card" id="learnings-physics">
             <summary>
               <span><i class="fa-solid fa-atom"></i> 3. Domain Physics & The Proximity "Oracle"</span>
             </summary>
@@ -152,7 +167,7 @@
           </details>
 
           <!-- 4. Sensor Artifacts & placeholders -->
-          <details class="methodology-card">
+          <details class="methodology-card" id="learnings-wind">
             <summary>
               <span><i class="fa-solid fa-compass"></i> 4. Sensor Placeholder Bias (Wind Bearing Trap)</span>
             </summary>
