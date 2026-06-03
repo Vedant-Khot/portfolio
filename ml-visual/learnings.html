@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Learnings & Topics — Wildfire Evacuation Threat Prediction</title>
+  <meta name="description" content="Core research insights, mathematical formulations, and engineering takeaways from the Wildfire Evacuation Threat Prediction case study.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inherited Main Stylesheet -->
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- Custom Light-Fiery Theme Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Cyber Grid Canvas -->
+  <canvas id="cyber-canvas"></canvas>
+
+  <!-- Report Layout Wrapper -->
+  <main class="container report-body">
+
+    <!-- Key Performance Metrics Grid -->
+    <div class="metric-grid">
+      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
+        <div class="metric-value gradient-text">0.981</div>
+        <div class="metric-label">Ensemble C-Index</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">72h</div>
+        <div class="metric-label">Horizon</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">5 km</div>
+        <div class="metric-label">Zone Radius</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">221</div>
+        <div class="metric-label">Events</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">37</div>
+        <div class="metric-label">Features</div>
+      </div>
+    </div>
+
+    <!-- MAIN DOCK LAYOUT -->
+    <div class="report-layout">
+      
+      <!-- Sticky Sidebar Menu -->
+      <nav class="report-sidebar">
+        <div class="sidebar-title">Report Chapters</div>
+        
+        <a href="index.html" class="sidebar-link">
+          <i class="fa-solid fa-compass-drafting"></i> 1. Core Foundations
+        </a>
+        <a href="chapter2.html" class="sidebar-link">
+          <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
+        </a>
+        <a href="chapter3.html" class="sidebar-link">
+          <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
+        </a>
+        <a href="chapter4.html" class="sidebar-link">
+          <i class="fa-solid fa-sliders"></i> 4. Preprocessing & EDA
+        </a>
+        <a href="chapter5.html" class="sidebar-link">
+          <i class="fa-solid fa-network-wired"></i> 5. ML Architecture
+        </a>
+        <a href="chapter6.html" class="sidebar-link">
+          <i class="fa-solid fa-leaf"></i> 6. SDG & Assessment
+        </a>
+        <a href="history.html" class="sidebar-link">
+          <i class="fa-solid fa-clock-rotate-left"></i> 7. Approach History
+        </a>
+        <a href="learnings.html" class="sidebar-link active">
+          <i class="fa-solid fa-lightbulb"></i> Key Learnings
+        </a>
+        <a href="team.html" class="sidebar-link">
+          <i class="fa-solid fa-users"></i> Research Team
+        </a>
+      </nav>
+      
+      <!-- Scrollable Content Area -->
+      <section class="report-content">
+        
+        <!-- LEARNINGS SECTION -->
+        <article id="learnings" class="chapter-card glass-card">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-lightbulb"></i> Key Research & Technical Learnings
+          </h2>
+          
+          <p class="report-paragraph">
+            Predicting active wildfire evacuation zone breaches involves unique mathematical, spatial, and statistical challenges. Below is a comprehensive catalog of the core topics involved in the project, documenting the theoretical concepts, structural gotchas, and research-level methodologies developed to solve them.
+          </p>
+
+          <!-- 1. Survival Analysis & Censoring -->
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-hourglass-half"></i> 1. Survival Analysis & Right-Censoring Mechanics</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                Standard classification frameworks treat predictions as flat binary tasks, discarding the critical temporal dimension of risk. In contrast, this project correctly frames threat modeling as a **Time-to-Event (Survival) prediction problem**.
+              </p>
+              <div class="callout-box" style="border-left-color: var(--accent-cyan); background: rgba(234, 88, 12, 0.02); margin-bottom: 0;">
+                <span class="callout-title" style="color: var(--accent-cyan);"><i class="fa-solid fa-circle-nodes"></i> Technical Insight — The Censoring Deficit</span>
+                <p style="font-size: 0.92rem; line-height: 1.6; margin: 0; color: var(--text-muted);">
+                  <strong>Naive vs. Kaplan-Meier estimates:</strong> The training dataset has a naive hit rate of 31.2% by 72 hours. However, the true Kaplan-Meier population estimate stands at <strong>~55%</strong>. This massive gap occurs because many fires located further away are right-censored—they never breach within the 72-hour window, but are highly likely to breach if observed longer. Modeling the censoring mechanism ensures risk projections remain unbiased.
+                </p>
+              </div>
+            </div>
+          </details>
+
+          <!-- 2. Zero-Inflation -->
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-circle-exclamation"></i> 2. Structural Zero-Inflation in Spatial Tracking</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                The dataset suffers from extreme zero-inflation across kinematics and growth features (88–92% zero values). Naive imputation breaks survival modeling. The team diagnosed this as a **structural sensor limitation** rather than random missingness.
+              </p>
+              <div class="callout-box" style="border-left-color: var(--accent-purple); background: rgba(168, 85, 247, 0.02); margin-bottom: 0;">
+                <span class="callout-title" style="color: var(--accent-purple);"><i class="fa-solid fa-chart-line"></i> Subpopulation Segmentation</span>
+                <p style="font-size: 0.92rem; line-height: 1.6; margin: 0; color: var(--text-muted);">
+                  <strong>72.4% of fires have only a single perimeter observation</strong> in the first 5 hours. Growth, speed, and heading are computed as differences between perimeters; without a second snapshot, these features default to zero. The team resolved this by segmenting the data into a <strong>Single-Perimeter cohort</strong> (modeled strictly on static initial proximity) and a <strong>Multi-Perimeter cohort</strong> (modeled with full kinematic tracking).
+                </p>
+              </div>
+            </div>
+          </details>
+
+          <!-- 3. Domain Physics & The Oracle -->
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-atom"></i> 3. Domain Physics & The Proximity "Oracle"</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                Machine learning models are highly prone to overfitting on statistical noise if physical boundaries are ignored. Applying domain constraints to features proved to be the most powerful modeling innovation.
+              </p>
+              <ul class="report-list" style="margin-bottom: 0;">
+                <li><strong>The 4,674m Threshold:</strong> Spatial analysis revealed that 100% of fires starting under 4,674 meters breached the evacuation zone boundary, whereas 0% of fires starting at or above 5,000 meters breached. This clean physical separation bounds model risk.</li>
+                <li><strong>Logarithmic Linearization:</strong> Distance features scale exponentially. Applying log-compression, <code>log_dist_min = log1p(dist_min_ci_0_5h)</code>, expanded feature variance and boosted Pearson correlation from −0.481 to a highly linear <strong>−0.812</strong>, providing robust gradient splits.</li>
+              </ul>
+            </div>
+          </details>
+
+          <!-- 4. Sensor Artifacts & placeholders -->
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-compass"></i> 4. Sensor Placeholder Bias (Wind Bearing Trap)</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                Raw datasets frequently contain hidden placeholders that leak bias into tree split algorithms. A major finding was the **0° North wind bearing default**.
+              </p>
+              <div class="callout-box" style="border-left-color: var(--accent-cyan); background: rgba(234, 88, 12, 0.02); margin-bottom: 0;">
+                <span class="callout-title" style="color: var(--accent-cyan);"><i class="fa-solid fa-triangle-exclamation"></i> Wind Heading Placeholder</span>
+                <p style="font-size: 0.92rem; line-height: 1.6; margin: 0; color: var(--text-muted);">
+                  For 160 of the 221 training fires, the wind spread direction defaulted to `spread_bearing_cos = 1.0` (pointing exactly 0° North). Tree-based models naively learn that fires headed North are highly dangerous, corrupting predictions. The team resolved this by introducing a binary mask feature <code>bearing_is_real</code>, instructing the ensemble to ignore the bearing signal for placeholder records.
+                </p>
+              </div>
+            </div>
+          </details>
+
+          <!-- 5. Calibration Rigor -->
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-scale-balanced"></i> 5. Probability Calibration & Metrics Rigor</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                The datathon evaluation metric heavily weights Brier Scores, making probability calibration far more important than raw classification accuracy. The team discovered that standard Platt Scaling falls short on right-censored training horizons.
+              </p>
+              <ul class="report-list" style="margin-bottom: 0;">
+                <li><strong>Isotonic Calibration:</strong> Replaced parametric probability scaling with per-fold isotonic regression to map raw model scores back to actual empirical breach rates, preventing extreme probability collapse at the 72h window ceiling.</li>
+                <li><strong>Heuristic Pitfalls:</strong> Early model attempts to use exponential decay probability models (e.g. <code>1 - exp(-k * risk * t)</code>) yielded poor scores because they failed to capture non-parametric temporal hazard rates. Isotonic calibration remains mathematically mandatory.</li>
+              </ul>
+            </div>
+          </details>
+
+          <!-- 6. Digital Twin Augmentation -->
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-clone"></i> 6. Digital Twin Augmentation & CV Stabilization</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                Small datasets (only 221 training fires) limit model depth and make validation folds unstable. The team bypassed this limitation through **Data Augmentation and Digital Twins**.
+              </p>
+              <p class="report-paragraph" style="margin-bottom: 0;">
+                By applying randomized, independent-jitter coordinates to historical fire boundaries, the team generated <strong>1,200 synthetic digital twin fires</strong>. This expanded training diversity and stabilized cross-validation folds, reducing Out-of-Fold variance and protecting the final ensemble from public leaderboard overfitting.
+              </p>
+            </div>
+          </details>
+
+        </article>
+      </section>
+      
+    </div>
+
+  </main>
+
+  <!-- Interactive Particles Loader Script -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>

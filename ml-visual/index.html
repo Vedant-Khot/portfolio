@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 1: Strategic Foundations — Wildfire Evacuation Threat Prediction</title>
+  <meta name="description" content="In-depth academic case study on predicting wildfire buffer breaches using advanced Survival Analysis, Ensemble Learning, and Spatial Kinematics under Prof. Sneha Varur.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inherited Main Stylesheet -->
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- Custom Light-Fiery Theme Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Cyber Grid Canvas -->
+  <canvas id="cyber-canvas"></canvas>
+
+  <!-- Back to Portfolio Floating Button -->
+  <!-- <a href="../index.html#projects" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i> Back to Portfolio
+  </a> -->
+
+  <!-- Report Layout Wrapper -->
+  <main class="container report-body">
+
+    <!-- Key Performance Metrics Grid -->
+    <div class="metric-grid">
+      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
+        <div class="metric-value gradient-text">0.981</div>
+        <div class="metric-label">Ensemble C-Index</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">72h</div>
+        <div class="metric-label">Horizon</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">5 km</div>
+        <div class="metric-label">Zone Radius</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">221</div>
+        <div class="metric-label">Events</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">37</div>
+        <div class="metric-label">Features</div>
+      </div>
+    </div>
+
+    <!-- MAIN DOCK LAYOUT -->
+    <div class="report-layout">
+      
+      <!-- Sticky Sidebar Menu -->
+      <nav class="report-sidebar">
+        <div class="sidebar-title">Report Chapters</div>
+        
+        <a href="index.html" class="sidebar-link active">
+          <i class="fa-solid fa-compass-drafting"></i> 1. Core Foundations
+        </a>
+        <a href="chapter2.html" class="sidebar-link">
+          <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
+        </a>
+        <a href="chapter3.html" class="sidebar-link">
+          <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
+        </a>
+        <a href="chapter4.html" class="sidebar-link">
+          <i class="fa-solid fa-sliders"></i> 4. Preprocessing & EDA
+        </a>
+        <a href="chapter5.html" class="sidebar-link">
+          <i class="fa-solid fa-network-wired"></i> 5. ML Architecture
+        </a>
+        <a href="chapter6.html" class="sidebar-link">
+          <i class="fa-solid fa-leaf"></i> 6. SDG & Assessment
+        </a>
+        <a href="history.html" class="sidebar-link">
+          <i class="fa-solid fa-clock-rotate-left"></i> 7. Approach History
+        </a>
+        <a href="learnings.html" class="sidebar-link">
+          <i class="fa-solid fa-lightbulb"></i> Key Learnings
+        </a>
+        <a href="team.html" class="sidebar-link">
+          <i class="fa-solid fa-users"></i> Research Team
+        </a>
+      </nav>
+      
+      <!-- Scrollable Content Area -->
+      <section class="report-content">
+        
+        <!-- CHAPTER 1 -->
+        <article id="chapter1" class="chapter-card glass-card">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-compass-drafting"></i> Chapter 1: Strategic Foundations & Domain Physics
+          </h2>
+
+          <!-- INTERACTIVE WILDFIRE BREACH RISK SIMULATOR -->
+          <div style="display:flex; align-items:center; gap:10px; margin-top:1.5rem; margin-bottom:1rem;">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.2rem; color:var(--text-white); margin:0;">
+              Interactive Wildfire Breach Risk Simulator
+            </h3>
+            <span style="font-size:0.7rem; color:var(--accent-cyan); background:rgba(234,88,12,0.08); border:1px solid rgba(234,88,12,0.15); padding:0.2rem 0.7rem; border-radius:12px; font-family:var(--font-header); font-weight:700;">
+              Spatio-Temporal Physics Simulator
+            </span>
+          </div>
+          <p class="report-paragraph" style="margin-bottom:1.5rem;">
+            Adjust the sliders below to simulate fire coordinates, closing speeds, and direction headings, and dynamically compute the evacuation breach risk index and estimated time-to-event (ETA) at the 5 km boundary threshold.
+          </p>
+
+          <div class="sim-container">
+            <div class="sim-inputs">
+              <!-- Proximity Slider -->
+              <div class="sim-input-group">
+                <div class="sim-input-label-row">
+                  <span>Starting Distance to Zone Center</span>
+                  <span class="sim-input-value" id="val-proximity">8.0 km</span>
+                </div>
+                <input type="range" class="sim-slider" id="sim-proximity" min="1000" max="25000" value="8000" step="100">
+              </div>
+
+              <!-- Speed Slider -->
+              <div class="sim-input-group">
+                <div class="sim-input-label-row">
+                  <span>Wildfire Propagation Speed</span>
+                  <span class="sim-input-value" id="val-speed">150 m/h</span>
+                </div>
+                <input type="range" class="sim-slider" id="sim-speed" min="20" max="800" value="150" step="10">
+              </div>
+
+              <!-- Alignment Slider -->
+              <div class="sim-input-group">
+                <div class="sim-input-label-row">
+                  <span>Spread Vector Alignment (Cosine)</span>
+                  <span class="sim-input-value" id="val-alignment">0.80</span>
+                </div>
+                <input type="range" class="sim-slider" id="sim-alignment" min="0.0" max="1.0" value="0.80" step="0.05">
+              </div>
+            </div>
+
+            <div class="sim-outputs">
+              <div class="sim-gauge-label">Threat Classification</div>
+              <div class="sim-gauge-wrapper">
+                <div class="sim-gauge-bg"></div>
+                <div class="sim-gauge-fill" id="sim-gauge-fill"></div>
+                <div class="sim-gauge-needle" id="sim-gauge-needle"></div>
+              </div>
+              <div class="sim-gauge-value" id="sim-risk-level">CRITICAL ALERT</div>
+              <div class="sim-eta-tag" id="sim-eta">EST. BREACH ETA: 25.0 hours</div>
+            </div>
+          </div>
+
+          <!-- ANIMATED FIRE APPROACH MAP -->
+          <div class="fire-map-wrap">
+            <div class="fire-map-label-row">
+              <span class="fire-map-badge"><i class="fa-solid fa-map-location-dot"></i> Live Threat Map</span>
+              <span style="font-family:var(--font-header); font-size:0.9rem; font-weight:700; color:var(--text-white);">Spatio-Temporal Approach Visualization</span>
+            </div>
+
+            <!-- Animated SVG Map -->
+            <svg class="fire-map-svg" viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Zone glow gradient -->
+                <radialGradient id="zoneGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%"   stop-color="hsl(20,90%,50%)" stop-opacity="0.12"/>
+                  <stop offset="100%" stop-color="hsl(20,90%,50%)" stop-opacity="0"/>
+                </radialGradient>
+                <!-- Terrain gradient -->
+                <linearGradient id="terrainGrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%"   stop-color="hsl(100,30%,92%)" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="hsl(40,40%,88%)" stop-opacity="0.3"/>
+                </linearGradient>
+                <!-- Fire glow -->
+                <radialGradient id="fireGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%"   stop-color="hsl(20,95%,50%)" stop-opacity="0.5"/>
+                  <stop offset="100%" stop-color="hsl(20,95%,50%)" stop-opacity="0"/>
+                </radialGradient>
+                <!-- Arrow marker -->
+                <marker id="fArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                  <path d="M0,0 L7,3.5 L0,7 Z" fill="hsl(20,90%,45%)"/>
+                </marker>
+              </defs>
+
+              <!-- Background terrain -->
+              <rect x="0" y="0" width="700" height="280" rx="12" fill="url(#terrainGrad)"/>
+
+              <!-- Grid lines (subtle) -->
+              <g stroke="rgba(160,140,120,0.12)" stroke-width="1">
+                <line x1="0" y1="56" x2="700" y2="56"/>
+                <line x1="0" y1="112" x2="700" y2="112"/>
+                <line x1="0" y1="168" x2="700" y2="168"/>
+                <line x1="0" y1="224" x2="700" y2="224"/>
+                <line x1="140" y1="0" x2="140" y2="280"/>
+                <line x1="280" y1="0" x2="280" y2="280"/>
+                <line x1="420" y1="0" x2="420" y2="280"/>
+                <line x1="560" y1="0" x2="560" y2="280"/>
+              </g>
+
+              <!-- ── EVACUATION ZONE (right) ── -->
+              <!-- Outer glow rings -->
+              <circle cx="570" cy="140" r="68" fill="url(#zoneGrad)" class="zone-ring-anim"/>
+              <circle cx="570" cy="140" r="54" fill="none" stroke="hsl(20,90%,45%)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35"/>
+              <circle cx="570" cy="140" r="38" fill="rgba(234,88,12,0.06)" stroke="hsl(20,90%,45%)" stroke-width="2" opacity="0.55"/>
+              <!-- Zone label -->
+              <text x="570" y="128" font-size="10" font-weight="800" fill="hsl(20,80%,35%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">5 km</text>
+              <text x="570" y="141" font-size="9" font-weight="700" fill="hsl(20,80%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">EVACUATION</text>
+              <text x="570" y="153" font-size="9" font-weight="700" fill="hsl(20,80%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">ZONE</text>
+              <!-- Buildings icons -->
+              <text x="556" y="174" font-size="15" text-anchor="middle">🏘️</text>
+              <text x="583" y="174" font-size="15" text-anchor="middle">🏥</text>
+
+              <!-- ── FIRE SOURCE (left) ── -->
+              <!-- Fire glow -->
+              <circle cx="110" cy="140" r="38" fill="url(#fireGlow)"/>
+              <!-- Animated fire emoji -->
+              <text x="110" y="148" font-size="26" text-anchor="middle" class="fire-dot-anim">🔥</text>
+              <!-- Origin label -->
+              <text x="110" y="172" font-size="9" font-weight="700" fill="hsl(20,75%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">WILDFIRE ORIGIN</text>
+              <text x="110" y="183" font-size="8.5" fill="hsl(20,12%,50%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">t = 0h</text>
+
+              <!-- ── TRAVEL PATH (animated dashes) ── -->
+              <line x1="138" y1="140" x2="513" y2="140"
+                    stroke="hsl(20,90%,45%)" stroke-width="2.5"
+                    stroke-dasharray="8 5" marker-end="url(#fArrow)"
+                    class="fire-path-animated"/>
+
+              <!-- Distance label above path -->
+              <rect x="265" y="108" width="170" height="22" rx="11" fill="rgba(234,88,12,0.08)" stroke="rgba(234,88,12,0.2)" stroke-width="1"/>
+              <text x="350" y="123" font-size="9.5" font-weight="700" fill="hsl(20,80%,35%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">
+                Closing Distance: 14.6 km → 5 km
+              </text>
+
+              <!-- ── ETA CHECKPOINT markers ── -->
+              <!-- 24h checkpoint -->
+              <line x1="230" y1="130" x2="230" y2="150" stroke="hsl(200,70%,48%)" stroke-width="1.5" stroke-dasharray="3,2"/>
+              <circle cx="230" cy="140" r="4.5" fill="hsl(200,70%,55%)" opacity="0.7"/>
+              <text x="230" y="124" font-size="8" font-weight="700" fill="hsl(200,60%,40%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">24h</text>
+
+              <!-- 48h checkpoint -->
+              <line x1="370" y1="130" x2="370" y2="150" stroke="hsl(36,100%,48%)" stroke-width="1.5" stroke-dasharray="3,2"/>
+              <circle cx="370" cy="140" r="4.5" fill="hsl(36,100%,55%)" opacity="0.7"/>
+              <text x="370" y="124" font-size="8" font-weight="700" fill="hsl(36,90%,38%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">48h</text>
+
+              <!-- Breach marker at 72h -->
+              <line x1="510" y1="116" x2="510" y2="160" stroke="hsl(20,90%,42%)" stroke-width="2" stroke-dasharray="4,2"/>
+              <circle cx="510" cy="140" r="6.5" fill="hsl(20,90%,45%)">
+                <animate attributeName="r" values="6.5;9;6.5" dur="1.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0.6;1" dur="1.8s" repeatCount="indefinite"/>
+              </circle>
+              <text x="510" y="110" font-size="9" font-weight="800" fill="hsl(20,85%,38%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">⚡ BREACH</text>
+              <text x="510" y="168" font-size="8.5" fill="hsl(20,12%,50%)" font-family="Space Grotesk,sans-serif" text-anchor="middle">t ≈ 72h</text>
+
+              <!-- ── WIND DIRECTION indicator ── -->
+              <text x="350" y="245" font-size="8.5" fill="hsl(200,50%,42%)" font-family="Space Grotesk,sans-serif" text-anchor="middle" font-weight="600">
+                Wind: SW → NE  |  Alignment cos(θ) = 0.82  |  Closing Speed: 210 m/h
+              </text>
+              <text x="350" y="258" font-size="8" fill="hsl(20,12%,55%)" font-family="Space Grotesk,sans-serif" text-anchor="middle" font-style="italic">
+                Spatio-temporal trajectory computed from kinematic feature vector
+              </text>
+
+              <!-- Compass rose (top-right) -->
+              <g transform="translate(654,26)">
+                <circle r="14" fill="rgba(255,255,255,0.6)" stroke="rgba(234,88,12,0.2)" stroke-width="1"/>
+                <text y="-3" font-size="7" font-weight="700" fill="hsl(20,80%,38%)" text-anchor="middle" font-family="Space Grotesk,sans-serif">N</text>
+                <line x1="0" y1="-10" x2="0" y2="-2" stroke="hsl(20,90%,45%)" stroke-width="1.5"/>
+                <line x1="0" y1="2" x2="0" y2="10" stroke="hsl(20,12%,55%)" stroke-width="1"/>
+                <line x1="-10" y1="0" x2="10" y2="0" stroke="hsl(20,12%,60%)" stroke-width="1"/>
+              </g>
+            </svg>
+
+            <!-- ETA Summary Strip -->
+            <div class="fire-map-eta-strip">
+              <div class="fire-map-eta-chip">
+                <i class="fa-solid fa-location-dot"></i>
+                Origin Distance: 14.6 km
+              </div>
+              <div class="fire-map-eta-chip">
+                <i class="fa-solid fa-wind"></i>
+                Closing Speed: 210 m/h
+              </div>
+              <div class="fire-map-eta-chip">
+                <i class="fa-solid fa-angles-right"></i>
+                Alignment: cos(θ) = 0.82
+              </div>
+              <div class="fire-map-eta-chip" style="background:rgba(220,38,38,0.07); border-color:rgba(220,38,38,0.2); color:hsl(0,80%,35%);">
+                <i class="fa-solid fa-triangle-exclamation" style="color:hsl(0,85%,45%);"></i>
+                BREACH ETA: ~72 hours
+              </div>
+            </div>
+          </div>
+
+          <!-- Collapsible Methodology Expander -->
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-graduation-cap"></i> View Detailed Project Overview & Core Foundations</span>
+            </summary>
+            <div class="details-content">
+              <div class="section-title-sub">
+                <i class="fa-solid fa-circle-nodes"></i> Project Overview
+              </div>
+              <p class="report-paragraph">
+                The project titled <strong>“WiDS Datathon 2026”</strong> focuses on predicting whether an active wildfire will reach within <strong>5 km of an evacuation zone within 72 hours</strong> using advanced Machine Learning and Survival Analysis techniques. The project was developed under the guidance of <strong>Prof. Sneha Varur</strong> in the Department of Computer Science and Engineering (Artificial Intelligence).
+              </p>
+              <p class="report-paragraph">
+                This work is interdisciplinary and combines survival analysis, ensemble learning, graph neural networks (GNNs), spatial-temporal data analysis, disaster prediction, and climate & social impact analytics. The project is highly aligned with current trends in AI for Climate, Disaster Intelligence, Geo-spatial AI, Risk Forecasting, and Smart Emergency Systems.
+              </p>
+
+              <div class="section-title-sub">
+                <i class="fa-solid fa-bullseye"></i> 1. Core Problem Understanding
+              </div>
+              <p class="report-paragraph">
+                The system predicts: <strong>“Will a wildfire reach within 5 km of an evacuation zone in the next 72 hours?”</strong>
+              </p>
+              <p class="report-paragraph">
+                This is not a simple classification problem. It is a <strong>time-to-event prediction problem</strong>, a <strong>survival analysis problem</strong>, and a <strong>spatio-temporal forecasting problem</strong>. The project attempts to understand fire growth, fire movement direction, speed, distance reduction, infrastructure threat, and temporal progression. Rather than evaluating the fire in isolation, it focuses on the active dynamics of distance contraction between the hazard boundary and civil assets.
+              </p>
+              
+              <div class="section-title-sub">
+                <i class="fa-solid fa-circle-exclamation"></i> 2. Why This Problem is Important
+              </div>
+              <p class="report-paragraph">
+                Wildfires globally are increasing because of climate change, drought, heat waves, deforestation, and human activity. The impacts of uncontrolled wildfire breaches are devastating, leading to massive loss of human life, infrastructure destruction, acute air pollution, ecological collapse, and huge economic losses.
+              </p>
+              <p class="report-paragraph">
+                The project has real-world operational importance because it can support emergency evacuation systems, fire department planning, infrastructure protection, government disaster response, and smart city resilience systems. By shifting early warnings from binary alerts to specific temporal risk horizons, rescue teams can deploy supplies, prioritize vulnerable groups, and map optimal transit paths.
+              </p>
+
+              <div class="section-title-sub">
+                <i class="fa-solid fa-brain"></i> 5. Strong Domain Understanding
+              </div>
+              <p class="report-paragraph">
+                One of the strongest parts of this project is the deep domain understanding. The team did not simply apply machine learning blindly to tabular fields. They thoroughly understood fire spread physics, spatial behavior, distance progression, survival prediction logic, and disaster management implications. This is extremely important in real AI projects, where physical constraints dictate the mathematical boundaries of models.
+              </p>
+              
+              <div class="callout-box">
+                <span class="callout-title"><i class="fa-solid fa-shield-halved"></i> Spatio-Temporal Domain Constraint</span>
+                <p style="font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                  Unlike traditional ML problems that treat observations as independent, wildfire risk modeling requires tracking spatial coordinates and temporal trends together. A fire's movement depends heavily on its previous movement speed and spread direction, which makes spatial kinematics critical for forecasting risk.
+                </p>
+              </div>
+            </div>
+          </details>
+        </article>
+      </section>
+      
+    </div>
+
+  </main>
+
+  <!-- Interactive Particles & Chart.js Loader Script -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>

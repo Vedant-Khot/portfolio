@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: ML Architecture & Performance — Wildfire Evacuation Threat Prediction</title>
+  <meta name="description" content="In-depth academic case study on predicting wildfire buffer breaches using advanced Survival Analysis, Ensemble Learning, and Spatial Kinematics under Prof. Sneha Varur.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inherited Main Stylesheet -->
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- Custom Light-Fiery Theme Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Cyber Grid Canvas -->
+  <canvas id="cyber-canvas"></canvas>
+
+  <!-- Back to Portfolio Floating Button -->
+  <!-- <a href="../index.html#projects" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i> Back to Portfolio
+  </a> -->
+
+  <!-- Report Layout Wrapper -->
+  <main class="container report-body">
+
+    <!-- Key Performance Metrics Grid -->
+    <div class="metric-grid">
+      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
+        <div class="metric-value gradient-text">0.981</div>
+        <div class="metric-label">Ensemble C-Index</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">72h</div>
+        <div class="metric-label">Horizon</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">5 km</div>
+        <div class="metric-label">Zone Radius</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">221</div>
+        <div class="metric-label">Events</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">37</div>
+        <div class="metric-label">Features</div>
+      </div>
+    </div>
+
+    <!-- MAIN DOCK LAYOUT -->
+    <div class="report-layout">
+      
+      <!-- Sticky Sidebar Menu -->
+      <nav class="report-sidebar">
+        <div class="sidebar-title">Report Chapters</div>
+        
+        <a href="index.html" class="sidebar-link">
+          <i class="fa-solid fa-compass-drafting"></i> 1. Core Foundations
+        </a>
+        <a href="chapter2.html" class="sidebar-link">
+          <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
+        </a>
+        <a href="chapter3.html" class="sidebar-link">
+          <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
+        </a>
+        <a href="chapter4.html" class="sidebar-link">
+          <i class="fa-solid fa-sliders"></i> 4. Preprocessing & EDA
+        </a>
+        <a href="chapter5.html" class="sidebar-link active">
+          <i class="fa-solid fa-network-wired"></i> 5. ML Architecture
+        </a>
+        <a href="chapter6.html" class="sidebar-link">
+          <i class="fa-solid fa-leaf"></i> 6. SDG & Assessment
+        </a>
+        <a href="history.html" class="sidebar-link">
+          <i class="fa-solid fa-clock-rotate-left"></i> 7. Approach History
+        </a>
+        <a href="learnings.html" class="sidebar-link">
+          <i class="fa-solid fa-lightbulb"></i> Key Learnings
+        </a>
+        <a href="team.html" class="sidebar-link">
+          <i class="fa-solid fa-users"></i> Research Team
+        </a>
+      </nav>
+      
+      <!-- Scrollable Content Area -->
+      <section class="report-content">
+        
+        <!-- CHAPTER 5 -->
+        <article id="chapter5" class="chapter-card glass-card">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-network-wired"></i> Chapter 5: Machine Learning Architecture & Performance
+          </h2>
+          
+          <details class="methodology-card" style="margin-bottom: 2rem;">
+            <summary>
+              <span><i class="fa-solid fa-graduation-cap"></i> View Methodology: Ensemble Survival Framework Overview</span>
+            </summary>
+            <div class="details-content">
+              <div class="section-title-sub">
+                <i class="fa-solid fa-microchip"></i> 13. Machine Learning Architecture
+              </div>
+              <p class="report-paragraph">
+                The project implements an advanced <strong>Ensemble Survival Framework</strong>, leveraging diverse model paradigms to capture different data patterns:
+              </p>
+            </div>
+          </details> <!-- ================================================================
+               AI PIPELINE ARCHITECTURE DIAGRAM
+               ================================================================ -->
+          <div class="pipeline-wrapper">
+
+            <!-- Header label -->
+            <div class="pipeline-label-row" style="flex-direction: column; gap: 1rem; align-items: center; width: 100%;">
+              <span class="pipeline-badge"><i class="fa-solid fa-diagram-project"></i> End-to-End Survival Analysis Pipeline</span>
+              
+              <!-- Interactive Model Selector Tabs -->
+              <div class="model-tabs-container" style="margin-bottom: 0.5rem;">
+                <button class="model-tab-btn active" data-model="all">
+                  <i class="fa-solid fa-layer-group"></i> All Modules
+                </button>
+                <button class="model-tab-btn" data-model="aft">
+                  <i class="fa-solid fa-bolt-lightning"></i> XGBoost AFT
+                </button>
+                <button class="model-tab-btn" data-model="cox">
+                  <i class="fa-solid fa-wave-square"></i> XGBoost Cox
+                </button>
+                <button class="model-tab-btn" data-model="rsf">
+                  <i class="fa-solid fa-tree"></i> RSF
+                </button>
+                <button class="model-tab-btn" data-model="wbl">
+                  <i class="fa-solid fa-chart-area"></i> Weibull
+                </button>
+              </div>
+            </div>
+
+            <!-- ── STAGE 1: Input ── -->
+            <div class="pipeline-row">
+              <div class="pipe-node pipe-input reveal">
+                <div class="pipe-node-glow"></div>
+                <div class="pipe-node-icon"><i class="fa-solid fa-database"></i></div>
+                <div class="pipe-node-title">Processed Dataset</div>
+                <div class="pipe-node-sub">43 Spatial-Kinematic Features<br>· SMOTE Balanced · Robust Scaled</div>
+                <div class="pipe-node-tags">
+                  <span class="pipe-tag">~18k samples</span>
+                  <span class="pipe-tag">72h window</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Arrow Stage 1 → 2 -->
+            <div class="pipeline-arrow-row">
+              <div class="pipe-arrow-trunk">
+                <div class="pipe-arrow-line animated-flow"></div>
+                <div class="pipe-arrow-split-label">Parallel Model Training</div>
+                <!-- 4 branch lines -->
+                <div class="pipe-branch-row">
+                  <div class="pipe-branch"></div>
+                  <div class="pipe-branch"></div>
+                  <div class="pipe-branch"></div>
+                  <div class="pipe-branch"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── STAGE 2: Four Models ── -->
+            <div class="pipeline-row pipeline-models-row">
+
+              <div class="pipe-node pipe-model reveal" style="--delay:0.05s">
+                <div class="pipe-node-glow"></div>
+                <div class="pipe-model-badge">AFT</div>
+                <div class="pipe-node-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+                <div class="pipe-node-title">XGBoost AFT</div>
+                <div class="pipe-node-sub">Accelerated Failure Time<br>Parametric time-to-event</div>
+                <div class="pipe-metric-row">
+                  <span class="pipe-metric-label">C-Index</span>
+                  <span class="pipe-metric-value">0.942</span>
+                </div>
+              </div>
+
+              <div class="pipe-node pipe-model reveal" style="--delay:0.12s">
+                <div class="pipe-node-glow"></div>
+                <div class="pipe-model-badge">COX</div>
+                <div class="pipe-node-icon"><i class="fa-solid fa-wave-square"></i></div>
+                <div class="pipe-node-title">XGBoost Cox</div>
+                <div class="pipe-node-sub">Proportional Hazards<br>Risk-rank ordering</div>
+                <div class="pipe-metric-row">
+                  <span class="pipe-metric-label">C-Index</span>
+                  <span class="pipe-metric-value">0.951</span>
+                </div>
+              </div>
+
+              <div class="pipe-node pipe-model reveal" style="--delay:0.19s">
+                <div class="pipe-node-glow"></div>
+                <div class="pipe-model-badge">RSF</div>
+                <div class="pipe-node-icon"><i class="fa-solid fa-tree"></i></div>
+                <div class="pipe-node-title">Random Survival Forest</div>
+                <div class="pipe-node-sub">Non-parametric trees<br>Non-linear interactions</div>
+                <div class="pipe-metric-row">
+                  <span class="pipe-metric-label">C-Index</span>
+                  <span class="pipe-metric-value">0.958</span>
+                </div>
+              </div>
+
+              <div class="pipe-node pipe-model reveal" style="--delay:0.26s">
+                <div class="pipe-node-glow"></div>
+                <div class="pipe-model-badge">WBL</div>
+                <div class="pipe-node-icon"><i class="fa-solid fa-chart-area"></i></div>
+                <div class="pipe-node-title">Weibull Model</div>
+                <div class="pipe-node-sub">Parametric baseline hazard<br>Smooth survival curves</div>
+                <div class="pipe-metric-row">
+                  <span class="pipe-metric-label">C-Index</span>
+                  <span class="pipe-metric-value">0.946</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Arrow Stage 2 → 3 (merge) -->
+            <div class="pipeline-arrow-row">
+              <div class="pipe-arrow-trunk">
+                <div class="pipe-branch-row pipe-branch-merge">
+                  <div class="pipe-branch"></div>
+                  <div class="pipe-branch"></div>
+                  <div class="pipe-branch"></div>
+                  <div class="pipe-branch"></div>
+                </div>
+                <div class="pipe-arrow-split-label">Rank-Based Confidence Blending</div>
+                <div class="pipe-arrow-line animated-flow"></div>
+              </div>
+            </div>
+
+            <!-- ── STAGE 3: Ensemble ── -->
+            <div class="pipeline-row">
+              <div class="pipe-node pipe-ensemble reveal" style="--delay:0.08s">
+                <div class="pipe-node-glow pipe-ensemble-glow"></div>
+                <div class="pipe-node-icon" style="font-size:1.6rem;"><i class="fa-solid fa-layer-group"></i></div>
+                <div class="pipe-node-title">Consolidated Blend Ensemble</div>
+                <div class="pipe-node-sub">Rank-based blending · Confidence-weighted voting<br>Calibrated survival probability aggregation</div>
+                <div class="pipe-ensemble-chips">
+                  <span class="pipe-chip">Rank Blend</span>
+                  <span class="pipe-chip">Confidence Weights</span>
+                  <span class="pipe-chip">Survival Probability</span>
+                  <span class="pipe-chip">SHAP Calibration</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Arrow Stage 3 → 4 -->
+            <div class="pipeline-arrow-row pipeline-arrow-short">
+              <div class="pipe-arrow-line animated-flow"></div>
+              <div class="pipe-arrow-head">▼</div>
+            </div>
+
+            <!-- ── STAGE 4: Output ── -->
+            <div class="pipeline-row">
+              <div class="pipe-node pipe-output reveal" style="--delay:0.04s">
+                <div class="pipe-node-glow pipe-output-glow"></div>
+                <div class="pipe-node-icon" style="font-size:1.5rem; color:#fff;"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="pipe-node-title" style="color:#fff;">Final Risk Prediction</div>
+                <div class="pipe-node-sub" style="color:rgba(255,255,255,0.78);">72h Evacuation Zone Breach Probability<br>Binary classification · Survival time estimate</div>
+                <div class="pipe-output-score">
+                  <span class="pipe-output-label">Ensemble C-Index</span>
+                  <span class="pipe-output-value">0.981</span>
+                </div>
+                <div class="pipe-output-badges">
+                  <span class="pipe-output-chip">🔥 Breach Alert</span>
+                  <span class="pipe-output-chip">⏱ Time Estimate</span>
+                  <span class="pipe-output-chip">📊 Risk Score</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- END PIPELINE DIAGRAM -->
+
+          <!-- Futuristic AI Results Dashboard -->
+          <div class="results-dashboard reveal">
+            <div class="results-dashboard-grid">
+              
+              <!-- Left Column: Giant Score Counter -->
+              <div class="results-main-metric">
+                <div class="results-radial-wrap">
+                  <svg class="radial-svg" viewBox="0 0 130 130">
+                    <defs>
+                      <linearGradient id="radialGrad" x1="0" x2="1" y1="0" y2="1">
+                        <stop offset="0%" stop-color="hsl(20,95%,45%)"/>
+                        <stop offset="100%" stop-color="hsl(180,100%,50%)"/>
+                      </linearGradient>
+                    </defs>
+                    <circle class="radial-track" cx="65" cy="65" r="61"/>
+                    <circle class="radial-fill" cx="65" cy="65" r="61"/>
+                  </svg>
+                  <div class="radial-score-txt">
+                    <span class="radial-val">0.981</span>
+                    <span class="radial-lbl">C-Index</span>
+                  </div>
+                </div>
+                <div style="font-family: var(--font-header); font-size: 0.88rem; font-weight: 700; color: var(--text-white); margin-bottom: 0.2rem;">
+                  Consolidated Blend Ensemble
+                </div>
+                <span style="font-size: 0.65rem; color: var(--accent-cyan); background: rgba(6,182,212,0.06); border: 1px solid rgba(6,182,212,0.15); padding: 0.15rem 0.5rem; border-radius: 50px; font-family: var(--font-header); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+                  Winning Architecture
+                </span>
+                <div class="results-advantage-card">
+                  Blending relative hazard ranks instead of raw probabilities preserves ordinal safety thresholds, shielding predictions from local outliers.
+                </div>
+              </div>
+
+              <!-- Right Column: Visual Comparisons -->
+              <div class="results-comparison-panel">
+                <div class="comp-panel-header">
+                  <i class="fa-solid fa-chart-simple" style="color: var(--accent-cyan);"></i> Model Concordance Index Comparison
+                </div>
+
+                <!-- SVG Horizontal Bar Graph -->
+                <svg viewBox="0 0 420 160" width="100%" xmlns="http://www.w3.org/2000/svg" style="background: rgba(0,0,0,0.06); border-radius: 12px; padding: 0.8rem; overflow: visible;">
+                  <!-- XGBoost AFT -->
+                  <text x="140" y="24" font-size="8.5" font-weight="700" fill="hsl(20,12%,35%)" font-family="Space Grotesk,sans-serif" text-anchor="end">XGBoost AFT</text>
+                  <rect x="150" y="14" width="200" height="12" rx="3" fill="rgba(234,88,12,0.15)" stroke="rgba(234,88,12,0.3)" stroke-width="1"/>
+                  <rect x="150" y="14" width="188.4" height="12" rx="3" fill="rgba(234,88,12,0.4)"/>
+                  <text x="344" y="24" font-size="8.5" font-weight="700" fill="hsl(20,12%,30%)" font-family="Space Grotesk,sans-serif">0.942</text>
+
+                  <!-- Weibull Model -->
+                  <text x="140" y="52" font-size="8.5" font-weight="700" fill="hsl(20,12%,35%)" font-family="Space Grotesk,sans-serif" text-anchor="end">Weibull Model</text>
+                  <rect x="150" y="42" width="200" height="12" rx="3" fill="rgba(234,88,12,0.15)" stroke="rgba(234,88,12,0.3)" stroke-width="1"/>
+                  <rect x="150" y="42" width="189.2" height="12" rx="3" fill="rgba(234,88,12,0.45)"/>
+                  <text x="344" y="52" font-size="8.5" font-weight="700" fill="hsl(20,12%,30%)" font-family="Space Grotesk,sans-serif">0.946</text>
+
+                  <!-- XGBoost Cox -->
+                  <text x="140" y="80" font-size="8.5" font-weight="700" fill="hsl(20,12%,35%)" font-family="Space Grotesk,sans-serif" text-anchor="end">XGBoost Cox</text>
+                  <rect x="150" y="70" width="200" height="12" rx="3" fill="rgba(234,88,12,0.15)" stroke="rgba(234,88,12,0.3)" stroke-width="1"/>
+                  <rect x="150" y="70" width="190.2" height="12" rx="3" fill="rgba(234,88,12,0.55)"/>
+                  <text x="344" y="80" font-size="8.5" font-weight="700" fill="hsl(20,12%,30%)" font-family="Space Grotesk,sans-serif">0.951</text>
+
+                  <!-- Random Survival Forest -->
+                  <text x="140" y="108" font-size="8.5" font-weight="700" fill="hsl(20,12%,35%)" font-family="Space Grotesk,sans-serif" text-anchor="end">Random Forest (RSF)</text>
+                  <rect x="150" y="98" width="200" height="12" rx="3" fill="rgba(234,88,12,0.15)" stroke="rgba(234,88,12,0.3)" stroke-width="1"/>
+                  <rect x="150" y="98" width="191.6" height="12" rx="3" fill="rgba(234,88,12,0.65)"/>
+                  <text x="344" y="108" font-size="8.5" font-weight="700" fill="hsl(20,12%,30%)" font-family="Space Grotesk,sans-serif">0.958</text>
+
+                  <!-- Blended Ensemble -->
+                  <text x="140" y="136" font-size="8.5" font-weight="800" fill="hsl(180,100%,35%)" font-family="Space Grotesk,sans-serif" text-anchor="end">Blended Ensemble</text>
+                  <rect x="150" y="126" width="200" height="12" rx="3" fill="rgba(6,182,212,0.08)" stroke="hsl(180,100%,45%)" stroke-width="1"/>
+                  <rect x="150" y="126" width="196.2" height="12" rx="3" fill="url(#radialGrad)"/>
+                  <text x="344" y="136" font-size="9.5" font-weight="900" fill="var(--accent-cyan)" font-family="Space Grotesk,sans-serif">0.981</text>
+                </svg>
+
+                <!-- Brier Score Calibration Box -->
+                <div class="brier-calibration-box">
+                  <div class="brier-txt-col">
+                    <h5 class="brier-title"><i class="fa-solid fa-gauge-simple-high" style="color: var(--accent-cyan); margin-right: 5px;"></i> Brier Calibration Compression</h5>
+                    <p class="brier-desc">Post-processing Platt scaling compresses probability forecast errors, aligning model outputs to historical hit rates.</p>
+                  </div>
+                  <div class="brier-flow-viz">
+                    <span class="brier-val-old">0.082</span>
+                    <span class="brier-arrow"><i class="fa-solid fa-circle-chevron-down"></i></span>
+                    <span class="brier-val-new">0.014</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ================================================================
+               WHY ENSEMBLE? VISUAL EXPLANATION SECTION
+               ================================================================ -->
+          <div style="margin: 2rem 0;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:1.5rem;">
+              <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+              <h3 style="font-family:var(--font-header); font-size:1.15rem; color:var(--text-white); margin:0;">
+                Why Use 4 Models? — Each Plays a Unique Role
+              </h3>
+              <span class="explain-tag" data-tip="Ensemble = combining multiple models. Each model captures different patterns, so the blend is more robust than any single model."><i class="fa-solid fa-circle-info"></i> What is ensemble?</span>
+            </div>
+
+            <!-- 4 Model Cards -->
+            <div class="ensemble-why-grid">
+
+              <!-- XGBoost AFT -->
+              <div class="ensemble-why-card" style="--card-accent: hsl(20,90%,45%); --ewc-bg: rgba(234,88,12,0.07); --ewc-color: hsl(20,85%,40%); --ewc-border: rgba(234,88,12,0.2);">
+                <div class="ewc-badge">AFT MODEL</div>
+                <h4 class="ewc-name">XGBoost AFT</h4>
+                <div class="ewc-role">⏱ Predicts: Exact Time-to-Breach</div>
+                <p class="ewc-desc">
+                  The Accelerated Failure Time model gives a direct estimate of <strong>how many hours</strong> until breach. Unlike Cox, it outputs a concrete time, making it valuable for ETA calculation in operational alerts.
+                </p>
+                <div class="ewc-score">0.942 <span>C-Index</span></div>
+              </div>
+
+              <!-- XGBoost Cox -->
+              <div class="ensemble-why-card" style="--card-accent: hsl(200,70%,48%); --ewc-bg: rgba(59,130,246,0.07); --ewc-color: hsl(200,60%,38%); --ewc-border: rgba(59,130,246,0.2);">
+                <div class="ewc-badge" style="background:rgba(59,130,246,0.07); color:hsl(200,60%,38%); border-color:rgba(59,130,246,0.2);">COX MODEL</div>
+                <h4 class="ewc-name">XGBoost Cox</h4>
+                <div class="ewc-role" style="color:hsl(200,60%,45%);">📊 Predicts: Relative Hazard Ranking</div>
+                <p class="ewc-desc">
+                  Cox Proportional Hazards computes a <strong>risk ranking score</strong> for each fire. It's best at distinguishing which fires are most dangerous relative to each other — critical for triage and priority ordering.
+                </p>
+                <div class="ewc-score">0.951 <span>C-Index</span></div>
+              </div>
+
+              <!-- RSF -->
+              <div class="ensemble-why-card" style="--card-accent: hsl(120,50%,42%); --ewc-bg: rgba(34,197,94,0.06); --ewc-color: hsl(120,45%,32%); --ewc-border: rgba(34,197,94,0.2);">
+                <div class="ewc-badge" style="background:rgba(34,197,94,0.06); color:hsl(120,45%,32%); border-color:rgba(34,197,94,0.2);">RSF MODEL</div>
+                <h4 class="ewc-name">Random Survival Forest</h4>
+                <div class="ewc-role" style="color:hsl(120,50%,40%);">🌲 Captures: Non-Linear Interactions</div>
+                <p class="ewc-desc">
+                  Tree-based survival forest captures <strong>complex non-linear patterns</strong> that parametric models miss — like sudden threshold effects where fires accelerate dramatically once crossing a certain distance.
+                </p>
+                <div class="ewc-score">0.958 <span>C-Index</span></div>
+              </div>
+
+              <!-- Weibull -->
+              <div class="ensemble-why-card" style="--card-accent: hsl(280,60%,50%); --ewc-bg: rgba(168,85,247,0.06); --ewc-color: hsl(280,50%,38%); --ewc-border: rgba(168,85,247,0.2);">
+                <div class="ewc-badge" style="background:rgba(168,85,247,0.06); color:hsl(280,50%,38%); border-color:rgba(168,85,247,0.2);">WEIBULL</div>
+                <h4 class="ewc-name">Weibull Distribution Model</h4>
+                <div class="ewc-role" style="color:hsl(280,55%,45%);">📈 Produces: Smooth Probability Curves</div>
+                <p class="ewc-desc">
+                  Parametric Weibull modeling fits a mathematical hazard shape to the data, producing <strong>smooth, interpretable survival curves</strong> that provide a statistical baseline and improve calibration.
+                </p>
+                <div class="ewc-score">0.946 <span>C-Index</span></div>
+              </div>
+
+            </div>
+
+            <!-- Blend Flow Visual -->
+            <div style="background:rgba(255,248,240,0.9); border:1px solid rgba(234,88,12,0.12); border-radius:16px; padding:1.5rem; margin-top:1rem;">
+              <div style="font-family:var(--font-header); font-size:0.78rem; font-weight:800; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:1.2rem; text-align:center;">
+                How Rank-Based Blending Works
+              </div>
+              <div class="ensemble-blend-flow">
+                <div class="eblend-item">
+                  <div class="eblend-dot" style="background:hsl(20,90%,45%);">AFT</div>
+                  <div class="eblend-label">0.942</div>
+                </div>
+                <div class="eblend-arrow">+</div>
+                <div class="eblend-item">
+                  <div class="eblend-dot" style="background:hsl(200,70%,48%);">COX</div>
+                  <div class="eblend-label">0.951</div>
+                </div>
+                <div class="eblend-arrow">+</div>
+                <div class="eblend-item">
+                  <div class="eblend-dot" style="background:hsl(120,50%,42%);">RSF</div>
+                  <div class="eblend-label">0.958</div>
+                </div>
+                <div class="eblend-arrow">+</div>
+                <div class="eblend-item">
+                  <div class="eblend-dot" style="background:hsl(280,60%,50%);">WBL</div>
+                  <div class="eblend-label">0.946</div>
+                </div>
+                <div class="eblend-arrow" style="font-size:1.6rem; color:var(--accent-cyan); font-weight:900;">=</div>
+                <div class="eblend-result">
+                  <div class="eblend-result-dot">BLEND<br>ENSEMBLE</div>
+                  <div class="eblend-result-val">0.981</div>
+                  <div class="eblend-result-label">C-INDEX</div>
+                </div>
+              </div>
+              <p style="font-size:0.8rem; color:var(--text-muted); text-align:center; margin:0.8rem 0 0; line-height:1.5;">
+                Instead of averaging raw probabilities, we blend the <strong>hazard rank order</strong> from each model.
+                This technique preserves ordinal safety relationships and shields the final prediction from individual model outliers.
+              </p>
+            </div>
+
+            <!-- GNN callout -->
+            <div class="callout-box" style="margin-top:1.5rem; border-left-color: var(--accent-purple);">
+              <span class="callout-title" style="color:var(--accent-purple);"><i class="fa-solid fa-circle-nodes"></i> Graph Neural Network Extension</span>
+              <p style="font-size:0.88rem; line-height:1.65; margin:0; color:var(--text-muted);">
+                Beyond the 4 tabular models, the pipeline also includes a <strong>Graph Neural Network (GNN)</strong> that constructs 
+                k-NN spatial graphs between grid cells. This traces how heat and smoke propagate through neighboring geographic vertices — 
+                capturing the <em>connectivity</em> of fire spread that tabular models miss. It places this project at the frontier of 
+                <strong>Spatial AI</strong> and environmental disaster intelligence.
+              </p>
+            </div>
+          </div>
+          
+          <h3 class="section-title-sub">Survival ML Model Architecture Flow</h3>
+          <div class="code-block-header">
+            <span>Model Execution Pipeline Flow</span>
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <pre class="code-block"><code style="color: var(--accent-cyan);">
+    [ Tabular Features ] ----> [ Robust Preprocessor ] ----> [ k-NN Graph Builder ]
+                                                                     │
+                   ┌──────────────────┬──────────────────────────────┘
+                   v                  v
+          [ XGBoost Survival ]   [ Graph Neural Net ]
+            - Cox Loss             - Spatial Vertices
+            - AFT Metric           - Heat Flow Vectors
+                   │                  │
+                   └────────┬─────────┘
+                            v
+             [ Rank-Based Blending Ensemble ]
+                            │
+                            v
+             [ 72h Survival Probability Curve ]
+       </code></pre>
+        </article>
+      </section>
+      
+    </div>
+
+  </main>
+
+  <!-- Interactive Particles & Chart.js Loader Script -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>

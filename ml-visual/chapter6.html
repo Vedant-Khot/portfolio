@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: Impact & Future Scope — Wildfire Evacuation Threat Prediction</title>
+  <meta name="description" content="In-depth academic case study on predicting wildfire buffer breaches using advanced Survival Analysis, Ensemble Learning, and Spatial Kinematics under Prof. Sneha Varur.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inherited Main Stylesheet -->
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- Custom Light-Fiery Theme Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Cyber Grid Canvas -->
+  <canvas id="cyber-canvas"></canvas>
+
+  <!-- Back to Portfolio Floating Button -->
+  <!-- <a href="../index.html#projects" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i> Back to Portfolio
+  </a> -->
+
+  <!-- Report Layout Wrapper -->
+  <main class="container report-body">
+
+    <!-- Key Performance Metrics Grid -->
+    <div class="metric-grid">
+      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
+        <div class="metric-value gradient-text">0.981</div>
+        <div class="metric-label">Ensemble C-Index</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">72h</div>
+        <div class="metric-label">Horizon</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">5 km</div>
+        <div class="metric-label">Zone Radius</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">221</div>
+        <div class="metric-label">Events</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">37</div>
+        <div class="metric-label">Features</div>
+      </div>
+    </div>
+
+    <!-- MAIN DOCK LAYOUT -->
+    <div class="report-layout">
+      
+      <!-- Sticky Sidebar Menu -->
+      <nav class="report-sidebar">
+        <div class="sidebar-title">Report Chapters</div>
+        
+        <a href="index.html" class="sidebar-link">
+          <i class="fa-solid fa-compass-drafting"></i> 1. Core Foundations
+        </a>
+        <a href="chapter2.html" class="sidebar-link">
+          <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
+        </a>
+        <a href="chapter3.html" class="sidebar-link">
+          <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
+        </a>
+        <a href="chapter4.html" class="sidebar-link">
+          <i class="fa-solid fa-sliders"></i> 4. Preprocessing & EDA
+        </a>
+        <a href="chapter5.html" class="sidebar-link">
+          <i class="fa-solid fa-network-wired"></i> 5. ML Architecture
+        </a>
+        <a href="chapter6.html" class="sidebar-link active">
+          <i class="fa-solid fa-leaf"></i> 6. SDG & Assessment
+        </a>
+        <a href="history.html" class="sidebar-link">
+          <i class="fa-solid fa-clock-rotate-left"></i> 7. Approach History
+        </a>
+        <a href="learnings.html" class="sidebar-link">
+          <i class="fa-solid fa-lightbulb"></i> Key Learnings
+        </a>
+        <a href="team.html" class="sidebar-link">
+          <i class="fa-solid fa-users"></i> Research Team
+        </a>
+      </nav>
+      
+      <!-- Scrollable Content Area -->
+      <section class="report-content">
+        
+        <!-- CHAPTER 6 -->
+        <article id="chapter6" class="chapter-card glass-card">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-leaf"></i> Chapter 6: Global Impact, Assessment & Expansion
+          </h2>
+          
+          <div class="section-title-sub">
+            <i class="fa-solid fa-globe"></i> 19. SDG Alignment Analysis
+          </div>
+          <p class="report-paragraph">
+            The project strongly aligns with several United Nations Sustainable Development Goals (SDGs), demonstrating its social and environmental value:
+          </p>
+          
+          <div class="sdg-badge-container">
+            <div class="sdg-badge" style="--sdg-color: #22c55e; --sdg-glow: rgba(34, 197, 94, 0.15);">
+              <div class="sdg-icon"><i class="fa-solid fa-cloud-sun-rain"></i></div>
+              <div>
+                <strong style="color: var(--text-white); font-size: 0.85rem; display: block;">SDG 13: Climate Action</strong>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Predicting climate-induced disasters to build resilience.</span>
+              </div>
+            </div>
+
+            <div class="sdg-badge" style="--sdg-color: #eab308; --sdg-glow: rgba(234, 179, 8, 0.15);">
+              <div class="sdg-icon"><i class="fa-solid fa-city"></i></div>
+              <div>
+                <strong style="color: var(--text-white); font-size: 0.85rem; display: block;">SDG 11: Sustainable Cities</strong>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Securing communities through early warnings.</span>
+              </div>
+            </div>
+
+            <div class="sdg-badge" style="--sdg-color: #ef4444; --sdg-glow: rgba(239, 68, 68, 0.15);">
+              <div class="sdg-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+              <div>
+                <strong style="color: var(--text-white); font-size: 0.85rem; display: block;">SDG 3: Good Health</strong>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Reducing public smoke exposure and respiratory risks.</span>
+              </div>
+            </div>
+
+            <div class="sdg-badge" style="--sdg-color: #a855f7; --sdg-glow: rgba(168, 85, 247, 0.15);">
+              <div class="sdg-icon"><i class="fa-solid fa-users"></i></div>
+              <div>
+                <strong style="color: var(--text-white); font-size: 0.85rem; display: block;">SDG 10: Reduced Inequalities</strong>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Protecting vulnerable community sectors first.</span>
+              </div>
+            </div>
+
+            <div class="sdg-badge" style="--sdg-color: #3b82f6; --sdg-glow: rgba(59, 130, 246, 0.15);">
+              <div class="sdg-icon"><i class="fa-solid fa-circle-nodes"></i></div>
+              <div>
+                <strong style="color: var(--text-white); font-size: 0.85rem; display: block;">SDG 9: Infrastructure</strong>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Protecting vital infrastructure like power and roads.</span>
+              </div>
+            </div>
+
+            <div class="sdg-badge" style="--sdg-color: #10b981; --sdg-glow: rgba(16, 185, 129, 0.15);">
+              <div class="sdg-icon"><i class="fa-solid fa-tree"></i></div>
+              <div>
+                <strong style="color: var(--text-white); font-size: 0.85rem; display: block;">SDG 15: Life on Land</strong>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Preserving ecosystems and forest biodiversity.</span>
+              </div>
+            </div>
+          </div>
+
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-star"></i> View 20. Strengths of the Project</span>
+            </summary>
+            <div class="details-content">
+              <ul class="checklist strengths" style="margin-bottom: 0;">
+                <li><strong>Strong Problem Selection:</strong> Addresses a highly critical, real-world challenge in climate and disaster management.</li>
+                <li><strong>Advanced ML Concepts:</strong> Moves beyond simple classification, adapting complex survival analysis and model ensembles.</li>
+                <li><strong>Excellent Feature Engineering:</strong> Derives physically meaningful spatial variables that reflect fire physics.</li>
+                <li><strong>Real-World Social Impact:</strong> Directly aligns with global sustainability goals and community safety.</li>
+                <li><strong>Thorough EDA:</strong> Uncovers actionable insights, such as July–August seasonality and starting distance thresholds.</li>
+                <li><strong>Rigorous Evaluation:</strong> Uses appropriate metrics (C-Index) and advanced ensembling techniques.</li>
+                <li><strong>Interdisciplinary Approach:</strong> Blends computer science, climate physics, and geographical information systems.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-circle-xmark"></i> View 21. Weaknesses & Areas for Improvement</span>
+            </summary>
+            <div class="details-content">
+              <ul class="checklist weaknesses" style="margin-bottom: 0;">
+                <li><strong>Small Dataset Volume:</strong> Sourcing only 221 events introduces overfitting risks and limits model generalization.</li>
+                <li><strong>Missing GNN Details:</strong> Lacks specific details on GNN architectures, coordinate graph building, and comparative results.</li>
+                <li><strong>No Real-Time Pipeline:</strong> The system operates offline without live satellite, telemetry, or weather streams.</li>
+                <li><strong>Limited Model Explainability:</strong> Lacks interpretability tools like SHAP or LIME to explain complex predictions.</li>
+              </ul>
+            </div>
+          </details>
+
+          <div class="section-title-sub">
+            <i class="fa-solid fa-forward"></i> 22. Future Improvements
+          </div>
+          <!-- Futuristic Climate-Tech Roadmap Timeline -->
+          <div class="roadmap-timeline">
+            <!-- Timeline vertical track line -->
+            <div class="roadmap-track"></div>
+            
+            <!-- Phase 1 -->
+            <div class="roadmap-node">
+              <div class="roadmap-bullet"><i class="fa-solid fa-cloud-sun-rain"></i></div>
+              <div class="roadmap-content-card">
+                <div class="roadmap-node-header">
+                  <h4 class="roadmap-node-title">Real-Time GIS & Weather Fusing</h4>
+                  <span class="roadmap-node-tag">Active R&D</span>
+                </div>
+                <p class="roadmap-node-desc">
+                  Integrating live NOAA and regional weather telemetry streams. Dynamic wind grids and fuel dryness levels will continuously adjust the fire spread direction and closing speed vector coefficients.
+                </p>
+              </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="roadmap-node">
+              <div class="roadmap-bullet"><i class="fa-solid fa-satellite"></i></div>
+              <div class="roadmap-content-card">
+                <div class="roadmap-node-header">
+                  <h4 class="roadmap-node-title">Multi-Spectral Satellite Ingestion</h4>
+                  <span class="roadmap-node-tag">Phase 2</span>
+                </div>
+                <p class="roadmap-node-desc">
+                  Fusing Sentinel-2 and Landsat active infrared bands to segments fire boundaries, automatically updating the initial perimeter coordinates.
+                </p>
+              </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="roadmap-node">
+              <div class="roadmap-bullet"><i class="fa-solid fa-mountain-sun"></i></div>
+              <div class="roadmap-content-card">
+                <div class="roadmap-node-header">
+                  <h4 class="roadmap-node-title">Topographical Elevation Modeling</h4>
+                  <span class="roadmap-node-tag">Planned</span>
+                </div>
+                <p class="roadmap-node-desc">
+                  Loading high-resolution Digital Elevation Models (DEM) to incorporate fuel slope vectors and local convective thermal drafts that accelerate uphill flame progression.
+                </p>
+              </div>
+            </div>
+
+            <!-- Phase 4 -->
+            <div class="roadmap-node">
+              <div class="roadmap-bullet"><i class="fa-solid fa-helicopter"></i></div>
+              <div class="roadmap-content-card">
+                <div class="roadmap-node-header">
+                  <h4 class="roadmap-node-title">Autonomous UAVs & Rescue Dashboard</h4>
+                  <span class="roadmap-node-tag">Future Scope</span>
+                </div>
+                <p class="roadmap-node-desc">
+                  Deploying autonomous drone coordinate tracking fleets coupled with a web-based real-time GIS warning dashboard, assisting fire departments in planning safer escape lanes.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="section-title-sub">
+            <i class="fa-solid fa-building-columns"></i> 23. Industry Relevance
+          </div>
+          <p class="report-paragraph">
+            This project is highly aligned with modern AI industry trends. The integration of advanced survival mechanics and complex ensemble models is significantly above average, showing high research-level readiness across domains like Climate AI, DisasterTech, GeoAI, Spatial ML, Smart Governance, and Environmental Analytics.
+          </p>
+
+          <div class="section-title-sub">
+            <i class="fa-solid fa-graduation-cap"></i> 24. Academic Evaluation & Scorecard
+          </div>
+          <div class="scorecard-grid">
+            <div class="scorecard-item">
+              <div class="score-value">9.0</div>
+              <div class="score-label">Technical Depth</div>
+            </div>
+            <div class="scorecard-item">
+              <div class="score-value">8.5</div>
+              <div class="score-label">Innovation</div>
+            </div>
+            <div class="scorecard-item">
+              <div class="score-value">10</div>
+              <div class="score-label">Practical Relevance</div>
+            </div>
+            <div class="scorecard-item">
+              <div class="score-value">8.5</div>
+              <div class="score-label">Presentation</div>
+            </div>
+            <div class="scorecard-item">
+              <div class="score-value">9.0</div>
+              <div class="score-label">Research Depth</div>
+            </div>
+          </div>
+
+          <div class="section-title-sub">
+            <i class="fa-solid fa-circle-check"></i> 25. Final Overall Assessment
+          </div>
+          <p class="report-paragraph" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1rem; font-weight: 500;">
+            This is a <strong>high-quality AI/ML project</strong> demonstrating strong domain understanding, advanced predictive modeling, excellent feature engineering, real-world social impact, and modern survival analysis techniques. The project stands out because it is not merely a classification task, but a realistic spatio-temporal risk forecasting system showing research-grade maturity.
+          </p>
+          <p class="report-paragraph">
+            For a 4th-semester undergraduate academic project, this work is significantly above average in technical sophistication, real-world relevance, and research alignment. It has strong potential to evolve into a research publication, a Kaggle competition solution, a government disaster analytics prototype, or an operational wildfire intelligence platform.
+          </p>
+        </article>
+      </section>
+      
+    </div>
+
+  </main>
+
+  <!-- Interactive Particles & Chart.js Loader Script -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>

@@ -709,6 +709,7 @@ const projectCases = {
       '0.981 Concordance Index: Reached highly reliable risk ranking results through rank-based blending and confidence weight optimizations.'
     ],
     detailedReportUrl: './ml/index.html',
+    detailedVisualUrl: './ml-visual/index.html',
     asciiSchema: `
          +-----------------------------------------------------+
          | 37 Features (Temporal, Growth, Kinematics, Distance)|
@@ -775,10 +776,15 @@ function openProjectCase(caseId) {
       </div>
       
       ${data.detailedReportUrl ? `
-      <div style="margin-top: 2rem; text-align: center;">
-        <a href="${data.detailedReportUrl}" class="cta-button" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-          <i class="fa-solid fa-file-invoice"></i> Open Detailed Analysis Report
+      <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+        <a href="${data.detailedReportUrl}" class="cta-button" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(234, 88, 12, 0.2); color: var(--text-white);">
+          <i class="fa-solid fa-file-invoice"></i> Editorial Report (Text First)
         </a>
+        ${data.detailedVisualUrl ? `
+        <a href="${data.detailedVisualUrl}" class="cta-button" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #ea580c; box-shadow: 0 0 15px rgba(234, 88, 12, 0.25);">
+          <i class="fa-solid fa-chart-line"></i> Interactive Dashboard (Visual First)
+        </a>
+        ` : ''}
       </div>
       ` : ''}
     </div>
