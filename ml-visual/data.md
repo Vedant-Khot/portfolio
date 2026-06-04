@@ -573,24 +573,6 @@ Supports:
 * Safer infrastructure
 * Evacuation planning
 
-## SDG 3 — Good Health
-
-Reduces:
-
-* Smoke exposure
-* Disaster-related health risks
-
-## SDG 10 — Reduced Inequalities
-
-Focus on vulnerable communities.
-
-## SDG 9 — Industry & Infrastructure
-
-Protects:
-
-* Roads
-* Utilities
-* Critical infrastructure
 
 ## SDG 15 — Life on Land
 
