@@ -32,7 +32,7 @@
   <main class="container report-body">
 
     <!-- Main Report Header -->
-    <header class="report-header">
+    <header class="report-header" style="max-width:100%">
       <div class="report-header-badge">
         <i class="fa-solid fa-fire"></i> Academic Case Study & Report
       </div>
@@ -40,29 +40,7 @@
       <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
     </header>
 
-    <!-- Key Performance Metrics Grid -->
-    <div class="metric-grid">
-      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
-        <div class="metric-value gradient-text">0.981</div>
-        <div class="metric-label">Ensemble C-Index</div>
-      </div>
-      <div class="glass-card metric-box">
-        <div class="metric-value">72h</div>
-        <div class="metric-label">Horizon</div>
-      </div>
-      <div class="glass-card metric-box">
-        <div class="metric-value">5 km</div>
-        <div class="metric-label">Zone Radius</div>
-      </div>
-      <div class="glass-card metric-box">
-        <div class="metric-value">221</div>
-        <div class="metric-label">Events</div>
-      </div>
-      <div class="glass-card metric-box">
-        <div class="metric-value">37</div>
-        <div class="metric-label">Features</div>
-      </div>
-    </div>
+   
 
     <!-- MAIN DOCK LAYOUT -->
     <div class="report-layout">
@@ -78,6 +56,7 @@
           <a href="#chapter1" class="sub-link"><i class="fa-solid fa-house"></i> Overview</a>
           <a href="#core-problem" class="sub-link"><i class="fa-solid fa-bullseye"></i> Core Problem</a>
           <a href="#domain-physics" class="sub-link"><i class="fa-solid fa-shield-halved"></i> Domain Physics</a>
+          <a href="#team" class="sub-link"><i class="fa-solid fa-users"></i> Research Team</a>
         </div>
         <a href="chapter2.html" class="sidebar-link">
           <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
@@ -100,7 +79,7 @@
         <a href="learnings.html" class="sidebar-link">
           <i class="fa-solid fa-lightbulb"></i> Key Learnings
         </a>
-        <a href="team.html" class="sidebar-link">
+        <a href="#team" class="sidebar-link">
           <i class="fa-solid fa-users"></i> Research Team
         </a>
       </nav>
@@ -157,6 +136,65 @@
               Unlike traditional ML problems that treat observations as independent, wildfire risk modeling requires tracking spatial coordinates and temporal trends together. A fire's movement depends heavily on its previous movement speed and spread direction, which makes spatial kinematics critical for forecasting risk.
             </p>
           </div>
+        </article>
+
+        <!-- RESEARCH TEAM SECTION -->
+        <article id="team" class="chapter-card glass-card" style="margin-top: 2rem;">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-users"></i> Research Team
+          </h2>
+          
+          <p class="report-paragraph">
+            The <strong>Wildfire Evacuation Threat Prediction</strong> case study is an interdisciplinary research project developing cutting-edge machine learning architectures and survival analysis formulations to secure communities against escalating climate-induced disasters. Under the mentorship of <strong>Prof. Sneha Varur</strong>, the team engineered a robust spatio-temporal early warning system designed to safeguard civil infrastructure and human lives.
+          </p>
+
+          <section class="team-section reveal" id="team-directory">
+            <div class="team-container">
+
+              <!-- Project Mentor -->
+              <div class="team-card mentor-card">
+                <div class="team-avatar">SV</div>
+                <h3>Prof. Sneha Varur</h3>
+                <p>Project Mentor</p>
+              </div>
+
+              <!-- Team Member 1 -->
+              <div class="team-card">
+                <div class="team-avatar">MJ</div>
+                <h3>M Janaki</h3>
+                <p>Team Member</p>
+              </div>
+
+              <!-- Team Member 2 -->
+              <div class="team-card">
+                <div class="team-avatar">NB</div>
+                <h3>Nupur Bagave</h3>
+                <p>Team Member</p>
+              </div>
+
+              <!-- Team Member 3 -->
+              <div class="team-card">
+                <div class="team-avatar">PK</div>
+                <h3>Parth Karpe</h3>
+                <p>Team Member</p>
+              </div>
+
+              <!-- Team Member 4 -->
+              <div class="team-card">
+                <div class="team-avatar">VK</div>
+                <h3>Vedant Khot</h3>
+                <p>Team Member</p>
+              </div>
+
+            </div>
+          </section>
+
+          <div class="section-title-sub" id="team-academic" style="margin-top: 2.5rem;">
+            <i class="fa-solid fa-graduation-cap"></i> CSE (Artificial Intelligence) Department
+          </div>
+          <p class="report-paragraph">
+            Developed as part of the 4th-semester academic curriculum, this research-level work demonstrates exceptional technical sophistication, mathematical rigor, and alignment with modern industry standards. By bridging pure spatial analytics with survival analysis modeling, the team successfully addressed structural data limitations to deliver a highly accurate hazard forecasting prototype.
+          </p>
         </article>
       </section>
       

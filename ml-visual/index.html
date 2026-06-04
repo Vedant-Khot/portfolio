@@ -32,7 +32,7 @@
   <main class="container report-body">
 
     <!-- Main Report Header -->
-    <header class="report-header">
+    <header class="report-header" style="max-width:100%">
       <div class="report-header-badge">
         <i class="fa-solid fa-fire"></i> Academic Case Study & Report
       </div>
@@ -40,29 +40,7 @@
       <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
     </header>
 
-    <!-- Key Performance Metrics Grid -->
-    <div class="metric-grid">
-      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
-        <div class="metric-value gradient-text">0.981</div>
-        <div class="metric-label">Ensemble C-Index</div>
-      </div>
-      <div class="glass-card metric-box">
-        <div class="metric-value">72h</div>
-        <div class="metric-label">Horizon</div>
-      </div>
-      <div class="glass-card metric-box">
-        <div class="metric-value">5 km</div>
-        <div class="metric-label">Zone Radius</div>
-      </div>
-      <div class="glass-card metric-box">
-        <div class="metric-value">221</div>
-        <div class="metric-label">Events</div>
-      </div>
-      <div class="glass-card metric-box">
-        <div class="metric-value">37</div>
-        <div class="metric-label">Features</div>
-      </div>
-    </div>
+   
 
     <!-- MAIN DOCK LAYOUT -->
     <div class="report-layout">
@@ -78,6 +56,7 @@
           <a href="#chapter1" class="sub-link"><i class="fa-solid fa-house"></i> Overview</a>
           <a href="#sim-proximity" class="sub-link"><i class="fa-solid fa-play"></i> Threat Simulator</a>
           <a href="#methodology-details" class="sub-link"><i class="fa-solid fa-book"></i> Methodology</a>
+          <a href="#team" class="sub-link"><i class="fa-solid fa-users"></i> Research Team</a>
         </div>
         <a href="chapter2.html" class="sidebar-link">
           <i class="fa-solid fa-chart-bar"></i> 2. Dataset & Kinematics
@@ -100,7 +79,7 @@
         <a href="learnings.html" class="sidebar-link">
           <i class="fa-solid fa-lightbulb"></i> Key Learnings
         </a>
-        <a href="team.html" class="sidebar-link">
+        <a href="#team" class="sidebar-link">
           <i class="fa-solid fa-users"></i> Research Team
         </a>
       </nav>
@@ -127,7 +106,171 @@
           <p class="report-paragraph" style="margin-bottom:1.5rem;">
             Adjust the sliders below to simulate fire coordinates, closing speeds, and direction headings, and dynamically compute the evacuation breach risk index and estimated time-to-event (ETA) at the 5 km boundary threshold.
           </p>
+           <!-- Key Performance Metrics Grid -->
+    <div class="metric-grid">
+      <div class="glass-card metric-box" style="border-color: var(--accent-cyan); box-shadow: var(--shadow-neon-cyan);">
+        <div class="metric-value gradient-text">0.981</div>
+        <div class="metric-label">Ensemble C-Index</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">72h</div>
+        <div class="metric-label">Horizon</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">5 km</div>
+        <div class="metric-label">Zone Radius</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">221</div>
+        <div class="metric-label">Events</div>
+      </div>
+      <div class="glass-card metric-box">
+        <div class="metric-value">37</div>
+        <div class="metric-label">Features</div>
+      </div>
+    </div>
 
+      <!-- Premium Spatio-Temporal Spread Dynamics Diagram -->
+          <div class="spread-container reveal" id="kinematics-section">
+            <div style="font-family: var(--font-header); font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <i class="fa-solid fa-compass"></i> Wildfire Spatio-Temporal Spread Dynamics & Kinematics
+            </div>
+            <p class="report-paragraph" style="text-align: center; max-width: 580px; margin: 0 auto 1.4rem;">
+              The vector equations map centroid displacement over time, resolving wind vectors and fire momentum into **Along-Track** (direct hazard breach) and **Cross-Track** (sideways spread) speeds.
+            </p>
+
+            <div class="spread-svg-wrapper">
+              <svg viewBox="0 0 680 340" width="100%" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
+                <!-- Definitions for gradients & markers -->
+                <defs>
+                  <radialGradient id="fireGradStart" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="hsl(20,100%,60%)" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="hsl(0,85%,45%)" stop-opacity="0.2"/>
+                  </radialGradient>
+                  <radialGradient id="fireGradActive" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="hsl(36,100%,65%)" stop-opacity="0.95"/>
+                    <stop offset="45%" stop-color="hsl(20,95%,50%)" stop-opacity="0.7"/>
+                    <stop offset="100%" stop-color="hsl(0,85%,42%)" stop-opacity="0.1"/>
+                  </radialGradient>
+                  <linearGradient id="evacGrad" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="hsl(180,100%,45%)" stop-opacity="0.32"/>
+                    <stop offset="100%" stop-color="hsl(180,100%,50%)" stop-opacity="0.08"/>
+                  </linearGradient>
+                  
+                  <!-- Arrow Markers -->
+                  <marker id="cyanArr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="hsl(180,100%,42%)"/>
+                  </marker>
+                  <marker id="orangeArr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="hsl(20,95%,45%)"/>
+                  </marker>
+                  <marker id="purpleArr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="hsl(270,95%,60%)"/>
+                  </marker>
+                </defs>
+
+                <!-- Topographical background grids -->
+                <rect x="0" y="0" width="680" height="340" fill="transparent"/>
+                <g stroke="rgba(234,88,12,0.04)" stroke-width="1">
+                  <line x1="0" y1="85" x2="680" y2="85"/>
+                  <line x1="0" y1="170" x2="680" y2="170"/>
+                  <line x1="0" y1="255" x2="680" y2="255"/>
+                  <line x1="170" y1="0" x2="170" y2="340"/>
+                  <line x1="340" y1="0" x2="340" y2="340"/>
+                  <line x1="510" y1="0" x2="510" y2="340"/>
+                </g>
+
+                <!-- Topo Contour Rings -->
+                <path d="M-40,120 C80,80 180,160 220,260 C260,340 120,400 -20,380 Z" fill="none" stroke="rgba(20,12,8,0.03)" stroke-width="1.5"/>
+                <path d="M120,-60 C320,-80 440,80 460,200 C480,320 340,380 200,340 Z" fill="none" stroke="rgba(20,12,8,0.03)" stroke-width="1.5"/>
+                <path d="M380,240 C520,180 620,240 680,300 C740,360 620,440 500,420 Z" fill="none" stroke="rgba(20,12,8,0.03)" stroke-width="1.5"/>
+
+                <!-- Grid Coordinates -->
+                <g fill="hsl(20,12%,50%)" font-size="7.5" font-family="Space Grotesk,sans-serif">
+                  <text x="8" y="82">LAT 39.42° N</text>
+                  <text x="8" y="167">LAT 39.40° N</text>
+                  <text x="8" y="252">LAT 39.38° N</text>
+                  <text x="175" y="334">LON 121.28° W</text>
+                  <text x="345" y="334">LON 121.25° W</text>
+                  <text x="515" y="334">LON 121.22° W</text>
+                </g>
+
+                <!-- Initial Fire Perimeter at t=0 -->
+                <circle cx="110" cy="240" r="50" fill="url(#fireGradStart)" stroke="rgba(234,88,12,0.2)" stroke-width="1" stroke-dasharray="3,2"/>
+                <path d="M70,245 C80,210 120,200 145,215 C160,230 155,260 140,275 C120,290 85,280 70,245 Z" fill="none" stroke="rgba(234,88,12,0.15)" stroke-width="1.2"/>
+                
+                <!-- Active Fire Perimeter at t=5h -->
+                <circle cx="280" cy="130" r="75" fill="url(#fireGradActive)"/>
+                <path d="M210,135 C230,80 320,65 350,95 C370,120 365,170 330,195 C290,220 230,190 210,135 Z" fill="none" stroke="hsl(20,90%,42%)" stroke-width="1.5"/>
+                
+                <!-- Centroid A (t=0) -->
+                <circle cx="110" cy="240" r="4.5" fill="hsl(0,85%,45%)" stroke="#ffffff" stroke-width="1.5"/>
+                <text x="110" y="257" font-size="9.5" fill="hsl(20,12%,30%)" font-weight="700" font-family="Space Grotesk,sans-serif" text-anchor="middle">Centroid A (t0)</text>
+
+                <!-- Centroid B (t=5h) -->
+                <circle cx="280" cy="130" r="4.5" fill="hsl(20,95%,45%)" stroke="#ffffff" stroke-width="1.5"/>
+                <text x="280" y="112" font-size="9.5" fill="hsl(20,12%,30%)" font-weight="700" font-family="Space Grotesk,sans-serif" text-anchor="middle">Centroid B (t5)</text>
+
+                <!-- Evacuation Zone Area (glowing cyan polygon) -->
+                <rect x="520" y="40" width="125" height="230" rx="16" fill="url(#evacGrad)" stroke="hsl(180,100%,45%)" stroke-width="2"/>
+                
+                <!-- Civil Boundary Shield Icon inside Evac Zone -->
+                <path d="M582.5,70 C590,70 600,60 600,60 C600,60 610,70 617.5,70 C617.5,88 605,98 600,100 C595,98 582.5,88 582.5,70 Z" fill="rgba(6,182,212,0.18)" stroke="var(--accent-cyan)" stroke-width="1.5" transform="translate(-18,12)"/>
+                <text x="582" y="104" font-size="10.5" fill="var(--accent-cyan)" font-weight="800" font-family="Space Grotesk,sans-serif" text-anchor="middle" letter-spacing="0.04em">EVAC ZONE</text>
+                <text x="582" y="116" font-size="8.5" fill="hsl(180,80%,32%)" font-weight="600" font-family="Space Grotesk,sans-serif" text-anchor="middle">5 km Civil Asset</text>
+
+                <!-- Movement Speed Vector (V) Centroid A -> B -->
+                <line x1="114" y1="237" x2="276" y2="133" stroke="hsl(20,95%,45%)" stroke-width="2.8" marker-end="url(#orangeArr)"/>
+                <text x="180" y="174" font-size="10" fill="hsl(20,90%,38%)" font-weight="700" font-family="Space Grotesk,sans-serif" transform="rotate(-33, 180, 174)">Spread Velocity Vector (V)</text>
+
+                <!-- Evacuation reference boundary distance line -->
+                <line x1="284" y1="130" x2="520" y2="130" stroke="rgba(6,182,212,0.22)" stroke-width="1.5" stroke-dasharray="4,3"/>
+                
+                <!-- Along-Track (Closing Speed) vector component -->
+                <line x1="280" y1="130" x2="430" y2="130" stroke="hsl(180,100%,42%)" stroke-width="2.5" marker-end="url(#cyanArr)"/>
+                <text x="355" y="123" font-size="9" fill="hsl(180,80%,30%)" font-weight="700" font-family="Space Grotesk,sans-serif" text-anchor="middle">Closing Speed (V · cos θ)</text>
+
+                <!-- Cross-Track vector component (sideways drift) -->
+                <line x1="280" y1="130" x2="280" y2="30" stroke="hsl(270,95%,60%)" stroke-width="2" stroke-dasharray="3,2" marker-end="url(#purpleArr)"/>
+                <text x="290" y="70" font-size="8.5" fill="hsl(270,80%,52%)" font-weight="700" font-family="Space Grotesk,sans-serif" transform="rotate(-90, 290, 70)">Cross-Track (V · sin θ)</text>
+
+                <!-- Angle theta marker arc -->
+                <path d="M330,130 A50,50 0 0,0 322,97" fill="none" stroke="hsl(20,95%,45%)" stroke-width="1.8"/>
+                <text x="336" y="117" font-size="10" fill="hsl(20,95%,45%)" font-weight="700" font-family="Space Grotesk,sans-serif">θ</text>
+
+                <!-- Active 5km Boundary Ring overlay -->
+                <line x1="520" y1="0" x2="520" y2="340" stroke="var(--accent-cyan)" stroke-width="1.8" stroke-dasharray="8,4" opacity="0.6"/>
+                <rect x="495" y="165" width="50" height="18" rx="9" fill="rgba(6,182,212,0.12)" stroke="var(--accent-cyan)" stroke-width="1"/>
+                <text x="520" y="177" font-size="8" fill="var(--accent-cyan)" font-weight="700" font-family="Space Grotesk,sans-serif" text-anchor="middle">5km Limit</text>
+
+                <!-- Drifting Warm Embers (Keyframe animated float circles) -->
+                <g fill="hsl(30,100%,50%)">
+                  <circle cx="150" cy="210" r="1.5" opacity="0.6">
+                    <animate attributeName="cx" values="150;300;450" dur="3s" repeatCount="indefinite"/>
+                    <animate attributeName="cy" values="210;130;90" dur="3s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="180" cy="190" r="2" opacity="0.4">
+                    <animate attributeName="cx" values="180;320;480" dur="2.4s" repeatCount="indefinite" begin="0.8s"/>
+                    <animate attributeName="cy" values="190;110;60" dur="2.4s" repeatCount="indefinite" begin="0.8s"/>
+                    <animate attributeName="opacity" values="0;0.9;0" dur="2.4s" repeatCount="indefinite" begin="0.8s"/>
+                  </circle>
+                  <circle cx="120" cy="225" r="1" opacity="0.7">
+                    <animate attributeName="cx" values="120;260;400" dur="3.6s" repeatCount="indefinite" begin="1.5s"/>
+                    <animate attributeName="cy" values="225;140;110" dur="3.6s" repeatCount="indefinite" begin="1.5s"/>
+                    <animate attributeName="opacity" values="0;0.8;0" dur="3.6s" repeatCount="indefinite" begin="1.5s"/>
+                  </circle>
+                </g>
+              </svg>
+            </div>
+            
+            <!-- Trigonometry Formula callout chips below SVG -->
+            <div style="display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin-top: 0.8rem;">
+              <span class="surv-anno-chip"><i class="fa-solid fa-calculator"></i> Along-Track (Closing) Speed = V × cos(θ)</span>
+              <span class="surv-anno-chip surv-anno-blue"><i class="fa-solid fa-arrows-split-up-and-left"></i> Cross-Track Speed = V × sin(θ)</span>
+              <span class="surv-anno-chip surv-anno-green"><i class="fa-solid fa-gauge-high"></i> V = Total Centroid Speed Vector</span>
+            </div>
+          </div>
           <div class="sim-container">
             <div class="sim-inputs">
               <!-- Proximity Slider -->
@@ -360,6 +503,65 @@
               </div>
             </div>
           </details>
+        </article>
+
+        <!-- RESEARCH TEAM SECTION -->
+        <article id="team" class="chapter-card glass-card" style="margin-top: 2rem;">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-users"></i> Research Team
+          </h2>
+          
+          <p class="report-paragraph">
+            The <strong>Wildfire Evacuation Threat Prediction</strong> case study is an interdisciplinary research project developing cutting-edge machine learning architectures and survival analysis formulations to secure communities against escalating climate-induced disasters. Under the mentorship of <strong>Prof. Sneha Varur</strong>, the team engineered a robust spatio-temporal early warning system designed to safeguard civil infrastructure and human lives.
+          </p>
+
+          <section class="team-section reveal" id="team-directory">
+            <div class="team-container">
+
+              <!-- Project Mentor -->
+              <div class="team-card mentor-card">
+                <div class="team-avatar">SV</div>
+                <h3>Prof. Sneha Varur</h3>
+                <p>Project Mentor</p>
+              </div>
+
+              <!-- Team Member 1 -->
+              <div class="team-card">
+                <div class="team-avatar">MJ</div>
+                <h3>M Janaki</h3>
+                <p>Team Member</p>
+              </div>
+
+              <!-- Team Member 2 -->
+              <div class="team-card">
+                <div class="team-avatar">NB</div>
+                <h3>Nupur Bagave</h3>
+                <p>Team Member</p>
+              </div>
+
+              <!-- Team Member 3 -->
+              <div class="team-card">
+                <div class="team-avatar">PK</div>
+                <h3>Parth Karpe</h3>
+                <p>Team Member</p>
+              </div>
+
+              <!-- Team Member 4 -->
+              <div class="team-card">
+                <div class="team-avatar">VK</div>
+                <h3>Vedant Khot</h3>
+                <p>Team Member</p>
+              </div>
+
+            </div>
+          </section>
+
+          <div class="section-title-sub" id="team-academic" style="margin-top: 2.5rem;">
+            <i class="fa-solid fa-graduation-cap"></i> CSE (Artificial Intelligence) Department
+          </div>
+          <p class="report-paragraph">
+            Developed as part of the 4th-semester academic curriculum, this research-level work demonstrates exceptional technical sophistication, mathematical rigor, and alignment with modern industry standards. By bridging pure spatial analytics with survival analysis modeling, the team successfully addressed structural data limitations to deliver a highly accurate hazard forecasting prototype.
+          </p>
         </article>
       </section>
       
