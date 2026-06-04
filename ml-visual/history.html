@@ -74,6 +74,9 @@
         <a href="learnings.html" class="sidebar-link">
           <i class="fa-solid fa-lightbulb"></i> Key Learnings
         </a>
+        <a href="features.html" class="sidebar-link">
+          <i class="fa-solid fa-gears"></i> Feature Engineering
+        </a>
         <a href="index.html#team" class="sidebar-link">
           <i class="fa-solid fa-users"></i> Research Team
         </a>
@@ -98,7 +101,130 @@
               </p>
             </div>
           </details>
+          <!-- Section: Approach Taxonomy Grid -->
+          <div class="section-title-sub" id="history-taxonomy" style="margin-top: 3rem;">
+            <i class="fa-solid fa-grip-lines"></i> Modeling Approach Taxonomy
+          </div>
+          <p class="report-paragraph">
+            The project's architectural attempts can be categorized into 10 distinct modeling approaches, spanning statistical baselines, hybrid physics modeling, digital twin augmentation, and empirical Lagrangian solvers.
+          </p>
 
+          <div class="taxonomy-grid reveal">
+            
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">01</div>
+              <h4 class="taxonomy-title">Pure Survival Statistics</h4>
+              <p class="taxonomy-desc">Baseline RSF, GBSA, and CoxPH models built using standard survival analysis libraries.</p>
+              <span class="taxonomy-models">ai_model_v3 to v8</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">02</div>
+              <h4 class="taxonomy-title">Physics-Feature ML</h4>
+              <p class="taxonomy-desc">Introduction of spatial proximity markers, time-to-event gates, and momentum vectors.</p>
+              <span class="taxonomy-models">ai_model_v9 to v10i</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">03</div>
+              <h4 class="taxonomy-title">Specialised Two-Brain</h4>
+              <p class="taxonomy-desc">Separate specialized training structures for static (1-obs) and dynamic (multi-obs) fires.</p>
+              <span class="taxonomy-models">final_soft_16_04</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">04</div>
+              <h4 class="taxonomy-title">Digital Twin Augmentation</h4>
+              <p class="taxonomy-desc">Generating synthetic coordinate jitter fires to combat small sample sizes and stabilize CV.</p>
+              <span class="taxonomy-models">v11 pipeline</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">05</div>
+              <h4 class="taxonomy-title">Seed Stability Blending</h4>
+              <p class="taxonomy-desc">Multi-seed average predictions of high-performing model frameworks to reduce outlier variance.</p>
+              <span class="taxonomy-models">v12 blender</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">06</div>
+              <h4 class="taxonomy-title">Pseudo-Labeling</h4>
+              <p class="taxonomy-desc">Incorporating high-confidence test set predictions back into the training dataset splits.</p>
+              <span class="taxonomy-models">v13 pipeline</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">07</div>
+              <h4 class="taxonomy-title">Multi-Model Meta-Stacking</h4>
+              <p class="taxonomy-desc">Blending predictions from CatBoost, GBSA, and RSF models using a Ridge meta-regressor.</p>
+              <span class="taxonomy-models">v14 meta-stacker</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">08</div>
+              <h4 class="taxonomy-title">Pure Calibration Expert</h4>
+              <p class="taxonomy-desc">Empirical Kaplan-Meier baseline matching combined with additive solvers and rank shifts.</p>
+              <span class="taxonomy-models">widsv37, wids50</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">09</div>
+              <h4 class="taxonomy-title">Kinetic Momentum Expert</h4>
+              <p class="taxonomy-desc">Physical threat scoring modeled as: Area × Speed / sqrt(Distance) × Solar Window Factor.</p>
+              <span class="taxonomy-models">wids50, final1</span>
+            </div>
+
+            <div class="taxonomy-card">
+              <div class="taxonomy-num">10</div>
+              <h4 class="taxonomy-title">Cross-Validated Ranking</h4>
+              <p class="taxonomy-desc">5-fold parametric Weibull Accelerated Failure Time blended with non-parametric CoxPH rankings.</p>
+              <span class="taxonomy-models">final2 (v75)</span>
+            </div>
+
+          </div>
+
+          <!-- Section: Best Submissions -->
+          <div class="section-title-sub" id="history-submissions" style="margin-top: 3rem;">
+            <i class="fa-solid fa-trophy"></i> Best Submissions by Approach
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="grid-table reveal">
+              <thead>
+                <tr>
+                  <th>Approach Category</th>
+                  <th>Best Performing File Reference</th>
+                  <th>Known Concordance Index Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Pure Calibration & Kinetic Momentum Solver</strong></td>
+                  <td><code>submission_momentum_oracle.csv</code></td>
+                  <td><strong>0.974+</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Kinetic Momentum + Seasonal Multiplier</strong></td>
+                  <td><code>submission_v52.csv</code> (final1 output)</td>
+                  <td><strong>0.974+</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Seed Blender Ensemble</strong></td>
+                  <td><code>submission_v12_seed_blender.csv</code></td>
+                  <td>0.9719 OOF</td>
+                </tr>
+                <tr>
+                  <td><strong>Meta-Stacking Classifier Blend</strong></td>
+                  <td><code>submission_v14_stacking.csv</code></td>
+                  <td>0.9706 OOF</td>
+                </tr>
+                <tr>
+                  <td><strong>Physics-Informed Two-Brain Ensemble</strong></td>
+                  <td><code>submission_v11_physics_ensemble.csv</code></td>
+                  <td>0.9695 OOF</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <div class="section-title-sub" id="history-roadmap">
             <i class="fa-solid fa-timeline"></i> Modeling Evolution Roadmap
           </div>
@@ -423,130 +549,7 @@
 
           </div>
 
-          <!-- Section: Approach Taxonomy Grid -->
-          <div class="section-title-sub" id="history-taxonomy" style="margin-top: 3rem;">
-            <i class="fa-solid fa-grip-lines"></i> Modeling Approach Taxonomy
-          </div>
-          <p class="report-paragraph">
-            The project's architectural attempts can be categorized into 10 distinct modeling approaches, spanning statistical baselines, hybrid physics modeling, digital twin augmentation, and empirical Lagrangian solvers.
-          </p>
-
-          <div class="taxonomy-grid reveal">
-            
-            <div class="taxonomy-card">
-              <div class="taxonomy-num">01</div>
-              <h4 class="taxonomy-title">Pure Survival Statistics</h4>
-              <p class="taxonomy-desc">Baseline RSF, GBSA, and CoxPH models built using standard survival analysis libraries.</p>
-              <span class="taxonomy-models">ai_model_v3 to v8</span>
-            </div>
-
-            <div class="taxonomy-card">
-              <div class="taxonomy-num">02</div>
-              <h4 class="taxonomy-title">Physics-Feature ML</h4>
-              <p class="taxonomy-desc">Introduction of spatial proximity markers, time-to-event gates, and momentum vectors.</p>
-              <span class="taxonomy-models">ai_model_v9 to v10i</span>
-            </div>
-
-            <div class="taxonomy-card">
-              <div class="taxonomy-num">03</div>
-              <h4 class="taxonomy-title">Specialised Two-Brain</h4>
-              <p class="taxonomy-desc">Separate specialized training structures for static (1-obs) and dynamic (multi-obs) fires.</p>
-              <span class="taxonomy-models">final_soft_16_04</span>
-            </div>
-
-            <div class="taxonomy-card">
-              <div class="taxonomy-num">04</div>
-              <h4 class="taxonomy-title">Digital Twin Augmentation</h4>
-              <p class="taxonomy-desc">Generating synthetic coordinate jitter fires to combat small sample sizes and stabilize CV.</p>
-              <span class="taxonomy-models">v11 pipeline</span>
-            </div>
-
-            <div class="taxonomy-card">
-              <div class="taxonomy-num">05</div>
-              <h4 class="taxonomy-title">Seed Stability Blending</h4>
-              <p class="taxonomy-desc">Multi-seed average predictions of high-performing model frameworks to reduce outlier variance.</p>
-              <span class="taxonomy-models">v12 blender</span>
-            </div>
-
-            <div class="taxonomy-card">
-              <div class="taxonomy-num">06</div>
-              <h4 class="taxonomy-title">Pseudo-Labeling</h4>
-              <p class="taxonomy-desc">Incorporating high-confidence test set predictions back into the training dataset splits.</p>
-              <span class="taxonomy-models">v13 pipeline</span>
-            </div>
-
-            <div class="taxonomy-card">
-              <div class="taxonomy-num">07</div>
-              <h4 class="taxonomy-title">Multi-Model Meta-Stacking</h4>
-              <p class="taxonomy-desc">Blending predictions from CatBoost, GBSA, and RSF models using a Ridge meta-regressor.</p>
-              <span class="taxonomy-models">v14 meta-stacker</span>
-            </div>
-
-            <div class="taxonomy-card">
-              <div class="taxonomy-num">08</div>
-              <h4 class="taxonomy-title">Pure Calibration Expert</h4>
-              <p class="taxonomy-desc">Empirical Kaplan-Meier baseline matching combined with additive solvers and rank shifts.</p>
-              <span class="taxonomy-models">widsv37, wids50</span>
-            </div>
-
-            <div class="taxonomy-card">
-              <div class="taxonomy-num">09</div>
-              <h4 class="taxonomy-title">Kinetic Momentum Expert</h4>
-              <p class="taxonomy-desc">Physical threat scoring modeled as: Area × Speed / sqrt(Distance) × Solar Window Factor.</p>
-              <span class="taxonomy-models">wids50, final1</span>
-            </div>
-
-            <div class="taxonomy-card">
-              <div class="taxonomy-num">10</div>
-              <h4 class="taxonomy-title">Cross-Validated Ranking</h4>
-              <p class="taxonomy-desc">5-fold parametric Weibull Accelerated Failure Time blended with non-parametric CoxPH rankings.</p>
-              <span class="taxonomy-models">final2 (v75)</span>
-            </div>
-
-          </div>
-
-          <!-- Section: Best Submissions -->
-          <div class="section-title-sub" id="history-submissions" style="margin-top: 3rem;">
-            <i class="fa-solid fa-trophy"></i> Best Submissions by Approach
-          </div>
-          <div style="overflow-x:auto;">
-            <table class="grid-table reveal">
-              <thead>
-                <tr>
-                  <th>Approach Category</th>
-                  <th>Best Performing File Reference</th>
-                  <th>Known Concordance Index Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Pure Calibration & Kinetic Momentum Solver</strong></td>
-                  <td><code>submission_momentum_oracle.csv</code></td>
-                  <td><strong>0.974+</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>Kinetic Momentum + Seasonal Multiplier</strong></td>
-                  <td><code>submission_v52.csv</code> (final1 output)</td>
-                  <td><strong>0.974+</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>Seed Blender Ensemble</strong></td>
-                  <td><code>submission_v12_seed_blender.csv</code></td>
-                  <td>0.9719 OOF</td>
-                </tr>
-                <tr>
-                  <td><strong>Meta-Stacking Classifier Blend</strong></td>
-                  <td><code>submission_v14_stacking.csv</code></td>
-                  <td>0.9706 OOF</td>
-                </tr>
-                <tr>
-                  <td><strong>Physics-Informed Two-Brain Ensemble</strong></td>
-                  <td><code>submission_v11_physics_ensemble.csv</code></td>
-                  <td>0.9695 OOF</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          
 
         </article>
       </section>

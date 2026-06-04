@@ -79,6 +79,9 @@
         <a href="learnings.html" class="sidebar-link">
           <i class="fa-solid fa-lightbulb"></i> Key Learnings
         </a>
+        <a href="features.html" class="sidebar-link">
+          <i class="fa-solid fa-gears"></i> Feature Engineering
+        </a>
         <a href="#team" class="sidebar-link">
           <i class="fa-solid fa-users"></i> Research Team
         </a>
@@ -90,11 +93,164 @@
         <!-- CHAPTER 1 -->
         <article id="chapter1" class="chapter-card glass-card">
           <h2 class="gradient-text">
-            <i class="fa-solid fa-compass-drafting"></i> Chapter 1: Strategic Foundations & Domain Physics
+            <i class="fa-solid fa-compass-drafting"></i> Chapter 1: Project Overview
           </h2>
 
+          <!-- EXECUTIVE SUMMARY -->
+          <p class="report-paragraph" style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 2.2rem; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 1.5rem;">
+            This research-grade AI case study presents an end-to-end survival analysis framework to predict wildfire breach threat timelines for evacuation zones. By combining spatial kinematics, coordinate-jitter augmentation, and confidence-weighted ensemble models, the system predicts the continuous probability of a wildfire breaching a 5 km evacuation buffer over a 72-hour forecast horizon, achieving a concordance index of <strong>0.981</strong>.
+          </p>
+
+          <!-- VISUAL CHAPTER HUB & ROADMAP GRID -->
+          <div style="display:flex; align-items:center; gap:10px; margin-top:1.5rem; margin-bottom:1.5rem;" id="chapter-grid">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.2rem; color:var(--text-white); margin:0;">
+              Interactive Project Roadmap & Chapters
+            </h3>
+            <span style="font-size:0.7rem; color:var(--accent-purple); background:rgba(168,85,247,0.08); border:1px solid rgba(168,85,247,0.15); padding:0.2rem 0.7rem; border-radius:12px; font-family:var(--font-header); font-weight:700;">
+              Case Study Navigation
+            </span>
+          </div>
+
+          <div class="roadmap-dashboard-grid">
+            <!-- Card 1: Core Foundations -->
+            <a href="index.html" class="roadmap-dash-card active">
+              <div class="card-glow"></div>
+              <div class="card-icon-row">
+                <i class="fa-solid fa-compass-drafting text-cyan"></i>
+                <span class="card-badge badge-cyan">Simulator Active</span>
+              </div>
+              <h4 class="card-title">1. Core Foundations</h4>
+              <p class="card-desc">Wildfire threat bounds, spatial kinematics, and live threat simulators.</p>
+              <div class="card-footer">
+                <span>View Overview</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+
+            <!-- Card 2: Dataset & Kinematics -->
+            <a href="chapter2.html" class="roadmap-dash-card">
+              <div class="card-glow"></div>
+              <div class="card-icon-row">
+                <i class="fa-solid fa-chart-bar text-orange"></i>
+                <span class="card-badge badge-orange">18k Samples</span>
+              </div>
+              <h4 class="card-title">2. Dataset & Kinematics</h4>
+              <p class="card-desc">Spatio-temporal data ingestion, coordinates mapping, and perimeters.</p>
+              <div class="card-footer">
+                <span>Explore Data</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+
+            <!-- Card 3: Survival Mechanics -->
+            <a href="chapter3.html" class="roadmap-dash-card">
+              <div class="card-glow"></div>
+              <div class="card-icon-row">
+                <i class="fa-solid fa-hourglass-half text-purple"></i>
+                <span class="card-badge badge-purple">Censored: ~55%</span>
+              </div>
+              <h4 class="card-title">3. Survival Mechanics</h4>
+              <p class="card-desc">Right-censoring mechanics, time-to-event gates, and Kaplan-Meier.</p>
+              <div class="card-footer">
+                <span>Explore Curves</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+
+            <!-- Card 4: Preprocessing & EDA -->
+            <a href="chapter4.html" class="roadmap-dash-card">
+              <div class="card-glow"></div>
+              <div class="card-icon-row">
+                <i class="fa-solid fa-sliders text-cyan"></i>
+                <span class="card-badge badge-cyan">Jul-Aug Peak: 62%</span>
+              </div>
+              <h4 class="card-title">4. Preprocessing & EDA</h4>
+              <p class="card-desc">Data cleaning, feature scaling, SMOTE, and seasonal temporal activity.</p>
+              <div class="card-footer">
+                <span>Explore EDA</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+
+            <!-- Card 5: Feature Engineering -->
+            <a href="features.html" class="roadmap-dash-card">
+              <div class="card-glow"></div>
+              <div class="card-icon-row">
+                <i class="fa-solid fa-gears text-orange"></i>
+                <span class="card-badge badge-orange">37 Features</span>
+              </div>
+              <h4 class="card-title">Feature Engineering</h4>
+              <p class="card-desc">Log transformations, availability masks, and directional alignment.</p>
+              <div class="card-footer">
+                <span>Explore Features</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+
+            <!-- Card 6: ML Architecture -->
+            <a href="chapter5.html" class="roadmap-dash-card">
+              <div class="card-glow"></div>
+              <div class="card-icon-row">
+                <i class="fa-solid fa-network-wired text-purple"></i>
+                <span class="card-badge badge-purple">C-Index: 0.981</span>
+              </div>
+              <h4 class="card-title">5. ML Architecture</h4>
+              <p class="card-desc">Accelerated Failure Time (AFT), Cox, RSF, and rank-based blending.</p>
+              <div class="card-footer">
+                <span>Explore Models</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+
+            <!-- Card 7: SDG & Assessment -->
+            <a href="chapter6.html" class="roadmap-dash-card">
+              <div class="card-glow"></div>
+              <div class="card-icon-row">
+                <i class="fa-solid fa-leaf text-cyan"></i>
+                <span class="card-badge badge-cyan">3 Direct SDGs</span>
+              </div>
+              <h4 class="card-title">6. SDG & Assessment</h4>
+              <p class="card-desc">Sustainability goals, project strengths, weaknesses, and scorecard.</p>
+              <div class="card-footer">
+                <span>Explore Impact</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+
+            <!-- Card 8: Approach History -->
+            <a href="history.html" class="roadmap-dash-card">
+              <div class="card-glow"></div>
+              <div class="card-icon-row">
+                <i class="fa-solid fa-clock-rotate-left text-orange"></i>
+                <span class="card-badge badge-orange">10 Chronologies</span>
+              </div>
+              <h4 class="card-title">7. Approach History</h4>
+              <p class="card-desc">Evolution chronology, modeling taxonomy, and leaderboard submissions.</p>
+              <div class="card-footer">
+                <span>Explore Roadmap</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+
+            <!-- Card 9: Key Learnings -->
+            <a href="learnings.html" class="roadmap-dash-card">
+              <div class="card-glow"></div>
+              <div class="card-icon-row">
+                <i class="fa-solid fa-lightbulb text-purple"></i>
+                <span class="card-badge badge-purple">4 Core Traps</span>
+              </div>
+              <h4 class="card-title">Key Learnings</h4>
+              <p class="card-desc">Zero-inflation segmenting, bearing default traps, and physics thresholds.</p>
+              <div class="card-footer">
+                <span>Explore Learnings</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+          </div>
+
           <!-- INTERACTIVE WILDFIRE BREACH RISK SIMULATOR -->
-          <div style="display:flex; align-items:center; gap:10px; margin-top:1.5rem; margin-bottom:1rem;">
+          <div style="display:flex; align-items:center; gap:10px; margin-top:2.5rem; margin-bottom:1rem;">
             <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
             <h3 style="font-family:var(--font-header); font-size:1.2rem; color:var(--text-white); margin:0;">
               Interactive Wildfire Breach Risk Simulator

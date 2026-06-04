@@ -2875,3 +2875,163 @@ details.methodology-card .details-content {
 }
 .explain-tag:hover::after { opacity: 1; }
 
+/* ================================================================
+   VISUAL CHAPTER ROADMAP DASHBOARD GRID
+   ================================================================ */
+.roadmap-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.roadmap-dash-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+
+.roadmap-dash-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(234, 88, 12, 0.02) 0%, rgba(168, 85, 247, 0.02) 100%);
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.roadmap-dash-card .card-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.roadmap-dash-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(234, 88, 12, 0.2);
+  box-shadow: 0 10px 30px rgba(234, 88, 12, 0.05), inset 0 1px 0 rgba(255,255,255,0.05);
+  transform: translateY(-5px);
+}
+
+.roadmap-dash-card:hover .card-glow {
+  opacity: 1;
+}
+
+.roadmap-dash-card.active {
+  border-color: rgba(6, 182, 212, 0.25);
+  background: rgba(6, 182, 212, 0.02);
+}
+
+.roadmap-dash-card.active:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.05);
+}
+
+.card-icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  z-index: 2;
+}
+
+.card-icon-row i {
+  font-size: 1.8rem;
+  transition: transform 0.3s;
+}
+
+.roadmap-dash-card:hover .card-icon-row i {
+  transform: scale(1.1);
+}
+
+.text-cyan { color: var(--accent-cyan); }
+.text-orange { color: var(--accent-orange); }
+.text-purple { color: var(--accent-purple); }
+
+.card-badge {
+  font-family: var(--font-header);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+}
+
+.badge-cyan {
+  background: rgba(6, 182, 212, 0.06);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  color: var(--accent-cyan);
+}
+
+.badge-orange {
+  background: rgba(234, 88, 12, 0.06);
+  border: 1px solid rgba(234, 88, 12, 0.15);
+  color: var(--accent-orange);
+}
+
+.badge-purple {
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  color: var(--accent-purple);
+}
+
+.card-title {
+  font-family: var(--font-header);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-white);
+  margin: 0 0 0.5rem 0;
+  z-index: 2;
+}
+
+.card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+  flex-grow: 1;
+  z-index: 2;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-header);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding-top: 0.8rem;
+  z-index: 2;
+  transition: color 0.3s;
+}
+
+.roadmap-dash-card:hover .card-footer {
+  color: var(--text-white);
+}
+
+.card-footer i {
+  transition: transform 0.3s;
+}
+
+.roadmap-dash-card:hover .card-footer i {
+  transform: translateX(4px);
+}
+
+
