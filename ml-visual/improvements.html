@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Improvements &amp; Comparison — Wildfire Evacuation Threat Prediction</title>
-  <meta name="description" content="A comprehensive analysis comparing our wildfire evacuation threat prediction models against the 2nd place (V28) competition solution, highlighting key technical insights and architectural gaps.">
+  <meta name="description" content="A comprehensive visual analysis comparing our wildfire evacuation threat prediction models against the 2nd place competition solution — with plain-English explanations for all audiences.">
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
@@ -19,114 +19,446 @@
   <link rel="stylesheet" href="css/style.css">
   
   <style>
-    /* Custom styles for Improvements Page */
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    
-    @media (max-width: 768px) {
-      .comparison-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    .visual-block {
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      border-radius: 12px;
-      padding: 1rem;
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 180px;
-    }
-    
-    .gap-badge {
-      display: inline-block;
-      padding: 0.2rem 0.5rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    .badge-high {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.2);
-      color: #ef4444;
-    }
-    
-    .badge-medium {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.2);
-      color: #f59e0b;
-    }
-    
-    .badge-low-medium {
-      background: rgba(6, 182, 212, 0.1);
-      border: 1px solid rgba(6, 182, 212, 0.2);
-      color: #06b6d4;
-    }
-    
-    .key-metrics-summary {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    
-    .summary-metric-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 12px;
-      padding: 1.2rem;
-      text-align: center;
+    /* ===================================================
+       IMPROVEMENTS PAGE — CUSTOM STYLES
+       =================================================== */
+
+    /* --- Story Banner (Top of page) --- */
+    .story-banner {
+      background: linear-gradient(135deg, rgba(234,88,12,0.06) 0%, rgba(220,38,38,0.04) 100%);
+      border: 1px solid rgba(234,88,12,0.15);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 2.5rem;
       position: relative;
+      overflow: hidden;
     }
-    
-    .summary-metric-card::before {
+    .story-banner::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      border-radius: 3px 3px 0 0;
-    }
-    
-    .card-v28::before {
+      top: 0; left: 0; right: 0;
+      height: 3px;
       background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
     }
-    
-    .card-ours::before {
-      background: linear-gradient(90deg, var(--accent-orange), #ef4444);
-    }
-    
-    .metric-title {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-    
-    .metric-main {
-      font-size: 2rem;
+    .story-banner-title {
       font-family: var(--font-header);
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--text-white);
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    
-    .metric-subtitle {
+    .story-banner p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .story-banner strong { color: var(--text-white); }
+
+    /* --- Section Divider --- */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 2.5rem 0 1.5rem;
+    }
+    .section-divider-bar {
+      width: 4px;
+      height: 32px;
+      background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .section-divider h3 {
+      font-family: var(--font-header);
+      font-size: 1.2rem;
+      color: var(--text-white);
+      margin: 0;
+    }
+    .section-divider .section-tag {
+      font-size: 0.7rem;
+      font-family: var(--font-header);
+      font-weight: 700;
+      color: var(--accent-cyan);
+      background: rgba(234,88,12,0.08);
+      border: 1px solid rgba(234,88,12,0.18);
+      padding: 0.2rem 0.7rem;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* --- Score Comparison Visual --- */
+    .score-podium {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 600px) { .score-podium { grid-template-columns: 1fr; } }
+
+    .podium-card {
+      border-radius: 14px;
+      padding: 1.6rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid transparent;
+    }
+    .podium-card.v28 {
+      background: rgba(6,182,212,0.04);
+      border-color: rgba(6,182,212,0.15);
+    }
+    .podium-card.ours {
+      background: rgba(234,88,12,0.04);
+      border-color: rgba(234,88,12,0.15);
+    }
+    .podium-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 3px 3px 0 0;
+    }
+    .podium-card.v28::before { background: linear-gradient(90deg, #06b6d4, #a855f7); }
+    .podium-card.ours::before { background: linear-gradient(90deg, var(--accent-cyan), #dc2626); }
+
+    .podium-label {
+      font-size: 0.75rem;
+      font-family: var(--font-header);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.6rem;
+    }
+    .podium-card.v28 .podium-label { color: #06b6d4; }
+    .podium-card.ours .podium-label { color: var(--accent-cyan); }
+
+    .podium-score {
+      font-size: 2.8rem;
+      font-family: var(--font-header);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .podium-card.v28 .podium-score { color: #06b6d4; }
+    .podium-card.ours .podium-score { color: var(--accent-cyan); }
+
+    .podium-meta {
       font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Animated Score Bar */
+    .score-bar-section { margin-bottom: 2rem; }
+    .score-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .score-bar-label {
+      font-family: var(--font-header);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-white);
+      min-width: 200px;
+      flex-shrink: 0;
+    }
+    .score-bar-track {
+      flex: 1;
+      height: 10px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .score-bar-fill.animated { transform: scaleX(1); }
+    .score-bar-value {
+      font-family: var(--font-header);
+      font-size: 0.85rem;
+      font-weight: 700;
+      min-width: 60px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .bar-winner  { background: linear-gradient(90deg, #06b6d4, #a855f7); }
+    .bar-ours-1  { background: linear-gradient(90deg, var(--accent-cyan), #ea580c); }
+    .bar-ours-2  { background: linear-gradient(90deg, #f97316, #dc2626); }
+    .bar-ours-3  { background: linear-gradient(90deg, #f43f5e, #be123c); }
+
+    /* --- Gap Cards (replacing details/summary) --- */
+    .gap-cards { display: flex; flex-direction: column; gap: 1.4rem; }
+
+    .gap-card {
+      border-radius: 14px;
+      border: 1px solid rgba(234,88,12,0.1);
+      background: rgba(255,255,255,0.6);
+      overflow: hidden;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .gap-card:hover {
+      border-color: rgba(234,88,12,0.25);
+      box-shadow: 0 8px 30px rgba(234,88,12,0.06);
+    }
+
+    .gap-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.4rem 1.6rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .gap-card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .icon-high { background: rgba(239,68,68,0.1); color: #ef4444; }
+    .icon-medium { background: rgba(245,158,11,0.1); color: #f59e0b; }
+    .icon-low { background: rgba(6,182,212,0.1); color: #06b6d4; }
+
+    .gap-card-titles { flex: 1; }
+    .gap-card-title {
+      font-family: var(--font-header);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 0.25rem;
+    }
+    .gap-card-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .gap-impact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.72rem;
+      font-family: var(--font-header);
+      font-weight: 700;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .pill-high { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+    .pill-medium { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: #f59e0b; }
+    .pill-low { background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); color: #06b6d4; }
+
+    .gap-card-body {
+      padding: 0 1.6rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Plain English Callout */
+    .plain-english {
+      background: rgba(234,88,12,0.03);
+      border: 1px solid rgba(234,88,12,0.12);
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+    }
+    .plain-english-label {
+      font-family: var(--font-header);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-cyan);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .plain-english p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .plain-english strong { color: var(--text-white); }
+
+    /* Technical Detail */
+    .tech-detail {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+    .tech-detail strong { color: var(--text-white); }
+    .tech-detail code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      background: rgba(234,88,12,0.06);
+      border: 1px solid rgba(234,88,12,0.12);
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
       color: var(--accent-cyan);
     }
-    
-    .metric-subtitle.orange-sub {
-      color: var(--accent-orange);
+
+    /* Visual Diagram Block */
+    .diagram-block {
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(234,88,12,0.08);
+      border-radius: 12px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .diagram-title {
+      font-family: var(--font-header);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .diagram-block svg { max-width: 100%; }
+    .diagram-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .d-chip {
+      font-size: 0.78rem;
+      font-family: var(--font-header);
+      font-weight: 600;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .d-chip.cyan { background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); color: #06b6d4; }
+    .d-chip.orange { background: rgba(234,88,12,0.1); border: 1px solid rgba(234,88,12,0.2); color: var(--accent-cyan); }
+    .d-chip.red { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+    .d-chip.purple { background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.2); color: #a855f7; }
+
+    /* --- Summary Table --- */
+    .imp-table-wrap { overflow-x: auto; margin: 1rem 0; }
+    .imp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+    }
+    .imp-table thead tr {
+      background: rgba(234,88,12,0.05);
+    }
+    .imp-table th {
+      padding: 0.9rem 1rem;
+      font-family: var(--font-header);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      text-align: left;
+      border-bottom: 2px solid rgba(234,88,12,0.1);
+    }
+    .imp-table td {
+      padding: 0.85rem 1rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(234,88,12,0.05);
+      vertical-align: middle;
+      line-height: 1.5;
+    }
+    .imp-table tbody tr:last-child td { border-bottom: none; }
+    .imp-table tbody tr:hover td { background: rgba(234,88,12,0.02); }
+    .imp-table .row-key { color: var(--text-white); font-weight: 600; }
+    .imp-table code {
+      font-size: 0.8rem;
+      background: rgba(234,88,12,0.06);
+      border: 1px solid rgba(234,88,12,0.12);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+      color: var(--accent-cyan);
+    }
+
+    /* Impact Badge */
+    .i-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.7rem;
+      font-family: var(--font-header);
+      font-weight: 700;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .i-badge.high { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+    .i-badge.medium { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: #f59e0b; }
+    .i-badge.low { background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); color: #06b6d4; }
+
+    /* Key Takeaway */
+    .takeaway-box {
+      border-radius: 14px;
+      padding: 1.8rem 2rem;
+      background: rgba(234,88,12,0.03);
+      border: 1px solid rgba(234,88,12,0.15);
+      border-left: 4px solid var(--accent-cyan);
+      margin-top: 2rem;
+    }
+    .takeaway-box .takeaway-title {
+      font-family: var(--font-header);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .takeaway-box p {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .takeaway-box strong { color: var(--text-white); }
+
+    /* SVG Colour Overrides for Light Theme */
+    .svg-text-header { fill: hsl(20, 24%, 12%); }
+    .svg-text-muted { fill: hsl(20, 12%, 45%); }
+    .svg-text-cyan { fill: hsl(20, 95%, 40%); }
+    .svg-text-orange { fill: hsl(22, 90%, 38%); }
+    .svg-text-red { fill: #ef4444; }
+    .svg-text-blue { fill: #3b82f6; }
+    .svg-track { stroke: rgba(0,0,0,0.08); }
+
+    /* Horizontal Rule Separator */
+    .content-hr {
+      border: none;
+      border-top: 1px solid rgba(234,88,12,0.08);
+      margin: 2rem 0;
     }
   </style>
 </head>
@@ -141,7 +473,7 @@
     <!-- Main Report Header -->
     <header class="report-header" style="max-width:100%">
       <div class="report-header-badge">
-        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+        <i class="fa-solid fa-fire"></i> Academic Case Study &amp; Report
       </div>
       <h1 class="gradient-text">wids datathon challenge 2026</h1>
       <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
@@ -185,8 +517,9 @@
           <i class="fa-solid fa-chart-line"></i> Improvements &amp; Comparison
         </a>
         <div class="sidebar-sub-nav">
+          <a href="#story" class="sub-link"><i class="fa-solid fa-book-open"></i> The Story</a>
           <a href="#comparison-scores" class="sub-link"><i class="fa-solid fa-trophy"></i> Score Comparison</a>
-          <a href="#comparison-differences" class="sub-link"><i class="fa-solid fa-magnifying-glass"></i> Key Differences</a>
+          <a href="#comparison-differences" class="sub-link"><i class="fa-solid fa-magnifying-glass"></i> What They Did Better</a>
           <a href="#comparison-gaps" class="sub-link"><i class="fa-solid fa-list-check"></i> Gap Analysis</a>
         </div>
         <a href="index.html#team" class="sidebar-link">
@@ -197,374 +530,530 @@
       <!-- Scrollable Content Area -->
       <section class="report-content">
         
-        <!-- IMPROVEMENTS SECTION -->
+        <!-- IMPROVEMENTS ARTICLE -->
         <article id="improvements" class="chapter-card glass-card">
           <h2 class="gradient-text">
-            <i class="fa-solid fa-chart-line"></i> Technical Improvements &amp; Leaderboard Comparison
+            <i class="fa-solid fa-chart-line"></i> Improvements &amp; Competition Comparison
           </h2>
-          
-          <p class="report-paragraph">
-            To validate the mathematical rigor and operational readiness of our ensemble early-warning system, we benchmarked our architectures against the competition-winning models. The ultimate reference point is the <strong>2nd Place Solution (V28 btt_mapping)</strong>, which secured an outstanding Private Leaderboard score of <strong>0.97458</strong>. Below is a deep-dive head-to-head architectural analysis showing where our framework stood, what gaps separated us, and how we could have bridged the remaining distance.
-          </p>
+
+          <!-- THE STORY SECTION -->
+          <div id="story"></div>
+          <div class="story-banner">
+            <div class="story-banner-title">
+              <i class="fa-solid fa-book-open"></i> The Story: How Close Did We Get?
+            </div>
+            <p>
+              In the WiDS Datathon 2026, hundreds of teams competed to build the best AI model for predicting wildfire evacuation timelines. 
+              The <strong>2nd place team</strong> scored <strong>0.97458</strong> on the private leaderboard. 
+              Our best model scored <strong>0.974+</strong> — an incredibly small gap separating two very different architectural philosophies.
+              This page is a deep dive into <em>exactly what they did differently</em>, why it worked, and what we learned from the comparison.
+              <br><br>
+              <strong>You don't need to know machine learning to follow this</strong> — every technical concept is explained in plain English before the technical details.
+            </p>
+          </div>
 
           <!-- SECTION 1: SCORE COMPARISON -->
-          <div style="display:flex; align-items:center; gap:10px; margin-top: 2rem; margin-bottom:1.5rem;" id="comparison-scores">
-            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
-            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
-              🏆 Head-to-Head Score Benchmarks
-            </h3>
+          <div class="section-divider" id="comparison-scores">
+            <div class="section-divider-bar"></div>
+            <h3>🏆 Head-to-Head Score Benchmarks</h3>
+            <span class="section-tag">Final Leaderboard</span>
           </div>
 
-          <div class="key-metrics-summary">
-            <div class="summary-metric-card card-v28">
-              <div class="metric-title">2nd Place (V28) LB Score</div>
-              <div class="metric-main gradient-text" style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text;">0.97458</div>
-              <div class="metric-subtitle">C-Index: 0.9449 | WBS: 0.0144</div>
+          <!-- Podium Cards -->
+          <div class="score-podium">
+            <div class="podium-card v28">
+              <div class="podium-label"><i class="fa-solid fa-medal"></i> 2nd Place — V28 btt_mapping</div>
+              <div class="podium-score">0.97458</div>
+              <div class="podium-meta">C-Index: 0.9449 &nbsp;|&nbsp; Brier Score: 0.0144</div>
             </div>
-            <div class="summary-metric-card card-ours">
-              <div class="metric-title">Our Best Ensemble (`wids50`)</div>
-              <div class="metric-main gradient-text" style="background: linear-gradient(135deg, var(--accent-orange), #ef4444); -webkit-background-clip: text;">0.9742+</div>
-              <div class="metric-subtitle orange-sub">C-Index: ~0.942 | WBS: ~0.014</div>
+            <div class="podium-card ours">
+              <div class="podium-label"><i class="fa-solid fa-fire"></i> Our Best — wids50 / final1</div>
+              <div class="podium-score">0.9742+</div>
+              <div class="podium-meta">C-Index: ~0.942 &nbsp;|&nbsp; Brier Score: ~0.014</div>
             </div>
           </div>
 
-          <p class="report-paragraph">
-            While our blended architectures (`wids50` / `final1`) achieved performance metrics neck-and-neck with the top tier of the competition leaderboard, the 2nd place solution established a highly stable margin using a survival-first backbone and elegant dual calibration.
-          </p>
+          <!-- Animated Score Bars -->
+          <div class="score-bar-section">
+            <div class="score-bar-row">
+              <div class="score-bar-label">V28 (2nd Place) — 0.97458</div>
+              <div class="score-bar-track">
+                <div class="score-bar-fill bar-winner" style="width:97.458%" data-width="97.458"></div>
+              </div>
+              <div class="score-bar-value" style="color:#06b6d4;">0.97458</div>
+            </div>
+            <div class="score-bar-row">
+              <div class="score-bar-label">Our wids50 / final1 — 0.9742</div>
+              <div class="score-bar-track">
+                <div class="score-bar-fill bar-ours-1" style="width:97.42%" data-width="97.42"></div>
+              </div>
+              <div class="score-bar-value" style="color:var(--accent-cyan);">0.974+</div>
+            </div>
+            <div class="score-bar-row">
+              <div class="score-bar-label">Our V12 Seed Blender — 0.9719</div>
+              <div class="score-bar-track">
+                <div class="score-bar-fill bar-ours-2" style="width:97.19%" data-width="97.19"></div>
+              </div>
+              <div class="score-bar-value" style="color:#f97316;">0.9719</div>
+            </div>
+            <div class="score-bar-row">
+              <div class="score-bar-label">Our V11 Physics Model — 0.9695</div>
+              <div class="score-bar-track">
+                <div class="score-bar-fill bar-ours-3" style="width:96.95%" data-width="96.95"></div>
+              </div>
+              <div class="score-bar-value" style="color:#f43f5e;">0.9695</div>
+            </div>
+          </div>
 
-          <table class="grid-table">
-            <thead>
-              <tr>
-                <th>Model Approach</th>
-                <th>C-index</th>
-                <th>WBS (Brier)</th>
-                <th>Hybrid Score</th>
-                <th>LB Score (Private)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="color:var(--text-white); font-weight: 700;">V28 btt_mapping (2nd Place)</td>
-                <td style="color:var(--accent-cyan); font-weight:700;">0.9449</td>
-                <td>0.0144</td>
-                <td style="color:var(--accent-purple); font-weight:700;">0.9734</td>
-                <td style="color:var(--text-white); background: rgba(0,255,255,0.03); font-weight:700;">0.97458</td>
-              </tr>
-              <tr>
-                <td>Our <code>wids50</code> / <code>final1</code></td>
-                <td>~0.9420</td>
-                <td>~0.0140</td>
-                <td>~0.9740</td>
-                <td>0.974+</td>
-              </tr>
-              <tr>
-                <td>Our V12 (Seed Blender)</td>
-                <td>0.9396</td>
-                <td>0.0143</td>
-                <td>0.9719</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td>Our V11 (Physics)</td>
-                <td>0.9320</td>
-                <td>0.0144</td>
-                <td>0.9695</td>
-                <td>—</td>
-              </tr>
-            </tbody>
-          </table>
+          <!-- Full Comparison Table -->
+          <div class="imp-table-wrap">
+            <table class="imp-table">
+              <thead>
+                <tr>
+                  <th>Model / Approach</th>
+                  <th>C-Index <span style="font-weight:400;text-transform:none;font-size:0.7rem;">(ranking accuracy)</span></th>
+                  <th>Brier Score <span style="font-weight:400;text-transform:none;font-size:0.7rem;">(lower = better)</span></th>
+                  <th>Hybrid Score</th>
+                  <th>LB Score (Private)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="row-key">V28 btt_mapping (2nd Place) 🥈</td>
+                  <td style="color:#06b6d4; font-weight:700;">0.9449</td>
+                  <td>0.0144</td>
+                  <td style="color:#a855f7; font-weight:700;">0.9734</td>
+                  <td style="color:var(--text-white); font-weight:700;">0.97458</td>
+                </tr>
+                <tr>
+                  <td class="row-key">Our <code>wids50</code> / <code>final1</code></td>
+                  <td>~0.9420</td>
+                  <td>~0.0140</td>
+                  <td>~0.9740</td>
+                  <td style="font-weight:600;">0.974+</td>
+                </tr>
+                <tr>
+                  <td>Our V12 (Seed Blender)</td>
+                  <td>0.9396</td>
+                  <td>0.0143</td>
+                  <td>0.9719</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Our V11 (Physics-Gated)</td>
+                  <td>0.9320</td>
+                  <td>0.0144</td>
+                  <td>0.9695</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <hr class="content-hr">
 
           <!-- SECTION 2: KEY DIFFERENCES -->
-          <div style="display:flex; align-items:center; gap:10px; margin-top:2.5rem; margin-bottom:1.5rem;" id="comparison-differences">
-            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
-            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
-              🔍 Architectural Gaps: What They Did That We Missed
-            </h3>
+          <div class="section-divider" id="comparison-differences">
+            <div class="section-divider-bar"></div>
+            <h3>🔍 What They Did That We Missed</h3>
+            <span class="section-tag">6 Key Gaps</span>
           </div>
 
-          <!-- Gap 1: Coxnet Backbone -->
-          <details class="methodology-card" open>
-            <summary>
-              <span><i class="fa-solid fa-calculator text-cyan"></i> 1. Coxnet Survival backbone (78% weight) vs Classifier Focus</span>
-            </summary>
-            <div class="details-content">
-              <p class="report-paragraph">
-                Our primary models relied heavily on a **CatBoost classifier** trained to predict event flags at discretized horizons. While we layered physics gates and calibration on top to respect time-to-event relationships, a classifier remains mathematically blind to the underlying censoring mechanism. 
-              </p>
-              <p class="report-paragraph">
-                The 2nd place team constructed their blend with a **Coxnet survival backbone comprising 78% of the final weight**. Coxnet is a penalized Cox Proportional Hazards model which natively processes right-censored data, calculating continuous hazard ratios mathematically correctly rather than treating censored fires as negative events.
-              </p>
-              
-              <div class="visual-block">
-                <!-- SVG: Coxnet vs CatBoost Censoring -->
-                <svg width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Grid Background -->
-                  <rect width="500" height="150" fill="rgba(255,255,255,0.01)" rx="8" />
-                  
-                  <!-- Timeline Header -->
-                  <text x="20" y="25" font-family="Space Grotesk, sans-serif" font-size="11" fill="var(--text-muted)" font-weight="700">MODELING PARADIGMS FOR RIGHT-CENSORED FIRES</text>
-                  
-                  <!-- CatBoost Classifier Timeline -->
-                  <text x="20" y="55" font-family="Space Grotesk, sans-serif" font-size="11" fill="var(--text-white)" font-weight="700">CatBoost (Binary Classifier)</text>
-                  <line x1="200" y1="50" x2="360" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="3" />
-                  <circle cx="200" cy="50" r="4" fill="var(--accent-orange)" />
-                  <line x1="360" y1="45" x2="360" y2="55" stroke="#ef4444" stroke-width="2" />
-                  <text x="370" y="54" font-family="sans-serif" font-size="10" fill="#ef4444">Censored (Forced to 0)</text>
-                  <text x="205" y="45" font-family="sans-serif" font-size="9" fill="var(--text-muted)">0h</text>
-                  <text x="355" y="45" font-family="sans-serif" font-size="9" fill="var(--text-muted)">72h</text>
-                  
-                  <!-- Coxnet Survival Timeline -->
-                  <text x="20" y="110" font-family="Space Grotesk, sans-serif" font-size="11" fill="var(--text-white)" font-weight="700">Coxnet (Survival Analysis)</text>
-                  <line x1="200" y1="105" x2="400" y2="105" stroke="var(--accent-cyan)" stroke-width="3" />
-                  <circle cx="200" cy="105" r="4" fill="var(--accent-cyan)" />
-                  <path d="M 400 100 L 405 105 L 400 110" fill="none" stroke="var(--accent-cyan)" stroke-width="2" />
-                  <text x="410" y="109" font-family="sans-serif" font-size="10" fill="var(--accent-cyan)">Censoring T (Respects Timing)</text>
-                  <text x="205" y="100" font-family="sans-serif" font-size="9" fill="var(--text-muted)">0h</text>
-                  <text x="395" y="100" font-family="sans-serif" font-size="9" fill="var(--text-muted)">Censored at 45h</text>
-                </svg>
+          <div class="gap-cards">
+
+            <!-- GAP 1: Coxnet Backbone -->
+            <div class="gap-card">
+              <div class="gap-card-header">
+                <div class="gap-card-icon icon-high"><i class="fa-solid fa-calculator"></i></div>
+                <div class="gap-card-titles">
+                  <div class="gap-card-title">1. Using the Right Type of AI Model for the Job</div>
+                  <div class="gap-card-subtitle">Coxnet Survival Backbone (78% weight) vs. CatBoost Classifier</div>
+                </div>
+                <span class="gap-impact-pill pill-high"><i class="fa-solid fa-arrow-up"></i> High Impact</span>
+              </div>
+              <div class="gap-card-body">
+                <div class="plain-english">
+                  <div class="plain-english-label"><i class="fa-regular fa-lightbulb"></i> In Plain English</div>
+                  <p>
+                    Imagine asking two doctors "how long will a patient survive?" Doctor A (like our CatBoost model) gives a simple yes/no answer — "will they survive past 72 hours?" Doctor B (like the Coxnet model) calculates a <strong>continuous timeline</strong>, saying "there's a 30% chance they don't make it past 24 hours, 55% past 48 hours..." That nuance matters enormously. 
+                    Our model was Doctor A. The 2nd place team used Doctor B — and it showed.
+                  </p>
+                </div>
+                <div class="tech-detail">
+                  Our primary models relied on a <strong>CatBoost classifier</strong> trained to predict event flags at discretized time horizons. While we layered physics gates and calibration on top to respect time-to-event relationships, a classifier remains mathematically blind to the underlying <em>censoring mechanism</em> — it treats "fire didn't breach in 72 hours" as a hard negative, ignoring that the fire might have breached at hour 73.
+                  <br><br>
+                  The 2nd place team constructed their blend with a <strong>Coxnet survival backbone at 78% ensemble weight</strong>. Coxnet is a penalized Cox Proportional Hazards model which natively processes right-censored data, calculating continuous hazard ratios correctly.
+                </div>
+                <div class="diagram-block">
+                  <div class="diagram-title">Modeling Paradigms: How Each Approach Handles Censored Fires</div>
+                  <svg width="560" height="170" viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <rect width="560" height="170" fill="rgba(234,88,12,0.02)" rx="10"/>
+                    
+                    <!-- CatBoost Row -->
+                    <text x="18" y="42" font-family="Space Grotesk, sans-serif" font-size="12" fill="hsl(20,24%,12%)" font-weight="700">CatBoost Classifier (Our Approach)</text>
+                    <text x="18" y="58" font-family="sans-serif" font-size="10" fill="hsl(20,12%,45%)">Fire not breached at 72h → treated as "safe" (Wrong!)</text>
+                    <!-- Timeline bar -->
+                    <rect x="18" y="66" width="300" height="8" rx="4" fill="rgba(0,0,0,0.06)"/>
+                    <rect x="18" y="66" width="220" height="8" rx="4" fill="#f97316"/>
+                    <circle cx="318" cy="70" r="5" fill="#ef4444"/>
+                    <line x1="318" y1="62" x2="318" y2="78" stroke="#ef4444" stroke-width="2"/>
+                    <text x="325" y="74" font-family="sans-serif" font-size="10" fill="#ef4444" font-weight="700">Forced "No Breach" ✗</text>
+                    <text x="18" y="62" font-family="sans-serif" font-size="9" fill="hsl(20,12%,50%)">t=0h</text>
+                    <text x="300" y="62" font-family="sans-serif" font-size="9" fill="hsl(20,12%,50%)">t=72h</text>
+                    
+                    <!-- Coxnet Row -->
+                    <text x="18" y="112" font-family="Space Grotesk, sans-serif" font-size="12" fill="hsl(20,24%,12%)" font-weight="700">Coxnet Survival Model (Their Approach)</text>
+                    <text x="18" y="128" font-family="sans-serif" font-size="10" fill="hsl(20,12%,45%)">Fire not breached at 72h → treated as "we just didn't see it yet" ✓</text>
+                    <!-- Timeline bar -->
+                    <rect x="18" y="136" width="300" height="8" rx="4" fill="rgba(0,0,0,0.06)"/>
+                    <rect x="18" y="136" width="300" height="8" rx="4" fill="hsl(20,95%,45%)"/>
+                    <path d="M 318 132 L 326 140 L 318 148" fill="none" stroke="hsl(20,95%,45%)" stroke-width="2"/>
+                    <text x="332" y="144" font-family="sans-serif" font-size="10" fill="hsl(20,95%,45%)" font-weight="700">Censored at t=72h ✓</text>
+                    <text x="18" y="132" font-family="sans-serif" font-size="9" fill="hsl(20,12%,50%)">t=0h</text>
+                    <text x="300" y="132" font-family="sans-serif" font-size="9" fill="hsl(20,12%,50%)">72h →</text>
+                  </svg>
+                  <div class="diagram-chips">
+                    <span class="d-chip orange"><i class="fa-solid fa-xmark"></i> Classifier treats "no breach" as a wrong negative</span>
+                    <span class="d-chip cyan"><i class="fa-solid fa-check"></i> Survival model respects censoring — mathematically correct</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </details>
 
-          <!-- Gap 2: Separate Close-Fire Split -->
-          <details class="methodology-card" open>
-            <summary>
-              <span><i class="fa-solid fa-arrows-split-up-and-left text-cyan"></i> 2. Specialized Close-Fire Model (<5km distance threshold)</span>
-            </summary>
-            <div class="details-content">
-              <p class="report-paragraph">
-                Fires occurring close to evacuation boundaries behave completely differently from distant forest fires. In our design, we built a Two-Brain architecture segmented by <strong>perimeter snapshot counts</strong> (low-res vs high-res data availability).
-              </p>
-              <p class="report-paragraph">
-                The 2nd place solution instead split models directly by **geospatial proximity**. They built a specialized Close-Fire Coxnet model trained only on the 69 fires starting within <strong>5 km</strong> of evacuation zones. Crucially, they set a high regularization (`alpha=0.20` vs backbone `0.05`) to prevent overfitting on this tiny 69-sample subset while allowing the model to adapt specifically to extreme-risk kinematics.
-              </p>
-              
-              <div class="visual-block">
-                <!-- SVG: Geospatial Proximity Split -->
-                <svg width="500" height="160" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="500" height="160" fill="rgba(255,255,255,0.01)" rx="8" />
-                  
-                  <!-- Evacuation Center -->
-                  <circle cx="250" cy="80" r="15" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444" stroke-width="1.5" />
-                  <text x="250" y="83" font-family="sans-serif" font-size="8" fill="#ef4444" text-anchor="middle" font-weight="700">ZONE</text>
-                  
-                  <!-- 5km Boundary Ring -->
-                  <circle cx="250" cy="80" r="45" fill="none" stroke="var(--accent-orange)" stroke-width="1.5" stroke-dasharray="4 4" />
-                  <text x="250" y="140" font-family="Space Grotesk, sans-serif" font-size="9" fill="var(--accent-orange)" text-anchor="middle">5km Boundary Threshold</text>
-                  
-                  <!-- Outer Space -->
-                  <circle cx="250" cy="80" r="75" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
-                  
-                  <!-- Close-Fire Model -->
-                  <line x1="250" y1="80" x2="220" y2="55" stroke="var(--accent-orange)" stroke-width="1.5" />
-                  <circle cx="220" cy="55" r="5" fill="var(--accent-orange)" />
-                  <text x="120" y="45" font-family="sans-serif" font-size="9" fill="var(--accent-orange)" font-weight="700">Close-Fire Coxnet</text>
-                  <text x="120" y="55" font-family="sans-serif" font-size="8" fill="var(--text-muted)">n = 69 | α = 0.20 (High Reg)</text>
-                  
-                  <!-- Far-Fire Backbone -->
-                  <line x1="250" y1="80" x2="350" y2="120" stroke="var(--accent-cyan)" stroke-width="1.5" />
-                  <circle cx="350" cy="120" r="5" fill="var(--accent-cyan)" />
-                  <text x="360" y="115" font-family="sans-serif" font-size="9" fill="var(--accent-cyan)" font-weight="700">Backbone Coxnet</text>
-                  <text x="360" y="125" font-family="sans-serif" font-size="8" fill="var(--text-muted)">n = 152 | α = 0.05 (Low Reg)</text>
-                </svg>
+            <!-- GAP 2: Proximity Split -->
+            <div class="gap-card">
+              <div class="gap-card-header">
+                <div class="gap-card-icon icon-high"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="gap-card-titles">
+                  <div class="gap-card-title">2. A Specialized "Last-Mile" Model for Close Fires</div>
+                  <div class="gap-card-subtitle">Separate Coxnet for fires starting within 5km of the evacuation zone</div>
+                </div>
+                <span class="gap-impact-pill pill-high"><i class="fa-solid fa-arrow-up"></i> High Impact</span>
+              </div>
+              <div class="gap-card-body">
+                <div class="plain-english">
+                  <div class="plain-english-label"><i class="fa-regular fa-lightbulb"></i> In Plain English</div>
+                  <p>
+                    Think of it like a hospital having separate care units — a general ward and an ICU. A fire starting 50km away is managed very differently from one already <strong>inside the 5km danger zone</strong>. The 2nd place team trained a completely separate AI model just for the 69 fires that started close to evacuation areas. 
+                    We split our models differently (by how much sensor data was available), which didn't capture this crucial geographic distinction.
+                  </p>
+                </div>
+                <div class="tech-detail">
+                  Our Two-Brain architecture split models by <strong>perimeter snapshot counts</strong> (low-resolution vs high-resolution data availability). The 2nd place solution split models directly by <strong>geospatial proximity</strong> — building a separate Close-Fire Coxnet trained on the 69 fires starting within 5 km of evacuation zones. They used a higher regularization penalty (<code>alpha=0.20</code> vs backbone <code>0.05</code>) to prevent overfitting on this tiny subset while still capturing extreme-risk kinematics.
+                </div>
+                <div class="diagram-block">
+                  <div class="diagram-title">Two-Model Strategy: Splitting by Geographic Proximity</div>
+                  <svg width="500" height="200" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="500" height="200" fill="rgba(234,88,12,0.02)" rx="10"/>
+
+                    <!-- Evacuation Zone (centre) -->
+                    <circle cx="250" cy="100" r="20" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="2"/>
+                    <text x="250" y="104" font-family="sans-serif" font-size="9" fill="#ef4444" text-anchor="middle" font-weight="700">EVAC</text>
+
+                    <!-- 5km ring -->
+                    <circle cx="250" cy="100" r="55" fill="none" stroke="hsl(20,95%,45%)" stroke-width="1.5" stroke-dasharray="5 4"/>
+                    <text x="250" y="170" font-family="Space Grotesk, sans-serif" font-size="9" fill="hsl(20,95%,45%)" text-anchor="middle" font-weight="700">5 km Threshold</text>
+
+                    <!-- Outer ring -->
+                    <circle cx="250" cy="100" r="90" fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
+
+                    <!-- Close fires (inside ring) -->
+                    <circle cx="210" cy="68" r="6" fill="hsl(20,95%,45%)"/>
+                    <circle cx="275" cy="62" r="6" fill="hsl(20,95%,45%)"/>
+                    <circle cx="228" cy="135" r="6" fill="hsl(20,95%,45%)"/>
+
+                    <!-- Close-fire label -->
+                    <rect x="8" y="50" width="130" height="40" rx="6" fill="rgba(234,88,12,0.06)" stroke="rgba(234,88,12,0.15)" stroke-width="1"/>
+                    <text x="73" y="66" font-family="Space Grotesk, sans-serif" font-size="10" fill="hsl(20,95%,45%)" text-anchor="middle" font-weight="700">Close-Fire Coxnet</text>
+                    <text x="73" y="79" font-family="sans-serif" font-size="9" fill="hsl(20,12%,45%)" text-anchor="middle">n=69 | α=0.20 (strict)</text>
+                    <line x1="138" y1="70" x2="204" y2="70" stroke="hsl(20,95%,45%)" stroke-width="1" stroke-dasharray="3 2"/>
+
+                    <!-- Far fires (outside ring) -->
+                    <circle cx="360" cy="55" r="6" fill="#06b6d4"/>
+                    <circle cx="370" cy="140" r="6" fill="#06b6d4"/>
+                    <circle cx="170" cy="35" r="6" fill="#06b6d4"/>
+
+                    <!-- Far-fire label -->
+                    <rect x="362" y="80" width="128" height="40" rx="6" fill="rgba(6,182,212,0.06)" stroke="rgba(6,182,212,0.15)" stroke-width="1"/>
+                    <text x="426" y="96" font-family="Space Grotesk, sans-serif" font-size="10" fill="#06b6d4" text-anchor="middle" font-weight="700">Backbone Coxnet</text>
+                    <text x="426" y="109" font-family="sans-serif" font-size="9" fill="hsl(20,12%,45%)" text-anchor="middle">n=152 | α=0.05 (loose)</text>
+                    <line x1="362" y1="100" x2="342" y2="100" stroke="#06b6d4" stroke-width="1" stroke-dasharray="3 2"/>
+                  </svg>
+                  <div class="diagram-chips">
+                    <span class="d-chip orange"><i class="fa-solid fa-bullseye"></i> 69 close fires → strict, specialized model</span>
+                    <span class="d-chip cyan"><i class="fa-solid fa-globe"></i> 152 far fires → general backbone model</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </details>
 
-          <!-- Gap 3: Beta Blend Search -->
-          <details class="methodology-card">
-            <summary>
-              <span><i class="fa-solid fa-sliders text-cyan"></i> 3. Grid-Searched Beta ($\beta = 0.55$) Blending Weight</span>
-            </summary>
-            <div class="details-content">
-              <p class="report-paragraph">
-                When combining the close-fire specialized model with the primary backbone model, the V28 solution used a dedicated blending parameter $\beta = 0.55$:
-                $$\text{Probability}_{\text{final}} = \beta \cdot P_{\text{close}} + (1 - \beta) \cdot P_{\text{backbone}}$$
-              </p>
-              <p class="report-paragraph" style="margin-bottom: 0;">
-                Rather than using manual heuristic blend ratios (which we applied globally to submission outputs), the 2nd place team performed a **13-value grid search** over the range $[0.00, 0.60]$ to mathematically optimize the boundary transition probability weight.
-              </p>
-            </div>
-          </details>
-
-          <!-- Gap 4: Dual Calibration Strategy -->
-          <details class="methodology-card" open>
-            <summary>
-              <span><i class="fa-solid fa-chart-area text-cyan"></i> 4. Dual Calibration — Platt at 12h/24h vs Isotonic at 48h/72h</span>
-            </summary>
-            <div class="details-content">
-              <p class="report-paragraph">
-                Calibration maps raw ML risk scores to real physical probabilities. We applied **isotonic regression across all four time horizons**.
-              </p>
-              <p class="report-paragraph">
-                The 2nd place team noticed a critical physical distinction between early and late horizons:
-                - **Early Horizons (12h, 24h)**: Noisy and highly uncertain. They applied **Platt calibration (logistic regression S-curve)** to smooth out noise and avoid extreme 0 or 1 predictions.
-                - **Late Horizons (48h, 72h)**: Physically deterministic. At 3 days, fires either clearly breached or fizzled out. They used **Isotonic calibration (step-wise step function)** to capture the sharp physical threshold cliff.
-              </p>
-              
-              <div class="visual-block">
-                <!-- SVG: Platt vs Isotonic Dual Calibration -->
-                <svg width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="500" height="150" fill="rgba(255,255,255,0.01)" rx="8" />
-                  
-                  <!-- Platt Plot (Left) -->
-                  <text x="40" y="25" font-family="Space Grotesk, sans-serif" font-size="11" fill="var(--accent-cyan)" font-weight="700">12h/24h: PLATT (SMOOTH SIGMOID)</text>
-                  <line x1="40" y1="120" x2="200" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
-                  <line x1="40" y1="40" x2="40" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
-                  <!-- Sigmoid Curve -->
-                  <path d="M 40 115 Q 120 115 120 80 T 200 45" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" />
-                  <text x="45" y="55" font-family="sans-serif" font-size="8" fill="var(--text-muted)">prob</text>
-                  <text x="175" y="115" font-family="sans-serif" font-size="8" fill="var(--text-muted)">score</text>
-                  
-                  <!-- Isotonic Plot (Right) -->
-                  <text x="280" y="25" font-family="Space Grotesk, sans-serif" font-size="11" fill="var(--accent-orange)" font-weight="700">48h/72h: ISOTONIC (STEP CLIFF)</text>
-                  <line x1="280" y1="120" x2="440" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
-                  <line x1="280" y1="40" x2="280" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
-                  <!-- Step Curve -->
-                  <path d="M 280 115 L 340 115 L 340 80 L 390 80 L 390 45 L 440 45" fill="none" stroke="var(--accent-orange)" stroke-width="2.5" />
-                  <text x="285" y="55" font-family="sans-serif" font-size="8" fill="var(--text-muted)">prob</text>
-                  <text x="415" y="115" font-family="sans-serif" font-size="8" fill="var(--text-muted)">score</text>
-                </svg>
+            <!-- GAP 3: Beta Blend Search -->
+            <div class="gap-card">
+              <div class="gap-card-header">
+                <div class="gap-card-icon icon-medium"><i class="fa-solid fa-sliders"></i></div>
+                <div class="gap-card-titles">
+                  <div class="gap-card-title">3. Mathematically Optimised Blending Weight</div>
+                  <div class="gap-card-subtitle">Grid-searched β = 0.55 for combining the two models</div>
+                </div>
+                <span class="gap-impact-pill pill-medium"><i class="fa-solid fa-minus"></i> Medium Impact</span>
+              </div>
+              <div class="gap-card-body">
+                <div class="plain-english">
+                  <div class="plain-english-label"><i class="fa-regular fa-lightbulb"></i> In Plain English</div>
+                  <p>
+                    When you have two models (the close-fire specialist and the general backbone), you need to decide <strong>how much to trust each one</strong>. We set this ratio by hand based on intuition. The 2nd place team ran 13 computer experiments, testing every possible ratio between 0% and 60%, and let the data decide the best split. Their math found β=0.55 — meaning 55% close-fire model, 45% backbone.
+                  </p>
+                </div>
+                <div class="tech-detail">
+                  When combining predictions, the V28 solution used a dedicated blending parameter β = 0.55:
+                  <br><br>
+                  <strong>Final Probability = β × P(close-fire) + (1 − β) × P(backbone)</strong>
+                  <br><br>
+                  Rather than applying manual heuristic blend ratios (which we did globally), the 2nd place team performed a <strong>13-value grid search</strong> over the range [0.00, 0.60] to mathematically optimize the boundary transition probability weight. This is a classic example of "letting the data decide" rather than human guessing.
+                </div>
               </div>
             </div>
-          </details>
 
-          <!-- Gap 5: Circular Temporal Encoding -->
-          <details class="methodology-card" open>
-            <summary>
-              <span><i class="fa-solid fa-arrows-spin text-cyan"></i> 5. Circular Temporal Encoding &amp; Interaction Features</span>
-            </summary>
-            <div class="details-content">
-              <p class="report-paragraph">
-                Wildfire risk changes dynamically with time (months represent seasons, hours represent daily peak burn periods). We fed raw integers (e.g. Month 1 to 12) into models, which creates an artificial discontinuity between December (12) and January (1).
-              </p>
-              <p class="report-paragraph">
-                The 2nd place solution resolved this using **Circular Encoding (sine/cosine transformation)**:
-                $$\text{month}_{\sin} = \sin\left(\frac{2\pi \cdot \text{month}}{12}\right), \quad \text{month}_{\cos} = \cos\left(\frac{2\pi \cdot \text{month}}{12}\right)$$
-                This positions time features on a continuous circle where December and January map adjacent to each other. They then coupled these circular timestamps with directional values to capture seasonal winds (e.g., `align_x_month_sin`).
-              </p>
-              
-              <div class="visual-block">
-                <!-- SVG: Circular Temporal Encoding -->
-                <svg width="500" height="160" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="500" height="160" fill="rgba(255,255,255,0.01)" rx="8" />
-                  
-                  <!-- Left: Linear Discontinuity -->
-                  <text x="30" y="25" font-family="Space Grotesk, sans-serif" font-size="10" fill="#ef4444" font-weight="700">RAW TIMESTAMPS (LINEAR DISCONTINUITY)</text>
-                  <line x1="30" y1="90" x2="200" y2="90" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
-                  <circle cx="30" cy="90" r="4" fill="#ef4444" />
-                  <text x="20" y="110" font-family="sans-serif" font-size="9" fill="var(--text-muted)">Jan (1)</text>
-                  
-                  <circle cx="180" cy="90" r="4" fill="#ef4444" />
-                  <text x="165" y="110" font-family="sans-serif" font-size="9" fill="var(--text-muted)">Dec (12)</text>
-                  
-                  <path d="M 180 80 Q 105 50 30 80" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3 3" />
-                  <text x="105" y="45" font-family="sans-serif" font-size="9" fill="#ef4444" text-anchor="middle">Broken gap</text>
-                  
-                  <!-- Right: Circular Continuum -->
-                  <text x="260" y="25" font-family="Space Grotesk, sans-serif" font-size="10" fill="var(--accent-cyan)" font-weight="700">CIRCULAR ENCODING (CONTINUOUS)</text>
-                  <circle cx="370" cy="95" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
-                  
-                  <!-- Dec & Jan adjacent -->
-                  <circle cx="370" cy="55" r="4" fill="var(--accent-cyan)" /> <!-- Jan -->
-                  <text x="370" y="48" font-family="sans-serif" font-size="8" fill="var(--text-muted)" text-anchor="middle">Jan</text>
-                  
-                  <circle cx="398" cy="67" r="4" fill="var(--accent-cyan)" /> <!-- Feb -->
-                  <circle cx="398" cy="123" r="4" fill="var(--accent-cyan)" /> <!-- Jun -->
-                  
-                  <circle cx="342" cy="67" r="4" fill="var(--accent-cyan)" /> <!-- Dec -->
-                  <text x="320" y="68" font-family="sans-serif" font-size="8" fill="var(--text-muted)">Dec</text>
-                  
-                  <path d="M 342 67 Q 356 50 370 55" fill="none" stroke="var(--accent-cyan)" stroke-width="1.5" />
-                  <text x="365" y="80" font-family="sans-serif" font-size="8" fill="var(--accent-cyan)" text-anchor="middle">Smooth wrap</text>
-                </svg>
+            <!-- GAP 4: Dual Calibration -->
+            <div class="gap-card">
+              <div class="gap-card-header">
+                <div class="gap-card-icon icon-medium"><i class="fa-solid fa-chart-area"></i></div>
+                <div class="gap-card-titles">
+                  <div class="gap-card-title">4. Smarter Probability Calibration for Early vs Late Horizons</div>
+                  <div class="gap-card-subtitle">Platt at 12h/24h (smooth sigmoid) vs Isotonic at 48h/72h (sharp step)</div>
+                </div>
+                <span class="gap-impact-pill pill-medium"><i class="fa-solid fa-minus"></i> Medium Impact</span>
+              </div>
+              <div class="gap-card-body">
+                <div class="plain-english">
+                  <div class="plain-english-label"><i class="fa-regular fa-lightbulb"></i> In Plain English</div>
+                  <p>
+                    Calibration is like adjusting the confidence of a weather forecast. For <strong>short-range forecasts</strong> (tomorrow's weather), there's a lot of uncertainty — you smooth out extreme predictions. For <strong>long-range forecasts</strong> (this entire season will be either wet or dry), the reality is binary and sharp. The 2nd place team applied the appropriate calibration shape for each time horizon, while we used the same calibration technique across all four time windows.
+                  </p>
+                </div>
+                <div class="tech-detail">
+                  We applied <strong>Isotonic regression across all four time horizons</strong>. The 2nd place team noticed a critical physical distinction:
+                  <br>• <strong>Early Horizons (12h, 24h)</strong>: Noisy, uncertain → applied Platt calibration (S-curve sigmoid) to smooth out noise and avoid extreme 0 or 1 predictions
+                  <br>• <strong>Late Horizons (48h, 72h)</strong>: Physically deterministic → at 3 days, fires either clearly breached or fizzled out → Isotonic calibration (step-wise cliff) captures the sharp physical threshold
+                </div>
+                <div class="diagram-block">
+                  <div class="diagram-title">Calibration Shapes: Smooth S-Curve (Early) vs. Step Cliff (Late)</div>
+                  <svg width="520" height="160" viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="520" height="160" fill="rgba(234,88,12,0.02)" rx="10"/>
+                    
+                    <!-- Left: Platt / Sigmoid (Early Horizons) -->
+                    <text x="60" y="22" font-family="Space Grotesk, sans-serif" font-size="11" fill="hsl(20,95%,40%)" font-weight="700" text-anchor="middle">12h / 24h — PLATT (Smooth)</text>
+                    <text x="60" y="35" font-family="sans-serif" font-size="9" fill="hsl(20,12%,45%)" text-anchor="middle">Smooth S-curve for uncertain early windows</text>
+                    <line x1="20" y1="130" x2="115" y2="130" stroke="rgba(0,0,0,0.1)" stroke-width="1.5"/>
+                    <line x1="20" y1="50" x2="20" y2="130" stroke="rgba(0,0,0,0.1)" stroke-width="1.5"/>
+                    <text x="12" y="53" font-family="sans-serif" font-size="8" fill="hsl(20,12%,50%)">1.0</text>
+                    <text x="12" y="93" font-family="sans-serif" font-size="8" fill="hsl(20,12%,50%)">0.5</text>
+                    <text x="12" y="133" font-family="sans-serif" font-size="8" fill="hsl(20,12%,50%)">0.0</text>
+                    <text x="20" y="143" font-family="sans-serif" font-size="8" fill="hsl(20,12%,50%)">Low</text>
+                    <text x="100" y="143" font-family="sans-serif" font-size="8" fill="hsl(20,12%,50%)">High</text>
+                    <path d="M 20 128 Q 50 127 67 90 T 115 52" fill="none" stroke="hsl(20,95%,45%)" stroke-width="2.5"/>
+
+                    <!-- Divider -->
+                    <line x1="145" y1="40" x2="145" y2="145" stroke="rgba(0,0,0,0.06)" stroke-width="1" stroke-dasharray="4 3"/>
+
+                    <!-- Right: Isotonic / Step (Late Horizons) -->
+                    <text x="370" y="22" font-family="Space Grotesk, sans-serif" font-size="11" fill="hsl(22,90%,38%)" font-weight="700" text-anchor="middle">48h / 72h — ISOTONIC (Step Cliff)</text>
+                    <text x="370" y="35" font-family="sans-serif" font-size="9" fill="hsl(20,12%,45%)" text-anchor="middle">Sharp step for deterministic late windows</text>
+                    <line x1="165" y1="130" x2="505" y2="130" stroke="rgba(0,0,0,0.1)" stroke-width="1.5"/>
+                    <line x1="165" y1="50" x2="165" y2="130" stroke="rgba(0,0,0,0.1)" stroke-width="1.5"/>
+                    <text x="155" y="53" font-family="sans-serif" font-size="8" fill="hsl(20,12%,50%)" text-anchor="end">1.0</text>
+                    <text x="155" y="93" font-family="sans-serif" font-size="8" fill="hsl(20,12%,50%)" text-anchor="end">0.5</text>
+                    <text x="155" y="133" font-family="sans-serif" font-size="8" fill="hsl(20,12%,50%)" text-anchor="end">0.0</text>
+                    <text x="165" y="143" font-family="sans-serif" font-size="8" fill="hsl(20,12%,50%)">Low</text>
+                    <text x="490" y="143" font-family="sans-serif" font-size="8" fill="hsl(20,12%,50%)" text-anchor="end">High</text>
+                    <path d="M 165 128 L 270 128 L 270 90 L 370 90 L 370 55 L 505 55" fill="none" stroke="hsl(22,90%,38%)" stroke-width="2.5"/>
+                  </svg>
+                  <div class="diagram-chips">
+                    <span class="d-chip orange"><i class="fa-solid fa-wave-square"></i> Platt = smooth S-curve for uncertain, noisy early windows</span>
+                    <span class="d-chip red"><i class="fa-solid fa-stairs"></i> Isotonic = sharp step for clear binary outcomes at 48h/72h</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </details>
 
-          <!-- Gap 6: Stratified CV stability -->
-          <details class="methodology-card">
-            <summary>
-              <span><i class="fa-solid fa-layer-group text-cyan"></i> 6. 10-fold Stratified CV + 5-seed Close averaging</span>
-            </summary>
-            <div class="details-content">
-              <p class="report-paragraph">
-                With a training dataset consisting of only 221 total events, validation folds are highly prone to data splitting variance. We utilized standard 5-fold cross-validation.
-              </p>
-              <p class="report-paragraph" style="margin-bottom: 0;">
-                The 2nd place team stabilized their backbone predictions using a **10-fold cross-validation scheme**. Furthermore, for the high-risk close-fire model (69 samples), they ran **7-fold cross-validation repeated across 5 different initialization seeds** (35 total training iterations) and averaged the results. This massive oversampling stabilized the Out-Of-Fold risk boundaries and eliminated leaderboard noise.
-              </p>
+            <!-- GAP 5: Circular Encoding -->
+            <div class="gap-card">
+              <div class="gap-card-header">
+                <div class="gap-card-icon icon-medium"><i class="fa-solid fa-arrows-spin"></i></div>
+                <div class="gap-card-titles">
+                  <div class="gap-card-title">5. Treating Time as a Circle, Not a Line</div>
+                  <div class="gap-card-subtitle">Circular sine/cosine encoding for months &amp; hours</div>
+                </div>
+                <span class="gap-impact-pill pill-medium"><i class="fa-solid fa-minus"></i> Medium Impact</span>
+              </div>
+              <div class="gap-card-body">
+                <div class="plain-english">
+                  <div class="plain-english-label"><i class="fa-regular fa-lightbulb"></i> In Plain English</div>
+                  <p>
+                    When you represent months as numbers (January=1, December=12), an AI model sees January and December as very far apart — a gap of 11. But on a calendar, they're <strong>right next to each other</strong>. The 2nd place team encoded time as a circle using math: a sine/cosine transformation that wraps December back around to January. This is the same trick used in navigation GPS systems and music theory.
+                  </p>
+                </div>
+                <div class="tech-detail">
+                  We fed raw integers (Month 1–12, Hour 0–23) into models, creating an artificial discontinuity between December (12) and January (1). The 2nd place solution resolved this using <strong>Circular Encoding</strong>:
+                  <br><br>
+                  month_sin = sin(2π × month / 12) &nbsp;&nbsp; month_cos = cos(2π × month / 12)
+                  <br><br>
+                  This positions time on a continuous circle where December and January map adjacent. They coupled circular timestamps with directional values to capture seasonal winds (e.g., <code>align_x_month_sin</code>).
+                </div>
+                <div class="diagram-block">
+                  <div class="diagram-title">Raw Numbers vs. Circular Encoding — Why Continuity Matters</div>
+                  <svg width="500" height="175" viewBox="0 0 500 175" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="500" height="175" fill="rgba(234,88,12,0.02)" rx="10"/>
+
+                    <!-- Left: Linear (broken) -->
+                    <text x="100" y="22" font-family="Space Grotesk, sans-serif" font-size="11" fill="#ef4444" font-weight="700" text-anchor="middle">Raw Numbers (Broken Gap)</text>
+                    <line x1="20" y1="95" x2="195" y2="95" stroke="rgba(0,0,0,0.1)" stroke-width="2.5"/>
+                    <circle cx="20" cy="95" r="5" fill="#ef4444"/>
+                    <text x="20" y="112" font-family="sans-serif" font-size="9" fill="hsl(20,12%,45%)" text-anchor="middle">Jan (1)</text>
+                    <circle cx="195" cy="95" r="5" fill="#ef4444"/>
+                    <text x="195" y="112" font-family="sans-serif" font-size="9" fill="hsl(20,12%,45%)" text-anchor="middle">Dec (12)</text>
+                    <!-- Broken gap arc -->
+                    <path d="M 195 85 Q 107 50 20 85" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4 3"/>
+                    <text x="107" y="54" font-family="sans-serif" font-size="9" fill="#ef4444" text-anchor="middle" font-weight="700">AI sees a huge gap ✗</text>
+                    <!-- Month markers -->
+                    <text x="66" y="108" font-family="sans-serif" font-size="8" fill="rgba(0,0,0,0.2)" text-anchor="middle">Apr</text>
+                    <text x="107" y="108" font-family="sans-serif" font-size="8" fill="rgba(0,0,0,0.2)" text-anchor="middle">Jul</text>
+                    <text x="152" y="108" font-family="sans-serif" font-size="8" fill="rgba(0,0,0,0.2)" text-anchor="middle">Oct</text>
+                    <circle cx="66" cy="95" r="3" fill="rgba(0,0,0,0.15)"/>
+                    <circle cx="107" cy="95" r="3" fill="rgba(0,0,0,0.15)"/>
+                    <circle cx="152" cy="95" r="3" fill="rgba(0,0,0,0.15)"/>
+
+                    <!-- Divider -->
+                    <line x1="230" y1="20" x2="230" y2="160" stroke="rgba(0,0,0,0.06)" stroke-width="1" stroke-dasharray="4 3"/>
+
+                    <!-- Right: Circular (smooth) -->
+                    <text x="370" y="22" font-family="Space Grotesk, sans-serif" font-size="11" fill="hsl(20,95%,40%)" font-weight="700" text-anchor="middle">Circular Encoding (Smooth ✓)</text>
+                    <circle cx="370" cy="95" r="55" fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="1.5"/>
+                    <!-- Month dots on circle -->
+                    <circle cx="370" cy="40" r="5" fill="hsl(20,95%,45%)"/> <!-- Jan top -->
+                    <text x="370" y="33" font-family="sans-serif" font-size="9" fill="hsl(20,12%,40%)" text-anchor="middle">Jan</text>
+                    <circle cx="395" cy="53" r="4" fill="rgba(234,88,12,0.4)"/> <!-- Feb -->
+                    <circle cx="425" cy="95" r="4" fill="rgba(234,88,12,0.4)"/> <!-- Apr -->
+                    <circle cx="370" cy="150" r="4" fill="rgba(234,88,12,0.4)"/> <!-- Jul bottom -->
+                    <text x="370" y="163" font-family="sans-serif" font-size="9" fill="hsl(20,12%,40%)" text-anchor="middle">Jul</text>
+                    <circle cx="315" cy="95" r="4" fill="rgba(234,88,12,0.4)"/> <!-- Oct -->
+                    <circle cx="345" cy="53" r="5" fill="hsl(20,95%,45%)"/> <!-- Dec near Jan -->
+                    <text x="322" y="48" font-family="sans-serif" font-size="9" fill="hsl(20,12%,40%)" text-anchor="end">Dec</text>
+                    <!-- Dec-Jan adjacency arc -->
+                    <path d="M 345 53 Q 357 40 370 40" fill="none" stroke="hsl(20,95%,45%)" stroke-width="1.8"/>
+                    <text x="348" y="38" font-family="sans-serif" font-size="8" fill="hsl(20,95%,45%)" font-weight="700">Adjacent ✓</text>
+                  </svg>
+                  <div class="diagram-chips">
+                    <span class="d-chip red"><i class="fa-solid fa-xmark"></i> Linear: Dec(12) and Jan(1) appear 11 steps apart</span>
+                    <span class="d-chip cyan"><i class="fa-solid fa-arrows-spin"></i> Circular: Dec and Jan are neighbours on the time ring</span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </details>
+
+            <!-- GAP 6: CV Stability -->
+            <div class="gap-card">
+              <div class="gap-card-header">
+                <div class="gap-card-icon icon-low"><i class="fa-solid fa-layer-group"></i></div>
+                <div class="gap-card-titles">
+                  <div class="gap-card-title">6. Running More Training Experiments for Stability</div>
+                  <div class="gap-card-subtitle">10-fold CV + 5-seed × 7-fold averaging on the close-fire subset</div>
+                </div>
+                <span class="gap-impact-pill pill-low"><i class="fa-solid fa-minus"></i> Low–Medium Impact</span>
+              </div>
+              <div class="gap-card-body">
+                <div class="plain-english">
+                  <div class="plain-english-label"><i class="fa-regular fa-lightbulb"></i> In Plain English</div>
+                  <p>
+                    When you only have 69 data points (the close fires), a model's performance can swing wildly depending on which 69 examples you happen to use for testing versus training — like judging a chef by only tasting their food on one lucky day. The 2nd place team ran <strong>35 separate training sessions</strong> (5 different random seeds × 7 folds) and averaged all the results for maximum stability. We used a simpler 5-fold approach.
+                  </p>
+                </div>
+                <div class="tech-detail">
+                  With only 221 total events, validation folds are highly prone to data splitting variance. We utilized standard <strong>5-fold cross-validation</strong>. The 2nd place team stabilized using:
+                  <br>• <strong>10-fold cross-validation</strong> for the main backbone
+                  <br>• <strong>7-fold × 5 seeds = 35 total training runs</strong> for the high-risk close-fire model (69 samples)
+                  <br><br>
+                  This massive oversampling eliminated Out-Of-Fold boundary noise and produced stable, trustworthy risk boundaries — especially critical for the tiny, high-stakes close-fire dataset.
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- end .gap-cards -->
+
+          <hr class="content-hr">
 
           <!-- SECTION 3: GAP ANALYSIS TABLE -->
-          <div style="display:flex; align-items:center; gap:10px; margin-top:2.5rem; margin-bottom:1.5rem;" id="comparison-gaps">
-            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
-            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
-              🛠️ Gap Analysis &amp; Actionable Improvements
-            </h3>
+          <div class="section-divider" id="comparison-gaps">
+            <div class="section-divider-bar"></div>
+            <h3>🛠️ Gap Analysis &amp; Actionable Takeaways</h3>
+            <span class="section-tag">Summary Table</span>
           </div>
 
-          <table class="grid-table">
-            <thead>
-              <tr>
-                <th>Target Element</th>
-                <th>Our Architecture</th>
-                <th>V28 (2nd Place) Strategy</th>
-                <th>Improvement Impact</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="color:var(--text-white); font-weight:700;">Primary Model Backbone</td>
-                <td>CatBoost classifier (discretized targets)</td>
-                <td>Coxnet Survival Model (78% ensemble weight)</td>
-                <td><span class="gap-badge badge-high">High Impact</span></td>
-              </tr>
-              <tr>
-                <td style="color:var(--text-white); font-weight:700;">Close-fire Segmenting</td>
-                <td>Two-brain split by perimeter data density</td>
-                <td>Separate Coxnet trained on distance &lt; 5km</td>
-                <td><span class="gap-badge badge-high">High Impact</span></td>
-              </tr>
-              <tr>
-                <td style="color:var(--text-white); font-weight:700;">Calibration Function</td>
-                <td>Isotonic regression across all horizons</td>
-                <td>Platt (Early 12h/24h) | Isotonic (Late 48h/72h)</td>
-                <td><span class="gap-badge badge-medium">Medium Impact</span></td>
-              </tr>
-              <tr>
-                <td style="color:var(--text-white); font-weight:700;">Transition Blending</td>
-                <td>Manual ensemble weighting</td>
-                <td>Grid search optimal override beta [0.00→0.60]</td>
-                <td><span class="gap-badge badge-medium">Medium Impact</span></td>
-              </tr>
-              <tr>
-                <td style="color:var(--text-white); font-weight:700;">Time representation</td>
-                <td>Raw temporal integers (1–12, 0–23)</td>
-                <td>Circular sin/cos encoding for seasons &amp; hours</td>
-                <td><span class="gap-badge badge-medium">Medium Impact</span></td>
-              </tr>
-              <tr>
-                <td style="color:var(--text-white); font-weight:700;">CV Stability</td>
-                <td>5-fold cross-validation</td>
-                <td>10-fold backbone + 5-seed × 7-fold close-fire</td>
-                <td><span class="gap-badge badge-low-medium">Low-Medium</span></td>
-              </tr>
-              <tr>
-                <td style="color:var(--text-white); font-weight:700;">Interaction Features</td>
-                <td>Simple physical ratios</td>
-                <td>Seasonal × direction (e.g. <code>align_x_month_sin</code>)</td>
-                <td><span class="gap-badge badge-low-medium">Low-Medium</span></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="imp-table-wrap">
+            <table class="imp-table">
+              <thead>
+                <tr>
+                  <th>What We're Comparing</th>
+                  <th>Our Architecture</th>
+                  <th>V28 (2nd Place) Strategy</th>
+                  <th>Impact If Fixed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="row-key">Primary AI Model Type</td>
+                  <td>CatBoost classifier (binary yes/no)</td>
+                  <td>Coxnet Survival Model (continuous timeline) — 78% weight</td>
+                  <td><span class="i-badge high"><i class="fa-solid fa-arrow-up"></i> High</span></td>
+                </tr>
+                <tr>
+                  <td class="row-key">How We Divided Fires</td>
+                  <td>Split by how much sensor data was available</td>
+                  <td>Split by distance to evacuation zone (&lt;5km specialist)</td>
+                  <td><span class="i-badge high"><i class="fa-solid fa-arrow-up"></i> High</span></td>
+                </tr>
+                <tr>
+                  <td class="row-key">Calibration Method</td>
+                  <td>Isotonic regression on all 4 time windows</td>
+                  <td>Platt for 12h/24h (smooth) + Isotonic for 48h/72h (step)</td>
+                  <td><span class="i-badge medium"><i class="fa-solid fa-minus"></i> Medium</span></td>
+                </tr>
+                <tr>
+                  <td class="row-key">Model Blending Weight</td>
+                  <td>Manual ratio chosen by intuition</td>
+                  <td>Optimized via 13-point grid search (β=0.55)</td>
+                  <td><span class="i-badge medium"><i class="fa-solid fa-minus"></i> Medium</span></td>
+                </tr>
+                <tr>
+                  <td class="row-key">Time Representation</td>
+                  <td>Raw integers (Jan=1, Dec=12)</td>
+                  <td>Circular sin/cos encoding (Dec wraps to Jan)</td>
+                  <td><span class="i-badge medium"><i class="fa-solid fa-minus"></i> Medium</span></td>
+                </tr>
+                <tr>
+                  <td class="row-key">Training Stability</td>
+                  <td>5-fold cross-validation</td>
+                  <td>10-fold backbone + 5 seeds × 7-fold on close fires (35 runs)</td>
+                  <td><span class="i-badge low"><i class="fa-solid fa-arrow-down"></i> Low–Medium</span></td>
+                </tr>
+                <tr>
+                  <td class="row-key">Interaction Features</td>
+                  <td>Simple physical ratios</td>
+                  <td>Seasonal × direction features (e.g. <code>align_x_month_sin</code>)</td>
+                  <td><span class="i-badge low"><i class="fa-solid fa-arrow-down"></i> Low–Medium</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-          <!-- KEY TAKEAWAY BOX -->
-          <div class="callout-box" style="margin-top: 2rem; border-left-color: var(--accent-orange); background: rgba(234, 88, 12, 0.02);">
-            <span class="callout-title" style="color: var(--accent-orange);"><i class="fa-solid fa-circle-exclamation"></i> Key Takeaway &amp; Operational Lesson</span>
-            <p style="font-size:0.9rem; margin:0; line-height:1.6; color:var(--text-muted);">
-              <strong>Our primary mistake was relying on a CatBoost Classifier as the ensemble core.</strong> A proper survival analysis model (like Coxnet) respects the censoring structure of the data mathematically. While we patched this deficiency with physics-informed heuristic gates, the 2nd place team structured the model correctly from the ground up. Their iteration history shows they converged on the exact same spatial threshold we did (5km), but they possessed the correct statistical tools to exploit the boundary risk dynamics.
+          <!-- KEY TAKEAWAY -->
+          <div class="takeaway-box">
+            <div class="takeaway-title"><i class="fa-solid fa-circle-exclamation"></i> Key Takeaway &amp; Lesson Learned</div>
+            <p>
+              <strong>Our primary mistake was using the wrong type of model as the foundation.</strong> A CatBoost classifier forces every wildfire into a binary bucket — "breached" or "didn't breach" — which ignores the rich timing information in the data. The 2nd place team used Coxnet, a model specifically designed for situations where you're predicting <em>when</em> something will happen, not just <em>if</em> it will happen.
+              <br><br>
+              The striking part? Both teams independently discovered the same 5km distance threshold as the key splitting boundary. We had the right geographic insight, but lacked the correct statistical machinery to fully exploit it. This competition taught us that <strong>domain insight and mathematical correctness both matter</strong> — neither alone is enough to reach the very top.
             </p>
           </div>
 
@@ -574,6 +1063,21 @@
     </div>
 
   </main>
+
+  <!-- Bar animation observer -->
+  <script>
+    // Animate score bars when they enter the viewport
+    const bars = document.querySelectorAll('.score-bar-fill');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    bars.forEach(bar => observer.observe(bar));
+  </script>
 
   <!-- Interactive Particles Loader Script -->
   <script src="js/app.js" defer></script>
