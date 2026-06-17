@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Improvements &amp; Comparison — Wildfire Evacuation Threat Prediction</title>
+  <meta name="description" content="A comprehensive analysis comparing our wildfire evacuation threat prediction models against the 2nd place (V28) competition solution, highlighting key technical insights and architectural gaps.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inherited Main Stylesheet -->
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- Custom Light-Fiery Theme Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* Custom styles for Improvements Page */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .visual-block {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 180px;
+    }
+    
+    .gap-badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .badge-high {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+    
+    .badge-medium {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+    }
+    
+    .badge-low-medium {
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      color: #06b6d4;
+    }
+    
+    .key-metrics-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .summary-metric-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .summary-metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      border-radius: 3px 3px 0 0;
+    }
+    
+    .card-v28::before {
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+    }
+    
+    .card-ours::before {
+      background: linear-gradient(90deg, var(--accent-orange), #ef4444);
+    }
+    
+    .metric-title {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    
+    .metric-main {
+      font-size: 2rem;
+      font-family: var(--font-header);
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 0.2rem;
+    }
+    
+    .metric-subtitle {
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+    }
+    
+    .metric-subtitle.orange-sub {
+      color: var(--accent-orange);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cyber Grid Canvas -->
+  <canvas id="cyber-canvas"></canvas>
+
+  <!-- Report Layout Wrapper -->
+  <main class="container report-body">
+
+    <!-- Main Report Header -->
+    <header class="report-header" style="max-width:100%">
+      <div class="report-header-badge">
+        <i class="fa-solid fa-fire"></i> Academic Case Study & Report
+      </div>
+      <h1 class="gradient-text">wids datathon challenge 2026</h1>
+      <p>Predicting Time-to-Threat for Evacuation Zones Using Survival Analysis</p>
+    </header>
+
+    <!-- MAIN DOCK LAYOUT -->
+    <div class="report-layout">
+      
+      <!-- Sticky Sidebar Menu -->
+      <nav class="report-sidebar">
+        <div class="sidebar-title">Report Chapters</div>
+        
+        <a href="index.html" class="sidebar-link">
+          <i class="fa-solid fa-compass-drafting"></i> 1. Core Foundations
+        </a>
+        <a href="chapter2.html" class="sidebar-link">
+          <i class="fa-solid fa-chart-bar"></i> 2. Dataset &amp; Kinematics
+        </a>
+        <a href="chapter3.html" class="sidebar-link">
+          <i class="fa-solid fa-hourglass-half"></i> 3. Survival Mechanics
+        </a>
+        <a href="chapter4.html" class="sidebar-link">
+          <i class="fa-solid fa-sliders"></i> 4. Preprocessing &amp; EDA
+        </a>
+        <a href="chapter5.html" class="sidebar-link">
+          <i class="fa-solid fa-network-wired"></i> 5. ML Architecture
+        </a>
+        <a href="chapter6.html" class="sidebar-link">
+          <i class="fa-solid fa-leaf"></i> 6. SDG &amp; Assessment
+        </a>
+        <a href="history.html" class="sidebar-link">
+          <i class="fa-solid fa-clock-rotate-left"></i> 7. Approach History
+        </a>
+        <a href="learnings.html" class="sidebar-link">
+          <i class="fa-solid fa-lightbulb"></i> Key Learnings
+        </a>
+        <a href="features.html" class="sidebar-link">
+          <i class="fa-solid fa-gears"></i> Feature Engineering
+        </a>
+        <a href="improvements.html" class="sidebar-link active">
+          <i class="fa-solid fa-chart-line"></i> Improvements &amp; Comparison
+        </a>
+        <div class="sidebar-sub-nav">
+          <a href="#comparison-scores" class="sub-link"><i class="fa-solid fa-trophy"></i> Score Comparison</a>
+          <a href="#comparison-differences" class="sub-link"><i class="fa-solid fa-magnifying-glass"></i> Key Differences</a>
+          <a href="#comparison-gaps" class="sub-link"><i class="fa-solid fa-list-check"></i> Gap Analysis</a>
+        </div>
+        <a href="index.html#team" class="sidebar-link">
+          <i class="fa-solid fa-users"></i> Research Team
+        </a>
+      </nav>
+      
+      <!-- Scrollable Content Area -->
+      <section class="report-content">
+        
+        <!-- IMPROVEMENTS SECTION -->
+        <article id="improvements" class="chapter-card glass-card">
+          <h2 class="gradient-text">
+            <i class="fa-solid fa-chart-line"></i> Technical Improvements &amp; Leaderboard Comparison
+          </h2>
+          
+          <p class="report-paragraph">
+            To validate the mathematical rigor and operational readiness of our ensemble early-warning system, we benchmarked our architectures against the competition-winning models. The ultimate reference point is the <strong>2nd Place Solution (V28 btt_mapping)</strong>, which secured an outstanding Private Leaderboard score of <strong>0.97458</strong>. Below is a deep-dive head-to-head architectural analysis showing where our framework stood, what gaps separated us, and how we could have bridged the remaining distance.
+          </p>
+
+          <!-- SECTION 1: SCORE COMPARISON -->
+          <div style="display:flex; align-items:center; gap:10px; margin-top: 2rem; margin-bottom:1.5rem;" id="comparison-scores">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
+              🏆 Head-to-Head Score Benchmarks
+            </h3>
+          </div>
+
+          <div class="key-metrics-summary">
+            <div class="summary-metric-card card-v28">
+              <div class="metric-title">2nd Place (V28) LB Score</div>
+              <div class="metric-main gradient-text" style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text;">0.97458</div>
+              <div class="metric-subtitle">C-Index: 0.9449 | WBS: 0.0144</div>
+            </div>
+            <div class="summary-metric-card card-ours">
+              <div class="metric-title">Our Best Ensemble (`wids50`)</div>
+              <div class="metric-main gradient-text" style="background: linear-gradient(135deg, var(--accent-orange), #ef4444); -webkit-background-clip: text;">0.9742+</div>
+              <div class="metric-subtitle orange-sub">C-Index: ~0.942 | WBS: ~0.014</div>
+            </div>
+          </div>
+
+          <p class="report-paragraph">
+            While our blended architectures (`wids50` / `final1`) achieved performance metrics neck-and-neck with the top tier of the competition leaderboard, the 2nd place solution established a highly stable margin using a survival-first backbone and elegant dual calibration.
+          </p>
+
+          <table class="grid-table">
+            <thead>
+              <tr>
+                <th>Model Approach</th>
+                <th>C-index</th>
+                <th>WBS (Brier)</th>
+                <th>Hybrid Score</th>
+                <th>LB Score (Private)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color:var(--text-white); font-weight: 700;">V28 btt_mapping (2nd Place)</td>
+                <td style="color:var(--accent-cyan); font-weight:700;">0.9449</td>
+                <td>0.0144</td>
+                <td style="color:var(--accent-purple); font-weight:700;">0.9734</td>
+                <td style="color:var(--text-white); background: rgba(0,255,255,0.03); font-weight:700;">0.97458</td>
+              </tr>
+              <tr>
+                <td>Our <code>wids50</code> / <code>final1</code></td>
+                <td>~0.9420</td>
+                <td>~0.0140</td>
+                <td>~0.9740</td>
+                <td>0.974+</td>
+              </tr>
+              <tr>
+                <td>Our V12 (Seed Blender)</td>
+                <td>0.9396</td>
+                <td>0.0143</td>
+                <td>0.9719</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Our V11 (Physics)</td>
+                <td>0.9320</td>
+                <td>0.0144</td>
+                <td>0.9695</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- SECTION 2: KEY DIFFERENCES -->
+          <div style="display:flex; align-items:center; gap:10px; margin-top:2.5rem; margin-bottom:1.5rem;" id="comparison-differences">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
+              🔍 Architectural Gaps: What They Did That We Missed
+            </h3>
+          </div>
+
+          <!-- Gap 1: Coxnet Backbone -->
+          <details class="methodology-card" open>
+            <summary>
+              <span><i class="fa-solid fa-calculator text-cyan"></i> 1. Coxnet Survival backbone (78% weight) vs Classifier Focus</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                Our primary models relied heavily on a **CatBoost classifier** trained to predict event flags at discretized horizons. While we layered physics gates and calibration on top to respect time-to-event relationships, a classifier remains mathematically blind to the underlying censoring mechanism. 
+              </p>
+              <p class="report-paragraph">
+                The 2nd place team constructed their blend with a **Coxnet survival backbone comprising 78% of the final weight**. Coxnet is a penalized Cox Proportional Hazards model which natively processes right-censored data, calculating continuous hazard ratios mathematically correctly rather than treating censored fires as negative events.
+              </p>
+              
+              <div class="visual-block">
+                <!-- SVG: Coxnet vs CatBoost Censoring -->
+                <svg width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Grid Background -->
+                  <rect width="500" height="150" fill="rgba(255,255,255,0.01)" rx="8" />
+                  
+                  <!-- Timeline Header -->
+                  <text x="20" y="25" font-family="Space Grotesk, sans-serif" font-size="11" fill="var(--text-muted)" font-weight="700">MODELING PARADIGMS FOR RIGHT-CENSORED FIRES</text>
+                  
+                  <!-- CatBoost Classifier Timeline -->
+                  <text x="20" y="55" font-family="Space Grotesk, sans-serif" font-size="11" fill="var(--text-white)" font-weight="700">CatBoost (Binary Classifier)</text>
+                  <line x1="200" y1="50" x2="360" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="3" />
+                  <circle cx="200" cy="50" r="4" fill="var(--accent-orange)" />
+                  <line x1="360" y1="45" x2="360" y2="55" stroke="#ef4444" stroke-width="2" />
+                  <text x="370" y="54" font-family="sans-serif" font-size="10" fill="#ef4444">Censored (Forced to 0)</text>
+                  <text x="205" y="45" font-family="sans-serif" font-size="9" fill="var(--text-muted)">0h</text>
+                  <text x="355" y="45" font-family="sans-serif" font-size="9" fill="var(--text-muted)">72h</text>
+                  
+                  <!-- Coxnet Survival Timeline -->
+                  <text x="20" y="110" font-family="Space Grotesk, sans-serif" font-size="11" fill="var(--text-white)" font-weight="700">Coxnet (Survival Analysis)</text>
+                  <line x1="200" y1="105" x2="400" y2="105" stroke="var(--accent-cyan)" stroke-width="3" />
+                  <circle cx="200" cy="105" r="4" fill="var(--accent-cyan)" />
+                  <path d="M 400 100 L 405 105 L 400 110" fill="none" stroke="var(--accent-cyan)" stroke-width="2" />
+                  <text x="410" y="109" font-family="sans-serif" font-size="10" fill="var(--accent-cyan)">Censoring T (Respects Timing)</text>
+                  <text x="205" y="100" font-family="sans-serif" font-size="9" fill="var(--text-muted)">0h</text>
+                  <text x="395" y="100" font-family="sans-serif" font-size="9" fill="var(--text-muted)">Censored at 45h</text>
+                </svg>
+              </div>
+            </div>
+          </details>
+
+          <!-- Gap 2: Separate Close-Fire Split -->
+          <details class="methodology-card" open>
+            <summary>
+              <span><i class="fa-solid fa-arrows-split-up-and-left text-cyan"></i> 2. Specialized Close-Fire Model (<5km distance threshold)</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                Fires occurring close to evacuation boundaries behave completely differently from distant forest fires. In our design, we built a Two-Brain architecture segmented by <strong>perimeter snapshot counts</strong> (low-res vs high-res data availability).
+              </p>
+              <p class="report-paragraph">
+                The 2nd place solution instead split models directly by **geospatial proximity**. They built a specialized Close-Fire Coxnet model trained only on the 69 fires starting within <strong>5 km</strong> of evacuation zones. Crucially, they set a high regularization (`alpha=0.20` vs backbone `0.05`) to prevent overfitting on this tiny 69-sample subset while allowing the model to adapt specifically to extreme-risk kinematics.
+              </p>
+              
+              <div class="visual-block">
+                <!-- SVG: Geospatial Proximity Split -->
+                <svg width="500" height="160" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="500" height="160" fill="rgba(255,255,255,0.01)" rx="8" />
+                  
+                  <!-- Evacuation Center -->
+                  <circle cx="250" cy="80" r="15" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444" stroke-width="1.5" />
+                  <text x="250" y="83" font-family="sans-serif" font-size="8" fill="#ef4444" text-anchor="middle" font-weight="700">ZONE</text>
+                  
+                  <!-- 5km Boundary Ring -->
+                  <circle cx="250" cy="80" r="45" fill="none" stroke="var(--accent-orange)" stroke-width="1.5" stroke-dasharray="4 4" />
+                  <text x="250" y="140" font-family="Space Grotesk, sans-serif" font-size="9" fill="var(--accent-orange)" text-anchor="middle">5km Boundary Threshold</text>
+                  
+                  <!-- Outer Space -->
+                  <circle cx="250" cy="80" r="75" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                  
+                  <!-- Close-Fire Model -->
+                  <line x1="250" y1="80" x2="220" y2="55" stroke="var(--accent-orange)" stroke-width="1.5" />
+                  <circle cx="220" cy="55" r="5" fill="var(--accent-orange)" />
+                  <text x="120" y="45" font-family="sans-serif" font-size="9" fill="var(--accent-orange)" font-weight="700">Close-Fire Coxnet</text>
+                  <text x="120" y="55" font-family="sans-serif" font-size="8" fill="var(--text-muted)">n = 69 | α = 0.20 (High Reg)</text>
+                  
+                  <!-- Far-Fire Backbone -->
+                  <line x1="250" y1="80" x2="350" y2="120" stroke="var(--accent-cyan)" stroke-width="1.5" />
+                  <circle cx="350" cy="120" r="5" fill="var(--accent-cyan)" />
+                  <text x="360" y="115" font-family="sans-serif" font-size="9" fill="var(--accent-cyan)" font-weight="700">Backbone Coxnet</text>
+                  <text x="360" y="125" font-family="sans-serif" font-size="8" fill="var(--text-muted)">n = 152 | α = 0.05 (Low Reg)</text>
+                </svg>
+              </div>
+            </div>
+          </details>
+
+          <!-- Gap 3: Beta Blend Search -->
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-sliders text-cyan"></i> 3. Grid-Searched Beta ($\beta = 0.55$) Blending Weight</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                When combining the close-fire specialized model with the primary backbone model, the V28 solution used a dedicated blending parameter $\beta = 0.55$:
+                $$\text{Probability}_{\text{final}} = \beta \cdot P_{\text{close}} + (1 - \beta) \cdot P_{\text{backbone}}$$
+              </p>
+              <p class="report-paragraph" style="margin-bottom: 0;">
+                Rather than using manual heuristic blend ratios (which we applied globally to submission outputs), the 2nd place team performed a **13-value grid search** over the range $[0.00, 0.60]$ to mathematically optimize the boundary transition probability weight.
+              </p>
+            </div>
+          </details>
+
+          <!-- Gap 4: Dual Calibration Strategy -->
+          <details class="methodology-card" open>
+            <summary>
+              <span><i class="fa-solid fa-chart-area text-cyan"></i> 4. Dual Calibration — Platt at 12h/24h vs Isotonic at 48h/72h</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                Calibration maps raw ML risk scores to real physical probabilities. We applied **isotonic regression across all four time horizons**.
+              </p>
+              <p class="report-paragraph">
+                The 2nd place team noticed a critical physical distinction between early and late horizons:
+                - **Early Horizons (12h, 24h)**: Noisy and highly uncertain. They applied **Platt calibration (logistic regression S-curve)** to smooth out noise and avoid extreme 0 or 1 predictions.
+                - **Late Horizons (48h, 72h)**: Physically deterministic. At 3 days, fires either clearly breached or fizzled out. They used **Isotonic calibration (step-wise step function)** to capture the sharp physical threshold cliff.
+              </p>
+              
+              <div class="visual-block">
+                <!-- SVG: Platt vs Isotonic Dual Calibration -->
+                <svg width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="500" height="150" fill="rgba(255,255,255,0.01)" rx="8" />
+                  
+                  <!-- Platt Plot (Left) -->
+                  <text x="40" y="25" font-family="Space Grotesk, sans-serif" font-size="11" fill="var(--accent-cyan)" font-weight="700">12h/24h: PLATT (SMOOTH SIGMOID)</text>
+                  <line x1="40" y1="120" x2="200" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+                  <line x1="40" y1="40" x2="40" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+                  <!-- Sigmoid Curve -->
+                  <path d="M 40 115 Q 120 115 120 80 T 200 45" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" />
+                  <text x="45" y="55" font-family="sans-serif" font-size="8" fill="var(--text-muted)">prob</text>
+                  <text x="175" y="115" font-family="sans-serif" font-size="8" fill="var(--text-muted)">score</text>
+                  
+                  <!-- Isotonic Plot (Right) -->
+                  <text x="280" y="25" font-family="Space Grotesk, sans-serif" font-size="11" fill="var(--accent-orange)" font-weight="700">48h/72h: ISOTONIC (STEP CLIFF)</text>
+                  <line x1="280" y1="120" x2="440" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+                  <line x1="280" y1="40" x2="280" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+                  <!-- Step Curve -->
+                  <path d="M 280 115 L 340 115 L 340 80 L 390 80 L 390 45 L 440 45" fill="none" stroke="var(--accent-orange)" stroke-width="2.5" />
+                  <text x="285" y="55" font-family="sans-serif" font-size="8" fill="var(--text-muted)">prob</text>
+                  <text x="415" y="115" font-family="sans-serif" font-size="8" fill="var(--text-muted)">score</text>
+                </svg>
+              </div>
+            </div>
+          </details>
+
+          <!-- Gap 5: Circular Temporal Encoding -->
+          <details class="methodology-card" open>
+            <summary>
+              <span><i class="fa-solid fa-arrows-spin text-cyan"></i> 5. Circular Temporal Encoding &amp; Interaction Features</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                Wildfire risk changes dynamically with time (months represent seasons, hours represent daily peak burn periods). We fed raw integers (e.g. Month 1 to 12) into models, which creates an artificial discontinuity between December (12) and January (1).
+              </p>
+              <p class="report-paragraph">
+                The 2nd place solution resolved this using **Circular Encoding (sine/cosine transformation)**:
+                $$\text{month}_{\sin} = \sin\left(\frac{2\pi \cdot \text{month}}{12}\right), \quad \text{month}_{\cos} = \cos\left(\frac{2\pi \cdot \text{month}}{12}\right)$$
+                This positions time features on a continuous circle where December and January map adjacent to each other. They then coupled these circular timestamps with directional values to capture seasonal winds (e.g., `align_x_month_sin`).
+              </p>
+              
+              <div class="visual-block">
+                <!-- SVG: Circular Temporal Encoding -->
+                <svg width="500" height="160" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="500" height="160" fill="rgba(255,255,255,0.01)" rx="8" />
+                  
+                  <!-- Left: Linear Discontinuity -->
+                  <text x="30" y="25" font-family="Space Grotesk, sans-serif" font-size="10" fill="#ef4444" font-weight="700">RAW TIMESTAMPS (LINEAR DISCONTINUITY)</text>
+                  <line x1="30" y1="90" x2="200" y2="90" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+                  <circle cx="30" cy="90" r="4" fill="#ef4444" />
+                  <text x="20" y="110" font-family="sans-serif" font-size="9" fill="var(--text-muted)">Jan (1)</text>
+                  
+                  <circle cx="180" cy="90" r="4" fill="#ef4444" />
+                  <text x="165" y="110" font-family="sans-serif" font-size="9" fill="var(--text-muted)">Dec (12)</text>
+                  
+                  <path d="M 180 80 Q 105 50 30 80" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3 3" />
+                  <text x="105" y="45" font-family="sans-serif" font-size="9" fill="#ef4444" text-anchor="middle">Broken gap</text>
+                  
+                  <!-- Right: Circular Continuum -->
+                  <text x="260" y="25" font-family="Space Grotesk, sans-serif" font-size="10" fill="var(--accent-cyan)" font-weight="700">CIRCULAR ENCODING (CONTINUOUS)</text>
+                  <circle cx="370" cy="95" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+                  
+                  <!-- Dec & Jan adjacent -->
+                  <circle cx="370" cy="55" r="4" fill="var(--accent-cyan)" /> <!-- Jan -->
+                  <text x="370" y="48" font-family="sans-serif" font-size="8" fill="var(--text-muted)" text-anchor="middle">Jan</text>
+                  
+                  <circle cx="398" cy="67" r="4" fill="var(--accent-cyan)" /> <!-- Feb -->
+                  <circle cx="398" cy="123" r="4" fill="var(--accent-cyan)" /> <!-- Jun -->
+                  
+                  <circle cx="342" cy="67" r="4" fill="var(--accent-cyan)" /> <!-- Dec -->
+                  <text x="320" y="68" font-family="sans-serif" font-size="8" fill="var(--text-muted)">Dec</text>
+                  
+                  <path d="M 342 67 Q 356 50 370 55" fill="none" stroke="var(--accent-cyan)" stroke-width="1.5" />
+                  <text x="365" y="80" font-family="sans-serif" font-size="8" fill="var(--accent-cyan)" text-anchor="middle">Smooth wrap</text>
+                </svg>
+              </div>
+            </div>
+          </details>
+
+          <!-- Gap 6: Stratified CV stability -->
+          <details class="methodology-card">
+            <summary>
+              <span><i class="fa-solid fa-layer-group text-cyan"></i> 6. 10-fold Stratified CV + 5-seed Close averaging</span>
+            </summary>
+            <div class="details-content">
+              <p class="report-paragraph">
+                With a training dataset consisting of only 221 total events, validation folds are highly prone to data splitting variance. We utilized standard 5-fold cross-validation.
+              </p>
+              <p class="report-paragraph" style="margin-bottom: 0;">
+                The 2nd place team stabilized their backbone predictions using a **10-fold cross-validation scheme**. Furthermore, for the high-risk close-fire model (69 samples), they ran **7-fold cross-validation repeated across 5 different initialization seeds** (35 total training iterations) and averaged the results. This massive oversampling stabilized the Out-Of-Fold risk boundaries and eliminated leaderboard noise.
+              </p>
+            </div>
+          </details>
+
+          <!-- SECTION 3: GAP ANALYSIS TABLE -->
+          <div style="display:flex; align-items:center; gap:10px; margin-top:2.5rem; margin-bottom:1.5rem;" id="comparison-gaps">
+            <div style="width:4px; height:28px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple)); border-radius:2px;"></div>
+            <h3 style="font-family:var(--font-header); font-size:1.1rem; color:var(--text-white); margin:0;">
+              🛠️ Gap Analysis &amp; Actionable Improvements
+            </h3>
+          </div>
+
+          <table class="grid-table">
+            <thead>
+              <tr>
+                <th>Target Element</th>
+                <th>Our Architecture</th>
+                <th>V28 (2nd Place) Strategy</th>
+                <th>Improvement Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color:var(--text-white); font-weight:700;">Primary Model Backbone</td>
+                <td>CatBoost classifier (discretized targets)</td>
+                <td>Coxnet Survival Model (78% ensemble weight)</td>
+                <td><span class="gap-badge badge-high">High Impact</span></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-white); font-weight:700;">Close-fire Segmenting</td>
+                <td>Two-brain split by perimeter data density</td>
+                <td>Separate Coxnet trained on distance &lt; 5km</td>
+                <td><span class="gap-badge badge-high">High Impact</span></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-white); font-weight:700;">Calibration Function</td>
+                <td>Isotonic regression across all horizons</td>
+                <td>Platt (Early 12h/24h) | Isotonic (Late 48h/72h)</td>
+                <td><span class="gap-badge badge-medium">Medium Impact</span></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-white); font-weight:700;">Transition Blending</td>
+                <td>Manual ensemble weighting</td>
+                <td>Grid search optimal override beta [0.00→0.60]</td>
+                <td><span class="gap-badge badge-medium">Medium Impact</span></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-white); font-weight:700;">Time representation</td>
+                <td>Raw temporal integers (1–12, 0–23)</td>
+                <td>Circular sin/cos encoding for seasons &amp; hours</td>
+                <td><span class="gap-badge badge-medium">Medium Impact</span></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-white); font-weight:700;">CV Stability</td>
+                <td>5-fold cross-validation</td>
+                <td>10-fold backbone + 5-seed × 7-fold close-fire</td>
+                <td><span class="gap-badge badge-low-medium">Low-Medium</span></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-white); font-weight:700;">Interaction Features</td>
+                <td>Simple physical ratios</td>
+                <td>Seasonal × direction (e.g. <code>align_x_month_sin</code>)</td>
+                <td><span class="gap-badge badge-low-medium">Low-Medium</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- KEY TAKEAWAY BOX -->
+          <div class="callout-box" style="margin-top: 2rem; border-left-color: var(--accent-orange); background: rgba(234, 88, 12, 0.02);">
+            <span class="callout-title" style="color: var(--accent-orange);"><i class="fa-solid fa-circle-exclamation"></i> Key Takeaway &amp; Operational Lesson</span>
+            <p style="font-size:0.9rem; margin:0; line-height:1.6; color:var(--text-muted);">
+              <strong>Our primary mistake was relying on a CatBoost Classifier as the ensemble core.</strong> A proper survival analysis model (like Coxnet) respects the censoring structure of the data mathematically. While we patched this deficiency with physics-informed heuristic gates, the 2nd place team structured the model correctly from the ground up. Their iteration history shows they converged on the exact same spatial threshold we did (5km), but they possessed the correct statistical tools to exploit the boundary risk dynamics.
+            </p>
+          </div>
+
+        </article>
+      </section>
+      
+    </div>
+
+  </main>
+
+  <!-- Interactive Particles Loader Script -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>
